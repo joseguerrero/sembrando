@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd /usr/share/sembrando-para-el-futuro/presentacion/
+python inicio.py $*

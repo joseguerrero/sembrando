@@ -1,0 +1,47 @@
+#!/bin/bash -e
+#
+# ==============================================================================
+# PAQUETE: sembrando-para-el-futuro
+# ARCHIVO: postinst
+# DESCRIPCIÓN: Configura el sistema despues la instalación del paquete.
+# COPYRIGHT:
+#  (C) 2013, 2014 José Francisco Guerrero <jsfrncscg@gmail.com>
+#  (C) 2013, 2014 Homero Salvador Hernández <hsh283@gmail.com>
+# LICENCIA: GPL3
+# ==============================================================================
+#
+# Este programa es software libre. Puede redistribuirlo y/o modificarlo bajo los
+# términos de la Licencia Pública General de GNU (versión 3).
+
+PKG="sembrando-para-el-futuro"
+
+case ${1} in
+
+	configure)
+
+        # Aquí va lo que el paquete debe configurar/crear/borrar después de
+        # instalarse. Lenguaje a usar: BASH.
+	chmod 755 /usr/bin/sembrando # Esto es para darle permisos al lanzador de ejecutarse.
+	chmod 755 /usr/share/applications/Sembrando\ para\ el\ futuro.desktop #Permisos para el acceso directo
+	chmod 755 /usr/share/sembrando-para-el-futuro/presentacion/inicio.py
+	;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+
+        # Aquí va lo que el paquete debe configurar/crear/borrar en caso
+        # de abortarse la instalación. Lenguaje a usar: BASH.
+
+        ;;
+
+        *)
+
+                echo "postinst no reconoce el argumento '"${1}"'" >&2
+                exit 1
+
+        ;;
+
+esac
+
+#DEBHELPER#
+
+exit 0
