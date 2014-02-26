@@ -37,6 +37,8 @@ class Manejador(object):
         self.running = True
         self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption(titulo)
+	icon = pygame.image.load("../iconos/sembrando96x96.png")
+	pygame.display.set_icon(icon)
  
     def cleanUp (self):
         """

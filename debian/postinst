@@ -22,7 +22,7 @@ case ${1} in
         # Aquí va lo que el paquete debe configurar/crear/borrar después de
         # instalarse. Lenguaje a usar: BASH.
 	chmod 755 /usr/bin/sembrando # Esto es para darle permisos al lanzador de ejecutarse.
-	chmod 755 /usr/share/applications/Sembrando\ para\ el\ futuro.desktop #Permisos para el acceso directo
+	chmod 755 /usr/share/applications/sembrando-para-el-futuro.desktop #Permisos para el acceso directo
 	chmod 755 /usr/share/sembrando-para-el-futuro/presentacion/inicio.py
 	;;
 
