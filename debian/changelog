@@ -6,9 +6,7 @@ sembrando-para-el-futuro (1.0+2) unstable; urgency=low
   * [5d98dd2] cambios esteticos en Makefile y control, agragamos nuevos iconos, agregamos el icono de la aplicación en manejador.py
   * [b6dea04] cambios en chanchelog
 
-  [ Fran ]
-
- -- Fran <fran@canaima-popular>  Wed, 26 Feb 2014 11:05:02 -0430
+ -- José Francisco Guerrero <jsfrncscg@gmail.com>  Wed, 26 Feb 2014 11:05:02 -0430
 
 sembrando-para-el-futuro (1.0) unstable; urgency=low
 
