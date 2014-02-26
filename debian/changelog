@@ -1,8 +1,14 @@
-sembrando-para-el-futuro (1.0+1) UNRELEASED; urgency=low
+sembrando-para-el-futuro (1.0+2) unstable; urgency=low
 
+  [ José Francisco Guerrero ]
   * versión 1.0+1
+  * [0ab9c19] Actualizando rules
+  * [5d98dd2] cambios esteticos en Makefile y control, agragamos nuevos iconos, agregamos el icono de la aplicación en manejador.py
+  * [b6dea04] cambios en chanchelog
 
- -- José Francisco Guerrero <jsfrncscg@gmail.com>  Mon, 17 Feb 2014 16:49:51 -0430
+  [ Fran ]
+
+ -- Fran <fran@canaima-popular>  Wed, 26 Feb 2014 11:05:02 -0430
 
 sembrando-para-el-futuro (1.0) unstable; urgency=low
 
