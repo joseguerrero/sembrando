@@ -72,7 +72,7 @@ class estado(pantalla.Pantalla):
         self.acc3_7 = texto(200, 400, u"Pulsa sobre el botón guardar para salvar tu configuración. ", 20, "normal", 500)
         self.acc3_8 = texto(10, 160, u"2.- Elige el tamaño de la letra. ", 20,"normal", 400)
         self.acc3_9 = texto(100, 200, u"18         20        22 ", 20, "normal", 400)
-        instrucciones = u"Pantalla: Diversidad funcional visual: Instrucciones: pulsa las teclas uno, 2, o 3, para seleccionar la opcion de tu preferencia, en cada una de las siguientes preguntas, o pulsa la tecla escape para volver al menú: "
+        instrucciones = u"Pantalla: Discapacidad visual: Instrucciones: pulsa las teclas uno, 2, o 3, para seleccionar la opcion de tu preferencia, en cada una de las siguientes preguntas, o pulsa la tecla escape para volver al menú: "
         self.pregunta1 = u"¿Deseas activar el lector de pantalla? Si deseas activarlo presiona uno. Si no deseas activarlo pulsa 2. "
         self.pregunta2 = u"Elige la velocidad del lector de pantalla: Si deseas velocidad lenta, pulsa uno. Velocidad media, pulsa 2. Velocidad rápida, pulsa 3."
         self.cargar_preferencias()
