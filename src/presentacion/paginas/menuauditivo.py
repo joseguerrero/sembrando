@@ -20,7 +20,7 @@ class estado(pantalla.Pantalla):
         @type previa: bool
         """
         self.parent = parent
-        self.spserver.processtext(u"Configuración de diversidad funcional auditiva.", False)
+        self.spserver.processtext(u"Configuración de discapacidad auditiva.", False)
         self.previa = previa
         self.fondo_acc = pygame.image.load(self.fondos + "fondo-acc.png").convert()
         self.background = self.fondo_acc

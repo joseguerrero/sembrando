@@ -47,8 +47,8 @@ class estado(pantalla.Pantalla):
         Carga los botones utilizados en esta pantalla.
         """
         self.puerta = boton("puerta", "Regresar", self.botones + "boton-puerta.png", 3, 650, 425, None, False, 1)
-        self.boton_sordo = boton("sordo", "Diversidad funcional auditiva", self.botones + "boton-sordo.png", 3 ,300, 440, None, False, 1)
-        self.boton_visual = boton("config-vis", "Diversidad funcional visual", self.botones + "boton-visual.png", 3 ,483, 430, None, False, 1)
+        self.boton_sordo = boton("sordo", "Discapacidad auditiva", self.botones + "boton-sordo.png", 3 ,300, 440, None, False, 1)
+        self.boton_visual = boton("config-vis", "Discapacidad visual", self.botones + "boton-visual.png", 3 ,483, 430, None, False, 1)
         self.inicio = boton("inicio", "Inicio", self.botones + "boton-inicio.png", 3,  650, 440 , None, False, 1)
         
     def start(self):

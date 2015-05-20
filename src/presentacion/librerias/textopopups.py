@@ -8,11 +8,11 @@ u"utiliza el RATON o en el teclado las TECLAS y la tecla ENTER para ingresar en 
 "lector1":u"Bienvenidas y bienvenidos a Sembrando para el futuro. Sigue las instrucciones: para navegar en el recurso "
 u"utiliza el ratón, o en el teclado, las teclas de dirección y la tecla enter para ingresar en las pantallas. ",
 
-"texto2": u"    Instrucciones: pulsa sobre el botón Diversidad Funcional Auditiva DFA o sobre el botón " 
-u"Diversidad Funcional Visual DFV según tu nivel de accesibilidad. ",
+"texto2": u"    Instrucciones: pulsa sobre el botón Discapacidad Auditiva DFA o sobre el botón " 
+u"Discapacidad Visual DFV según tu nivel de accesibilidad. ",
 
-"lector2":u"Pantalla menú de configuración. Instrucciones: pulsa sobre el botón Diversidad Funcional Auditiva o sobre el botón " 
-u"Diversidad Funcional Visual según tu nivel de accesibilidad. "
+"lector2":u"Pantalla menú de configuración. Instrucciones: pulsa sobre el botón Discapacidad Auditiva o sobre el botón " 
+u"Discapacidad Visual según tu nivel de accesibilidad. "
 }
 
 p1_vis = {
