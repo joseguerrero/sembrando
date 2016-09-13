@@ -17,14 +17,3 @@
 
 %:
 	dh ${@}
-
-# El target "override_dh_auto_install" permite sustituir el proceso de
-# instalación por defecto que utilizan los ayudantes debhelper, por lo que
-# se le instruya dentro de él. Es recomendable reutilizar el Makefile del
-# desarrollador para ésta labor. Nótese la utilidad de definir $(DESTDIR)
-# en el Makefile: al ser reutilizado en debian/rules, ésta variable adquiere
-# el valor necesario para instalarse dentro de la carpeta debian, lugar
-# donde finalmente se hace el paquete.
-
-override_dh_auto_install:
-	$(MAKE) DESTDIR=$(CURDIR)/debian/sembrando-para-el-futuro install

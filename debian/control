@@ -1,16 +1,15 @@
 Source: sembrando-para-el-futuro
-Version: 1.0+2
 Section: educacion
 Priority: extra
 Maintainer: José Francisco Guerrero <jsfrncscg@gmail.com>
 Uploaders: José Francisco Guerrero <jsfrncscg@gmail.com>
 Build-Depends: cdbs, debhelper (>= 9)
-Standards-Version: 3.9.4
-Vcs-Git: git://git.canaima.softwarelibre.gob.ve/sembrando-para-el-futuro.git 
+Standards-Version: 3.9.6
+Vcs-Git: https://github.com/joseguerrero/sembrando.git
 Vcs-Browser: https://github.com/joseguerrero/sembrando
 
 Package: sembrando-para-el-futuro
 Architecture: all
-Depends: blender, python-pygame (>= 1.8.1), speech-dispatcher (>= 0.7-6.2), python-speechd (>= 0.7-6.2), wmctrl (>= 1.07-7), festvox-sflpc16k (>= 1.0.0Canaima1+11), sox (>= 14.4.0-3), libsox2 (>= 14.4.0-3), libsox-fmt-base (>= 14.4.0-3), libsox-fmt-alsa (>= 14.4.0-3), ${shlibs:Depends}, ${misc:Depends}
+Depends: blender, speech-dispatcher, python3-speechd, wmctrl, festvox-ellpc11k, sox, libsox2, libsox-fmt-base, libsox-fmt-alsa, ${shlibs:Depends}, ${misc:Depends}
 Description: Recurso educativo que incorpora un interprete virtual de lengua
  de señas venezolana y sintesis de voz.
