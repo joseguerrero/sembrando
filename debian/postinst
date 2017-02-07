@@ -19,17 +19,10 @@ case ${1} in
 
 	configure)
 
-        # Aquí va lo que el paquete debe configurar/crear/borrar después de
-        # instalarse. Lenguaje a usar: BASH.
-	chmod 755 /usr/bin/sembrando # Esto es para darle permisos al lanzador de ejecutarse.
-	chmod 755 /usr/share/applications/sembrando-para-el-futuro.desktop #Permisos para el acceso directo
-	chmod 755 /usr/share/sembrando-para-el-futuro/presentacion/inicio.py
+	chmod +x /usr/share/sembrando-para-el-futuro/presentacion/inicio.py
 	;;
 
         abort-upgrade|abort-remove|abort-deconfigure)
-
-        # Aquí va lo que el paquete debe configurar/crear/borrar en caso
-        # de abortarse la instalación. Lenguaje a usar: BASH.
 
         ;;
 

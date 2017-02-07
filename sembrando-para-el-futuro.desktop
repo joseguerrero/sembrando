@@ -1,4 +1,3 @@
-
 [Desktop Entry]
 Name=Sembrando para el futuro
 Name[es_VE]=sembrando-para-el-futuro.desktop
@@ -6,7 +5,8 @@ GenericName=Sembrando para el futuro
 GenericName[es_VE]=Sembrando para el futuro
 Comment=Recurso Digitalizado para los Aprendizajes que incorpora accesibilidad.
 Comment[es_VE]=Comment=Recurso Digitalizado para los Aprendizajes que incorpora accesibilidad.
-Exec=/usr/bin/sembrando
+Exec=python inicio.py $*
+Path=/usr/share/sembrando-para-el-futuro/presentacion/
 Terminal=false
 Type=Application
 StartupNotify=true
