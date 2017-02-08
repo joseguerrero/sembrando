@@ -6,7 +6,7 @@ from librerias.textoci import texto2
 from librerias.cajatexto import cajatexto
 from librerias.popups import PopUp, Button
 from librerias.animaciones import animacion
-import pantalla2
+from paginas import pantalla2
 
 class actividad(pantalla.Pantalla):
     def __init__(self, parent):

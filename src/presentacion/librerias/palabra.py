@@ -62,7 +62,7 @@ class palabra(pygame.sprite.Sprite):
         try:
             self.letras = pygame.font.Font(self.tipografia, size)
         except IOError: 
-            print "Error al cargar la fuente!"
+            print("Error al cargar la fuente!")
         self.palabra = palabra
         self.limpiar_comparador(palabra)
         

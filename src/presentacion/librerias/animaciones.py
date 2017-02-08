@@ -15,8 +15,8 @@ class spritesheet(object):
         """
         try:
             self.sheet = pygame.image.load(filename).convert_alpha()
-        except pygame.error, message:
-            raise SystemExit, message
+        except(pygame.error, message):
+            raise(SystemExit, message)
 
     def image_at(self, rectangle, colorkey = None):
         """

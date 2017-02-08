@@ -18,8 +18,8 @@ class spritesheet(object):
         
         try:
             self.sheet = pygame.image.load(filename).convert_alpha()
-        except pygame.error, message:
-            raise SystemExit, message
+        except(pygame.error, message):
+            raise(SystemExit, message)
     
     def image_at(self, rectangle, colorkey = None):
         """
@@ -109,9 +109,9 @@ class boton(pygame.sprite.Sprite):
         self.id = id
         self.tipo_objeto = "boton"
         self.parent = parent
-        self.sonido =  pygame.mixer.Sound("audio/gnr.ogg")
+        #self.sonido =  pygame.mixer.Sound("audio/gnr.ogg")
         my_font = pygame.font.SysFont("arial", self.parent.config.t_fuente)
-        self.tt = unicode(tooltip,"UTF-8")
+        self.tt = tooltip
         self.texto = pygame.sprite.Sprite()
         self.texto.image = my_font.render(self.tt, True, (0, 0, 0), (233, 234, 131))
         self.texto.rect = pygame.Rect((0, 0, 0, 0))
@@ -215,7 +215,7 @@ class boton(pygame.sprite.Sprite):
         """
         if self.colision() and canal.get_busy and self.sonar:
             self.sonar = False
-            canal.play(self.sonido)
+            #canal.play(self.sonido)
     
     def colision(self):
         """

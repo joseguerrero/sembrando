@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os, gc, sys, pygame, subprocess
+import os
+import gc 
+import sys
+import pygame
+import subprocess
 from librerias.singleton import Singleton
 from librerias.magnificador import Rendermag
 from librerias.configuracion import configuracion
@@ -37,8 +41,8 @@ class Manejador(object):
         self.running = True
         self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption(titulo)
-	icon = pygame.image.load("../iconos/sembrando96x96.png")
-	pygame.display.set_icon(icon)
+    icon = pygame.image.load("../iconos/sembrando96x96.png")
+    pygame.display.set_icon(icon)
  
     def cleanUp (self):
         """
@@ -52,9 +56,9 @@ class Manejador(object):
             state.cleanUp()
         if not subprocess.call(["pgrep", "blenderplayer"]):
             subprocess.call(["pkill", "-9", "blenderplayer"])
-        print "Cerrando servidor de texto a voz"
+        print("Cerrando servidor de texto a voz") 
         sys.exit(0)
-        print "Cerrando Sembrando para el futuro"
+        print("Cerrando Sembrando para el futuro")
         
     def changeState (self, gameState):
         """
@@ -134,7 +138,7 @@ class Manejador(object):
                 self.config.consultar()
                 
                 if os.path.isdir("../interprete/__pycache__"):
-                    print "Borrando cache del interprete"
+                    print("Borrando cache del interprete")
                     if os.path.isfile("../interprete/__pycache__/interprete.cpython-32.pyc"):
                         os.remove("../interprete/__pycache__/interprete.cpython-32.pyc")
                     os.removedirs("../interprete/__pycache__")
@@ -147,9 +151,9 @@ class Manejador(object):
                         subprocess.call(["wmctrl", "-a", "interprete", "-b", "add,above"])
                         break
                     except:
-                        print "No se ha podido cargar el interprete virtual."    
+                        print("No se ha podido cargar el interprete virtual.")
             else:
-                print "Blenderplayer ya se encuentra en ejecucion"
+                print("Blenderplayer ya se encuentra en ejecucion")
         else:
             self.config.definicion = codigo
             self.states[-1].portada_glosario = False

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pygame
-from palabra import palabra
+from .palabra import palabra
 
 class texto():
     """

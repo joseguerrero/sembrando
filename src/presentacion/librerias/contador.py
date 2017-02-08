@@ -23,7 +23,7 @@ class contador():
                 self.final = True
             else:
                 self.tiempo += self.contador.get_time()
-            print self.tiempo
+            print(self.tiempo)
         
 #def main():
 #    salir = False

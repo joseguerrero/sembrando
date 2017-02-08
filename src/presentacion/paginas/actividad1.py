@@ -453,7 +453,7 @@ class estado(pantalla.Pantalla):
             self.spserver.processtext(self.preguntas.dic_pistas[self.preguntas.valor][valor] + "Pulsa Enter para continuar. ", self.parent.config.activar_lector)            
             self.popup_respuesta.agregar_grupo()
         except:
-            print "Valor fuera de rango"
+            print("Valor fuera de rango")
     
     def det_msj_n1(self):
         """

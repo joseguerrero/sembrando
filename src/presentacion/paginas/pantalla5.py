@@ -7,7 +7,10 @@ from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
 from librerias.contenido import cont, conceptos as cp
-import menucfg, pantalla2, pantalla6, pantalla10
+from paginas import menucfg
+from paginas import pantalla2
+from paginas import pantalla6
+from paginas import pantalla10
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent, anim_actual = 0):

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import speechd, subprocess
+import speechd
+import subprocess
 from manejador import Manejador as parent
 
 class Speechserver():
@@ -25,7 +26,7 @@ class Speechserver():
         Consulta el valor de la velocidad del sintetizador.
         """
         self.speaker.set_rate(self.dic_vel[self.parent.config.synvel])
-             
+                     
     def processtext2(self, texto, lector_activo):
         """
         Enviá información al sintetizador de voz para que este la procese y permite encolar las peticiones.
@@ -36,7 +37,7 @@ class Speechserver():
         @type lector_activo: bool
         """        
         if lector_activo:
-            self.data = texto.encode("utf-8")          
+            self.data = texto          
             self.speaker.speak(self.data)
     
     def processtext(self, texto, lector_activo, continuar = True):
@@ -56,7 +57,7 @@ class Speechserver():
         if lector_activo:
             if self.hablando and continuar:
                 self.stopserver()
-            self.data = texto.encode("utf-8")          
+            self.data = texto          
             self.speaker.speak(self.data)
             self.hablando = True
             

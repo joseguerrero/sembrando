@@ -6,7 +6,7 @@ from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.contenido import conceptos as cp
-import pantalla2
+from paginas import pantalla2
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent):

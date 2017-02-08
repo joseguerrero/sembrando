@@ -6,7 +6,13 @@ from librerias.boton import boton
 from librerias.popups import PopUp
 from librerias.imagen import imagen
 from librerias.textopopups import p2
-import menucfg, pantalla3, pantalla5, pantalla8, actividad1, actividad2, pantalla11 
+from paginas import menucfg
+from paginas import pantalla3
+from paginas import pantalla5
+from paginas import pantalla8
+from paginas import pantalla11
+from paginas import actividad1
+from paginas import actividad2
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent):

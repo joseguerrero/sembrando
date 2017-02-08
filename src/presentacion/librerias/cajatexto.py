@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pygame
-from palabra import palabra
+from .palabra import palabra
 
 class cajatexto(pygame.sprite.Sprite):
     """
@@ -42,7 +42,7 @@ class cajatexto(pygame.sprite.Sprite):
         if tamano=="medium":
             img = pygame.image.load("../imagenes/png/varios/cuadro-texto.png")
             self.ancho = img.get_rect().width
-            self.rect = img.get_rect()   
+            self.rect = img.get_rect()
         if tamano == "low":
             img = pygame.image.load("../imagenes/png/varios/cuadro-texto.png")
             self.ancho = img.get_rect().width 

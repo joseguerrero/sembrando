@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from palabra import palabra
+from .palabra import palabra
 
 class texto2():
     def __init__(self, posx, posy, texto, size, tipo_texto, limite_der, dic = 0):

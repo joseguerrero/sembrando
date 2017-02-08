@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pygame
-from eventos import ManejadorEventos
+from .eventos import ManejadorEventos
 
 class personaje(pygame.sprite.Sprite):
     """

@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 import pygame
 from librerias import pantalla
-
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
 from librerias.contenido import cont, conceptos as cp
-import pantalla2, pantalla9, pantalla10, menucfg
+from paginas import menucfg
+from paginas import pantalla2
+from paginas import pantalla9
+from paginas import pantalla10
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent, anim_actual = 0):

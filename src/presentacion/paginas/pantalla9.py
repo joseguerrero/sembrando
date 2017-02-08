@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import pygame
 from librerias import pantalla
-
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.popups import PopUp
@@ -12,7 +11,10 @@ from librerias.imgfondo import fondo
 from librerias.pixelperfect import *
 from librerias.textopopups import p9
 from librerias.objmask import object_mask
-import pantalla2, pantalla8, pantalla10, menucfg
+from paginas import menucfg
+from paginas import pantalla2
+from paginas import pantalla8
+from paginas import pantalla10
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent):
@@ -131,8 +133,8 @@ class estado(pantalla.Pantalla):
         self.grupo_banner.add(self.banner_siembra, self.banner_inf)
         self.grupo_botones.add(self.config, self.volver, self.home)
         self.grupo_mapa.add(self.zulia, self.occ, self.central, self.insu, self.capital, self.ori, self.andes, self.llanos, self.guayana)
-	self.spserver.processtext(u"Pantalla: La Agricultura en Venezuela: ", self.parent.config.activar_lector)        
-	self.spserver.processtext(p9["lector1"], self.parent.config.activar_lector)
+        self.spserver.processtext(u"Pantalla: La Agricultura en Venezuela: ", self.parent.config.activar_lector)        
+        self.spserver.processtext(p9["lector1"], self.parent.config.activar_lector)
         
     def handleEvents(self, events):
         """
