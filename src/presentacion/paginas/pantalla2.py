@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+import json
 import pygame
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.popups import PopUp
 from librerias.imagen import imagen
-from librerias.textopopups import p2
 from paginas import menucfg
 from paginas import pantalla3
 from paginas import pantalla5
@@ -22,9 +23,12 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
+
+        self.name = "screen_2"
         self.parent = parent
         self.previa = True
         self.ayuda = False
+
         self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()      
         self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
         self.img1 = pygame.image.load(self.pops + "f1.png").convert_alpha()
@@ -46,7 +50,11 @@ class estado(pantalla.Pantalla):
         """
         if not self.popup_ins.activo:
             self.popup_ins.agregar_grupo()
-            self.spserver.processtext(p2["lector1"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["popups"][self.name]["reader_1"],
+                self.parent.config.activar_lector
+            )
+
         else:
             self.popup_ins.eliminar_grupo()
             self.spserver.stopserver()
@@ -55,7 +63,17 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.popup_ins = PopUp(self.parent, p2["texto1"], "", self.dic_img, self.grupo_popup, 2, 512, 265, 100)
+        self.popup_ins = PopUp(
+            self.parent, 
+            self.parent.text_content["popups"][self.name]["text_1"], 
+            "",
+            self.dic_img,
+            self.grupo_popup,
+            2,
+            512,
+            265,
+            100
+        )
         
     def cargar_botones(self):
         """

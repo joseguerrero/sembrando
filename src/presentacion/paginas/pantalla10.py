@@ -5,7 +5,7 @@ from librerias import pantalla
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
-from librerias.contenido import conceptos as cp
+
 from paginas import pantalla2
 
 class estado(pantalla.Pantalla):
@@ -147,7 +147,14 @@ class estado(pantalla.Pantalla):
         @rtype: list
         """
         
-        self.concepto = texto(600, 200, cp[palabra], self.parent.config.t_fuente, "concepto", 1000)
+        self.concepto = texto(
+            600, 
+            200, 
+            self.parent.text_content["concepts"][palabra],
+            self.parent.config.t_fuente, 
+            "concepto", 
+            1000
+        )
         return self.concepto.img_palabras
     
     def indices(self, valor, palabra_negrita = ""):

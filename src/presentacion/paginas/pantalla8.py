@@ -6,7 +6,7 @@ from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
-from librerias.contenido import cont, conceptos as cp
+
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla9
@@ -22,6 +22,8 @@ class estado(pantalla.Pantalla):
         @param anim_actual: Código de la ultima animación mostrada en esta pantalla.
         @type anim_actual: int
         """
+        
+        self.name = "screen_8"
         self.deteccion_movimiento = False
         self.parent = parent
         self.previa = True
@@ -46,9 +48,33 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto8_2 = texto(32, 340, cont["texto8_2"], self.parent.config.t_fuente, "normal", 992, False)
-        self.texto8_3 = texto(32, 340, cont["texto8_3"], self.parent.config.t_fuente, "normal", 992, False)
-        self.texto8_4 = texto(32, 340, cont["texto8_4"], self.parent.config.t_fuente, "normal", 992, False)
+        self.texto8_2 = texto(
+            32, 
+            340, 
+            self.parent.text_content["content"][self.name]["text_2"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            992, 
+            False
+        )
+        self.texto8_3 = texto(
+            32, 
+            340, 
+            self.parent.text_content["content"][self.name]["text_3"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            992, 
+            False
+        )
+        self.texto8_4 = texto(
+            32, 
+            340, 
+            self.parent.text_content["content"][self.name]["text_4"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            992, 
+            False
+        )
     
     def cargar_botones(self):
         """
@@ -136,7 +162,10 @@ class estado(pantalla.Pantalla):
                                 self.deteccion_movimiento = False
                             
                         elif self.x.tipo_objeto == "palabra":
-                            self.spserver.processtext(cp[self.x.codigo], self.parent.config.activar_lector)                             
+                            self.spserver.processtext(
+                                self.parent.text_content["concepts"][self.x.codigo],
+                                self.parent.config.activar_lector
+                            )
                         
             if pygame.sprite.spritecollideany(self.raton, self.grupo_botones):
                 sprite = pygame.sprite.spritecollide(self.raton, self.grupo_botones, False)
@@ -205,10 +234,16 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.empty()            
             if self.parent.config.activar_lector:
                 if self.entrada_primera_vez:
-                    self.spserver.processtext2(cont["texto8_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext2(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                     self.entrada_primera_vez=False
                 else:
-                    self.spserver.processtext(cont["texto8_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                 self.grupo_fondotexto.add(self.caja_texto)
                 self.grupo_palabras.add(self.texto8_2.img_palabras)
                 self.txt_actual = self.texto8_2.img_palabras
@@ -224,7 +259,10 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.add(self.texto8_3.img_palabras)
             self.txt_actual = self.texto8_3.img_palabras
             self.chequeo_palabra(self.txt_actual)
-            self.spserver.processtext(cont["texto8_3"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["text_3"],
+                self.parent.config.activar_lector
+            )
         
         elif animacion == 3:
             self.elemento_actual = -1
@@ -235,7 +273,10 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.add(self.texto8_4.img_palabras)
             self.txt_actual = self.texto8_4.img_palabras
             self.chequeo_palabra(self.txt_actual)
-            self.spserver.processtext(cont["texto8_4"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["text_4"],
+                self.parent.config.activar_lector
+            )
             
         elif animacion ==4:
             self.limpiar_grupos()

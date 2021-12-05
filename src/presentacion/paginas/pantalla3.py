@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import pygame
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
-from librerias.contenido import cont, conceptos as cp
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla4
@@ -20,6 +20,8 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
+
+        self.name = "screen_3"
         self.deteccion_movimiento = False
         self.parent = parent
         self.previa = True
@@ -38,7 +40,15 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto3_2 = texto(32, 340, cont["texto3_2"], self.parent.config.t_fuente, "normal", 992, False)
+        self.texto3_2 = texto(
+            32,
+            340,
+            self.parent.text_content["content"][self.name]["text_2"],
+            self.parent.config.t_fuente,
+            "normal",
+            992,
+            False
+        )
     
     def cargar_botones(self):
         """
@@ -74,7 +84,10 @@ class estado(pantalla.Pantalla):
         self.anim1.detener()
         self.spserver.stopserver()
         self.entrada_primera_vez = True        
-        self.spserver.processtext(u"Pantalla: Las Plantas", self.parent.config.activar_lector)
+        self.spserver.processtext(
+            "Pantalla: Las Plantas",
+            self.parent.config.activar_lector
+        )
         if self.parent.config.activar_lector:
             self.reproducir_animacion(self.anim_actual)           
     
@@ -118,11 +131,17 @@ class estado(pantalla.Pantalla):
                                 self.parent.changeState(pantalla2.estado(self.parent))
                                                          
                         elif self.x.tipo_objeto == "palabra":
-                            self.spserver.processtext(cp[self.x.codigo], self.parent.config.activar_lector)
+                            self.spserver.processtext(
+                                self.parent.text_content["concepts"][self.x.codigo],
+                                self.parent.config.activar_lector
+                            )
                         self.deteccion_movimiento = False
 
                 elif event.key == pygame.K_SPACE:
-                    self.spserver.processtext(cont["texto3_2"], self.parent.config.activar_lector) 
+                    self.spserver.processtext(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    ) 
                     
             if pygame.sprite.spritecollideany(self.raton, self.grupo_palabras):
                 sprite = pygame.sprite.spritecollide(self.raton, self.grupo_palabras, False)
@@ -168,10 +187,16 @@ class estado(pantalla.Pantalla):
             
             if self.parent.config.activar_lector:
                 if self.entrada_primera_vez:
-                    self.spserver.processtext2(cont["texto3_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext2(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                     self.entrada_primera_vez = False
                 else:
-                    self.spserver.processtext(cont["texto3_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                 self.anim1.continuar()
                 self.grupo_fondotexto.add(self.caja_texto)
                 self.grupo_palabras.add(self.texto3_2.img_palabras)

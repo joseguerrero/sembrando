@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import os
 import gc 
 import sys
+import json
 import pygame
 import subprocess
 from librerias.singleton import Singleton
@@ -40,6 +42,7 @@ class Manejador(object):
         self.states = []
         self.running = True
         self.screen = pygame.display.set_mode(size)
+        self.load_text_content()
         pygame.display.set_caption(titulo)
     icon = pygame.image.load("../iconos/sembrando96x96.png")
     pygame.display.set_icon(icon)
@@ -159,3 +162,7 @@ class Manejador(object):
             self.states[-1].portada_glosario = False
             self.states[-1].limpiar_grupos()
             self.states[-1].ir_glosario()
+
+    def load_text_content(self):
+        with open('paginas/text/content.json') as f:
+            self.text_content  = json.load(f)

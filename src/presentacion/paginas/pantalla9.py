@@ -6,7 +6,7 @@ from librerias.boton import boton
 from librerias.texto import texto
 from librerias.popups import PopUp
 from librerias.imagen import imagen
-from librerias.contenido import cont
+
 from librerias.imgfondo import fondo
 from librerias.pixelperfect import *
 from librerias.textopopups import p9
@@ -24,6 +24,8 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
+
+        self.name = "screen_9"
         self.parent = parent
         self.previa = True
         self.deteccion_movimiento = False
@@ -55,43 +57,245 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto9_2_1 = texto(490, 60, cont["texto9_2_1"] , self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_2_2 = texto(490, self.texto9_2_1.y + self.texto9_2_1.ancho_final + 10, cont["texto9_2_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_2_3 = texto(490, self.texto9_2_2.y + self.texto9_2_2.ancho_final + 10, cont["texto9_2_3"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_2_4 = texto(490, self.texto9_2_3.y + self.texto9_2_3.ancho_final + 10, cont["texto9_2_4"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_2_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_2_1"] , 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_2_2 = texto(
+            490,
+            self.texto9_2_1.y + self.texto9_2_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_2_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_2_3 = texto(
+            490,
+            self.texto9_2_2.y + self.texto9_2_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_2_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_2_4 = texto(
+            490,
+            self.texto9_2_3.y + self.texto9_2_3.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_2_4"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_3_1 = texto(490, 60, cont["texto9_3_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_3_2 = texto(490, self.texto9_3_1.y + self.texto9_3_1.ancho_final + 10, cont["texto9_3_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_3_3 = texto(490, self.texto9_3_2.y + self.texto9_3_2.ancho_final + 10, cont["texto9_3_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_3_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_3_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_3_2 = texto(
+            490,
+            self.texto9_3_1.y + self.texto9_3_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_3_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_3_3 = texto(
+            490,
+            self.texto9_3_2.y + self.texto9_3_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_3_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_4_1 = texto(490, 60, cont["texto9_4_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_4_2 = texto(490, self.texto9_4_1.y + self.texto9_4_1.ancho_final + 10, cont["texto9_4_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_4_3 = texto(490, self.texto9_4_2.y + self.texto9_4_2.ancho_final + 10, cont["texto9_4_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_4_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_4_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_4_2 = texto(
+            490,
+            self.texto9_4_1.y + self.texto9_4_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_4_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_4_3 = texto(
+            490,
+            self.texto9_4_2.y + self.texto9_4_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_4_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_5_1 = texto(490, 60, cont["texto9_5_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_5_2 = texto(490, self.texto9_5_1.y + self.texto9_5_1.ancho_final + 10, cont["texto9_5_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_5_3 = texto(490, self.texto9_5_2.y + self.texto9_5_2.ancho_final + 10, cont["texto9_5_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_5_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_5_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_5_2 = texto(
+            490,
+            self.texto9_5_1.y + self.texto9_5_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_5_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_5_3 = texto(
+            490,
+            self.texto9_5_2.y + self.texto9_5_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_5_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_6_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_6_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_6_2 = texto(
+            490,
+            self.texto9_6_1.y + self.texto9_6_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_6_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_6_3 = texto(
+            490,
+            self.texto9_6_2.y + self.texto9_6_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_6_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_6_1 = texto(490, 60, cont["texto9_6_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_6_2 = texto(490, self.texto9_6_1.y + self.texto9_6_1.ancho_final + 10, cont["texto9_6_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_6_3 = texto(490, self.texto9_6_2.y + self.texto9_6_2.ancho_final + 10, cont["texto9_6_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_7_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_7_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_7_2 = texto(
+            490,
+            self.texto9_7_1.y + self.texto9_7_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_7_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_7_3 = texto(
+            490,
+            self.texto9_7_2.y + self.texto9_7_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_7_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_7_1 = texto(490, 60, cont["texto9_7_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_7_2 = texto(490, self.texto9_7_1.y + self.texto9_7_1.ancho_final + 10, cont["texto9_7_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_7_3 = texto(490, self.texto9_7_2.y + self.texto9_7_2.ancho_final + 10, cont["texto9_7_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_8_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_8_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_8_2 = texto(
+            490,
+            self.texto9_8_1.y + self.texto9_8_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_8_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_8_3 = texto(
+            490,
+            self.texto9_8_2.y + self.texto9_8_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_8_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_8_1 = texto(490, 60, cont["texto9_8_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_8_2 = texto(490, self.texto9_8_1.y + self.texto9_8_1.ancho_final + 10, cont["texto9_8_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_8_3 = texto(490, self.texto9_8_2.y + self.texto9_8_2.ancho_final + 10, cont["texto9_8_3"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_9_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_9_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_9_2 = texto(
+            490,
+            self.texto9_9_1.y + self.texto9_9_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_9_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_9_3 = texto(
+            490,
+            self.texto9_9_2.y + self.texto9_9_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_9_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
-        self.texto9_9_1 = texto(490, 60, cont["texto9_9_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_9_2 = texto(490, self.texto9_9_1.y + self.texto9_9_1.ancho_final + 10, cont["texto9_9_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_9_3 = texto(490, self.texto9_9_2.y + self.texto9_9_2.ancho_final + 10, cont["texto9_9_3"], self.parent.config.t_fuente, "normal", 1000)
-        
-        self.texto9_10_1 = texto(490, 60, cont["texto9_10_1"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_10_2 = texto(490, self.texto9_10_1.y + self.texto9_10_1.ancho_final + 10, cont["texto9_10_2"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_10_3 = texto(490, self.texto9_10_2.y + self.texto9_10_2.ancho_final + 10, cont["texto9_10_3"], self.parent.config.t_fuente, "normal", 1000)
-        self.texto9_10_4 = texto(490, self.texto9_10_3.y + self.texto9_10_3.ancho_final + 10, cont["texto9_10_4"], self.parent.config.t_fuente, "normal", 1000)
+        self.texto9_10_1 = texto(
+            490,
+            60, 
+            self.parent.text_content["content"][self.name]["text_10_1"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_10_2 = texto(
+            490,
+            self.texto9_10_1.y + self.texto9_10_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_10_2"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_10_3 = texto(
+            490,
+            self.texto9_10_2.y + self.texto9_10_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_10_3"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
+        self.texto9_10_4 = texto(
+            490,
+            self.texto9_10_3.y + self.texto9_10_3.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_10_4"], 
+            self.parent.config.t_fuente, 
+            "normal", 
+            1000
+        )
         
         self.popup_ins1 = PopUp(self.parent, (p9["texto1"] , ), "", None , self.grupo_popup, 1, 750, 400, -100)
         self.popup_ins1.agregar_grupo()
@@ -133,8 +337,14 @@ class estado(pantalla.Pantalla):
         self.grupo_banner.add(self.banner_siembra, self.banner_inf)
         self.grupo_botones.add(self.config, self.volver, self.home)
         self.grupo_mapa.add(self.zulia, self.occ, self.central, self.insu, self.capital, self.ori, self.andes, self.llanos, self.guayana)
-        self.spserver.processtext(u"Pantalla: La Agricultura en Venezuela: ", self.parent.config.activar_lector)        
-        self.spserver.processtext(p9["lector1"], self.parent.config.activar_lector)
+        self.spserver.processtext(
+            u"Pantalla: La Agricultura en Venezuela: ", 
+            self.parent.config.activar_lector
+        )        
+        self.spserver.processtext(
+            p9["lector1"], 
+            self.parent.config.activar_lector
+        )
         
     def handleEvents(self, events):
         """
@@ -181,7 +391,10 @@ class estado(pantalla.Pantalla):
                                 self.capital.iluminar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_2_1.img_palabras, self.texto9_2_2.img_palabras, self.texto9_2_3.img_palabras, self.texto9_2_4.img_palabras)
-                                self.spserver.processtext(cont["texto9_2_1l"] +  self.texto9_2_2.texto + self.texto9_2_3.texto + self.texto9_2_4.texto, self.parent.config.activar_lector)  
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_2_1l"] +  self.texto9_2_2.texto + self.texto9_2_3.texto + self.texto9_2_4.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                                       
                             elif self.x.id == u"región central":
                                 self.grupo_palabras.empty()
@@ -195,7 +408,10 @@ class estado(pantalla.Pantalla):
                                 self.central.iluminar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_3_1.img_palabras, self.texto9_3_2.img_palabras, self.texto9_3_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_3_1l"] + self.texto9_3_2.texto + self.texto9_3_3.texto, self.parent.config.activar_lector)                           
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_3_1l"] + self.texto9_3_2.texto + self.texto9_3_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                             if self.x.id == u"región los llanos":
                                 self.grupo_palabras.empty()
@@ -208,7 +424,10 @@ class estado(pantalla.Pantalla):
                                 self.llanos.iluminar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_4_1.img_palabras, self.texto9_4_2.img_palabras, self.texto9_4_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_4_1l"] +  self.texto9_4_2.texto + self.texto9_4_3.texto, self.parent.config.activar_lector) 
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_4_1l"] +  self.texto9_4_2.texto + self.texto9_4_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                             if self.x.id == u"región occidental":
                                 self.grupo_palabras.empty()
@@ -223,7 +442,10 @@ class estado(pantalla.Pantalla):
                                 self.guayana.apagar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_5_1.img_palabras, self.texto9_5_2.img_palabras, self.texto9_5_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_5_1l"] + self.texto9_5_2.texto + self.texto9_5_3.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_5_1l"] + self.texto9_5_2.texto + self.texto9_5_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                             if self.x.id == u"región zuliana":
                                 self.grupo_palabras.empty()
@@ -238,7 +460,10 @@ class estado(pantalla.Pantalla):
                                 self.guayana.apagar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_6_1.img_palabras, self.texto9_6_2.img_palabras, self.texto9_6_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_6_1l"] + self.texto9_6_2.texto + self.texto9_6_3.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_6_1l"] + self.texto9_6_2.texto + self.texto9_6_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                             if self.x.id == u"región los andes":
                                 self.grupo_palabras.empty()
@@ -253,7 +478,10 @@ class estado(pantalla.Pantalla):
                                 self.guayana.apagar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_7_1.img_palabras, self.texto9_7_2.img_palabras, self.texto9_7_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_7_1l"] + self.texto9_7_2.texto + self.texto9_7_3.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_7_1l"] + self.texto9_7_2.texto + self.texto9_7_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                             if self.x.id == u"región nor oriental":
                                 self.grupo_palabras.empty()
@@ -267,7 +495,10 @@ class estado(pantalla.Pantalla):
                                 self.guayana.apagar()
                                 self.insu.apagar()
                                 self.grupo_palabras.add(self.texto9_8_1.img_palabras, self.texto9_8_2.img_palabras, self.texto9_8_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_8_1l"] + self.texto9_8_2.texto + self.texto9_8_3.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_8_1l"] + self.texto9_8_2.texto + self.texto9_8_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                             
                             if self.x.id == u"región guayana":
                                 self.grupo_palabras.empty()
@@ -282,7 +513,10 @@ class estado(pantalla.Pantalla):
                                 self.insu.apagar()
                                 self.guayana.iluminar()
                                 self.grupo_palabras.add(self.texto9_9_1.img_palabras, self.texto9_9_2.img_palabras, self.texto9_9_3.img_palabras)
-                                self.spserver.processtext(cont["texto9_9_1l"] + self.texto9_9_2.texto + self.texto9_9_3.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_9_1l"] + self.texto9_9_2.texto + self.texto9_9_3.texto, 
+                                    self.parent.config.activar_lector
+                                )
                                 
                                 
                             if self.x.id == u"región insular":
@@ -298,7 +532,10 @@ class estado(pantalla.Pantalla):
                                 self.guayana.apagar()
                                 self.insu.iluminar()
                                 self.grupo_palabras.add(self.texto9_10_1.img_palabras, self.texto9_10_2.img_palabras, self.texto9_10_3.img_palabras, self.texto9_10_4.img_palabras )
-                                self.spserver.processtext(cont["texto9_10_1l"] + self.texto9_10_2.texto + self.texto9_10_3.texto + self.texto9_10_4.texto, self.parent.config.activar_lector)
+                                self.spserver.processtext(
+                                    self.parent.text_content["content"][self.name]["text_10_1l"] + self.texto9_10_2.texto + self.texto9_10_3.texto + self.texto9_10_4.texto, 
+                                    self.parent.config.activar_lector
+                                )
                     
                         elif self.x.tipo_objeto == "boton":
                             if self.x.id == "volver":

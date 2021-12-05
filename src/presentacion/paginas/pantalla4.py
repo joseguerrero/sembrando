@@ -6,7 +6,7 @@ from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
-from librerias.contenido import cont, conceptos as cp
+
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla3
@@ -20,6 +20,8 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
+
+        self.name = "screen_4"
         self.deteccion_movimiento = False 
         self.parent = parent
         self.previa = True
@@ -44,10 +46,42 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto4_2 = texto(64, 340, cont["texto4_2"], self.parent.config.t_fuente, "normal", 960, False)
-        self.texto4_3 = texto(64, 340, cont["texto4_3"], self.parent.config.t_fuente, "normal", 960, False)
-        self.texto4_4 = texto(64, 340, cont["texto4_4"], self.parent.config.t_fuente, "normal", 960, False)
-        self.texto4_5 = texto(64, 340, cont["texto4_5"], self.parent.config.t_fuente, "normal", 960, False)
+        self.texto4_2 = texto(
+            64,
+            340,
+            self.parent.text_content["content"][self.name]["text_2"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            960, 
+            False
+        )
+        self.texto4_3 = texto(
+            64,
+            340, 
+            self.parent.text_content["content"][self.name]["text_3"],
+            self.parent.config.t_fuente,
+            "normal", 
+            960, 
+            False
+        )
+        self.texto4_4 = texto(
+            64, 
+            340, 
+            self.parent.text_content["content"][self.name]["text_4"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            960, 
+            False
+        )
+        self.texto4_5 = texto(
+            64, 
+            340, 
+            self.parent.text_content["content"][self.name]["text_5"],
+            self.parent.config.t_fuente, 
+            "normal", 
+            960, 
+            False
+        )
         
     def cargar_botones(self):
         """
@@ -84,7 +118,10 @@ class estado(pantalla.Pantalla):
         self.anim4.detener()
         if self.anim_actual == 0:
             self.anim_actual = 1      
-        self.spserver.processtext(u"Pantalla: Partes de una planta", self.parent.config.activar_lector)
+        self.spserver.processtext(
+            "Pantalla: Partes de una planta", 
+            self.parent.config.activar_lector
+        )
         self.reproducir_animacion(self.anim_actual)
         
     
@@ -139,7 +176,10 @@ class estado(pantalla.Pantalla):
                                 
                         elif self.x.tipo_objeto == "palabra":
                             self.deteccion_movimiento = False
-                            self.spserver.processtext(cp[self.x.codigo], self.parent.config.activar_lector)
+                            self.spserver.processtext(
+                                self.parent.text_content["concepts"][self.x.codigo],
+                                self.parent.config.activar_lector
+                            )
                             
                 
             if pygame.sprite.spritecollideany(self.raton, self.grupo_palabras):
@@ -213,10 +253,16 @@ class estado(pantalla.Pantalla):
             
             if self.parent.config.activar_lector:
                 if self.entrada_primera_vez:
-                    self.spserver.processtext2(cont["texto4_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext2(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                     self.entrada_primera_vez=False
                 else:
-                    self.spserver.processtext(cont["texto4_2"], self.parent.config.activar_lector)
+                    self.spserver.processtext(
+                        self.parent.text_content["content"][self.name]["text_2"],
+                        self.parent.config.activar_lector
+                    )
                 self.grupo_fondotexto.add(self.caja_texto)
                 self.grupo_palabras.add(self.texto4_2.img_palabras)
                 self.txt_actual = self.texto4_2.img_palabras
@@ -234,7 +280,10 @@ class estado(pantalla.Pantalla):
             self.anim4_1.update()          
             self.anim4_1.stop = False
             self.anim4_1.continuar()
-            self.spserver.processtext(cont["anim4_1"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["anim_1"],
+                self.parent.config.activar_lector
+            )
         
         # Explicacion
         if animacion == 3:
@@ -247,7 +296,10 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.add(self.texto4_3.img_palabras)
             self.txt_actual = self.texto4_3.img_palabras
             self.chequeo_palabra(self.txt_actual)
-            self.spserver.processtext(cont["texto4_3"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["text_3"],
+                self.parent.config.activar_lector
+            )
         
         # Anim
         if animacion == 4:
@@ -260,7 +312,10 @@ class estado(pantalla.Pantalla):
             self.anim4_2.update()          
             self.anim4_2.stop = False
             self.anim4_2.continuar()
-            self.spserver.processtext(cont["anim4_2"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["anim_2"],
+                self.parent.config.activar_lector
+            )
         
         # Explicacion
         if animacion == 5:
@@ -273,7 +328,10 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.add(self.texto4_4.img_palabras)
             self.txt_actual = self.texto4_4.img_palabras
             self.chequeo_palabra(self.txt_actual)
-            self.spserver.processtext(cont["texto4_4"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["text_4"],
+                self.parent.config.activar_lector
+            )
         
         # Anim
         if animacion == 6:
@@ -286,7 +344,10 @@ class estado(pantalla.Pantalla):
             self.anim4_3.update()          
             self.anim4_3.stop = False            
             self.anim4_3.continuar()
-            self.spserver.processtext(cont["anim4_3"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["anim_3"],
+                self.parent.config.activar_lector
+            )
             
         # Explicacion
         if animacion == 7:
@@ -300,7 +361,10 @@ class estado(pantalla.Pantalla):
             self.grupo_palabras.add(self.texto4_5.img_palabras)
             self.txt_actual = self.texto4_5.img_palabras
             self.chequeo_palabra(self.txt_actual)
-            self.spserver.processtext(cont["texto4_5"], self.parent.config.activar_lector)  
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["text_5"],
+                self.parent.config.activar_lector
+            )  
       
         if animacion == 8:
             self.elemento_actual = -1
@@ -314,7 +378,10 @@ class estado(pantalla.Pantalla):
             self.anim4_4.stop = False
             self.anim4_4.continuar()
             self.grupo_botones.remove(self.sig)
-            self.spserver.processtext(cont["anim4_4"], self.parent.config.activar_lector)
+            self.spserver.processtext(
+                self.parent.text_content["content"][self.name]["anim_4"],
+                self.parent.config.activar_lector
+            )
     
     def draw(self):
         """

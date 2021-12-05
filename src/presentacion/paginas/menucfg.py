@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import pygame
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.popups import PopUp
 from librerias.imagen import imagen
-from librerias.textopopups import p1
 from paginas import pantalla2, menuauditivo, menuvisual
 
 class estado(pantalla.Pantalla):
@@ -18,6 +18,8 @@ class estado(pantalla.Pantalla):
         pantalla fue cargada a través del método changeState del Manejador.
         @type previa: bool
         """
+
+        self.name = "screen_1"
         self.previa = previa
         self.parent = parent
         self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
@@ -74,18 +76,48 @@ class estado(pantalla.Pantalla):
                 self.cargar_botones()
                 self.grupo_banner.add(self.banner_inf) 
                 self.grupo_botones.add(self.boton_sordo, self.boton_visual, self.inicio)
-                self.popup_ins = PopUp(self.parent, p1["texto1"], "", self.dic_img , self.grupo_popup, 2, 512, 290, 100)
+                self.popup_ins = PopUp(
+                    self.parent, 
+                    # TODO: If the parent is already being passed we can grab the
+                    # text from the parent's dict, we would only need to pass the
+                    # screen name and maybe the "popups" key
+                    self.parent.text_content["popups"][self.name]["text_1"],
+                    "", 
+                    self.dic_img, 
+                    self.grupo_popup, 
+                    2,
+                    512,
+                    290,
+                    100
+                )
+
                 self.popup_ins.agregar_grupo()
-                self.spserver.processtext(p1["lector1"], True)
+                self.spserver.processtext(
+                    self.parent.text_content["popups"][self.name]["reader_1"],
+                    True
+                )
             else:
                 self.background = self.fondo_simple
                 if self.parent.config.texto_cambio == True:
                     self.cargar_botones()
                     self.parent.config.texto_cambio = False
-                self.popup_ins = PopUp(self.parent, p1["texto2"], "", self.dic_img, self.grupo_popup, 2, 512, 270, 100)
+                self.popup_ins = PopUp(
+                    self.parent,
+                    self.parent.text_content["popups"][self.name]["text_2"],
+                    "", 
+                    self.dic_img, 
+                    self.grupo_popup, 
+                    2, 
+                    512, 
+                    270, 
+                    100
+                )
                 self.popup_ins.agregar_grupo()
-                self.spserver.processtext(p1["lector2"], True)    
-                self.grupo_banner.add(self.banner_config, self.banner_inf) 
+                self.spserver.processtext(
+                    self.parent.text_content["popups"][self.name]["reader_2"],
+                    True
+                )
+                self.grupo_banner.add(self.banner_config, self.banner_inf)
                 self.grupo_botones.add(self.boton_sordo, self.boton_visual, self.puerta)
             
     def handleEvents(self, events):

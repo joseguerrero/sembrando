@@ -5,7 +5,6 @@ from librerias import pantalla
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
-from librerias.contenido import cont
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent):
@@ -15,6 +14,8 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
+
+        self.name = "screen_11"
         self.parent = parent
         self.background = pygame.image.load(self.fondos + "fondo-acc.png").convert()
         self.caja_or = imagen(self.fondos + "caja.png", 290, 125)
@@ -33,21 +34,91 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.spserver.processtext(u"Pantalla: Orientaciones y Sugerencias: "
-                                  u"Pulsa sobre cada botón para que puedas explorar las orientaciones y sugerencias. ", 
-                                  self.parent.config.activar_lector)
-        self.texto11 = texto(400, 200, cont["texto11"], self.parent.config.t_fuente, "instruccion", 800)
-        self.texto11_5_1 = texto(300, 130, cont["texto11_5_1"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_5_2 = texto(300, self.texto11_5_1.y + self.texto11_5_1.ancho_final + 10, cont["texto11_5_2"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_5_3 = texto(300, self.texto11_5_2.y + self.texto11_5_2.ancho_final + 10, cont["texto11_5_3"], self.parent.config.t_fuente, "normal", 900)
-        
-        self.texto11_6_1 = texto(300, 130, cont["texto11_6_1"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_6_2 = texto(300, self.texto11_6_1.y + self.texto11_6_1.ancho_final + 10, cont["texto11_6_2"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_6_3 = texto(300, self.texto11_6_2.y + self.texto11_6_2.ancho_final + 10, cont["texto11_6_3"], self.parent.config.t_fuente, "normal", 900)
-        
-        self.texto11_7_1 = texto(300, 130, cont["texto11_7_1"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_7_2 = texto(300, self.texto11_7_1.y + self.texto11_7_1.ancho_final + 10, cont["texto11_7_2"], self.parent.config.t_fuente, "normal", 900)
-        self.texto11_7_3 = texto(300, self.texto11_7_2.y + self.texto11_7_2.ancho_final + 10, cont["texto11_7_3"], self.parent.config.t_fuente, "normal", 900)
+        self.spserver.processtext(
+            "Pantalla: Orientaciones y Sugerencias: "
+            "Pulsa sobre cada botón para que puedas explorar las orientaciones y sugerencias. ", 
+            self.parent.config.activar_lector
+        )
+        self.texto11 = texto(
+            400, 
+            200, 
+            self.parent.text_content["content"][self.name]["text_1"],
+            self.parent.config.t_fuente, 
+            "instruccion",
+            800
+        )
+        self.texto11_5_1 = texto(
+            300, 
+            130, 
+            self.parent.text_content["content"][self.name]["text_5_1"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_5_2 = texto(
+            300, 
+            self.texto11_5_1.y + self.texto11_5_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_5_2"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_5_3 = texto(
+            300, 
+            self.texto11_5_2.y + self.texto11_5_2.ancho_final + 10,
+            self.parent.text_content["content"][self.name]["text_5_3"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_6_1 = texto(
+            300,
+            130,
+            self.parent.text_content["content"][self.name]["text_6_1"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_6_2 = texto(
+            300,
+            self.texto11_6_1.y + self.texto11_6_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_6_2"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_6_3 = texto(
+            300, 
+            self.texto11_6_2.y + self.texto11_6_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_6_3"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_7_1 = texto(
+            300, 
+            130, 
+            self.parent.text_content["content"][self.name]["text_7_1"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_7_2 = texto(
+            300, 
+            self.texto11_7_1.y + self.texto11_7_1.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_7_2"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
+        self.texto11_7_3 = texto(
+            300, 
+            self.texto11_7_2.y + self.texto11_7_2.ancho_final + 10, 
+            self.parent.text_content["content"][self.name]["text_7_3"],
+            self.parent.config.t_fuente, 
+            "normal",
+            900
+        )
   
     def cargar_botones(self):
         """
@@ -105,12 +176,13 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.add(self.texto11_5_1.img_palabras, self.texto11_5_2.img_palabras, self.texto11_5_3.img_palabras)
                             self.caja_or.ajustar_alto(self.texto11_5_1.ancho_final + self.texto11_5_2.ancho_final + self.texto11_5_3.ancho_final + 20)
                             self.grupo_banner.add(self.banner_or_es, self.caja_or, self.banner_inf)
-                            #self.spserver.processtext(self.texto11_5_1.texto + self.texto11_5_2.texto + self.texto11_5_3.texto + 
-                            #                          u"Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
-                            #                          self.parent.config.activar_lector)
-                            self.spserver.processtext(cont["texto11_5_1l"] + cont["texto11_5_2l"] + cont["texto11_5_3l"] + 
-                                                      u"Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
-                                                      self.parent.config.activar_lector)
+                            self.spserver.processtext(
+                                self.parent.text_content["content"][self.name]["text_5_1l"] +
+                                self.parent.text_content["content"][self.name]["text_5_2l"] +
+                                self.parent.text_content["content"][self.name]["text_5_3l"] +
+                                "Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
+                                self.parent.config.activar_lector
+                            )
                             
                         elif self.x.id == "or-docentes":
                             self.grupo_palabras.empty()
@@ -118,12 +190,14 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.add(self.texto11_6_1.img_palabras, self.texto11_6_2.img_palabras, self.texto11_6_3.img_palabras)
                             self.caja_or.ajustar_alto(self.texto11_6_1.ancho_final + self.texto11_6_2.ancho_final + self.texto11_6_3.ancho_final + 20)
                             self.grupo_banner.add(self.banner_or_doc, self.caja_or, self.banner_inf)
-                            #self.spserver.processtext(self.texto11_6_1.texto + self.texto11_6_2.texto + self.texto11_6_3.texto + 
-                            #                          u"Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
-                            #                          self.parent.config.activar_lector)
-                            self.spserver.processtext(cont["texto11_6_1l"] + cont["texto11_6_2l"] + cont["texto11_6_3l"] + 
-                                                      u"Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
-                                                      self.parent.config.activar_lector)
+                            
+                            self.spserver.processtext(
+                                self.parent.text_content["content"][self.name]["text_6_1l"] +
+                                self.parent.text_content["content"][self.name]["text_6_2l"] +
+                                self.parent.text_content["content"][self.name]["text_6_3l"] +
+                                "Ahora, utiliza las teclas de dirección y explora la siguiente orientación o sugerencia. ",
+                                self.parent.config.activar_lector
+                            )
                             
                         elif self.x.id == "or-padres":
                             self.grupo_palabras.empty()
@@ -131,12 +205,14 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.add(self.texto11_7_1.img_palabras, self.texto11_7_2.img_palabras, self.texto11_7_3.img_palabras)
                             self.caja_or.ajustar_alto(self.texto11_7_1.ancho_final + self.texto11_7_2.ancho_final + self.texto11_7_3.ancho_final + 20)
                             self.grupo_banner.add(self.banner_or_pa, self.caja_or, self.banner_inf)
-                            #self.spserver.processtext(self.texto11_7_1.texto + self.texto11_7_2.texto + self.texto11_7_3.texto +
-                            #                          u"Fin de contenido, regresa al menú. ",
-                            #                          self.parent.config.activar_lector)   
-                            self.spserver.processtext(cont["texto11_7_1l"] + cont["texto11_7_2l"] + cont["texto11_7_3l"] +
-                                                      u"Fin de contenido, regresa al menú. ",
-                                                      self.parent.config.activar_lector)
+                            
+                            self.spserver.processtext(
+                                self.parent.text_content["content"][self.name]["text_7_1l"] +
+                                self.parent.text_content["content"][self.name]["text_7_2l"] +
+                                self.parent.text_content["content"][self.name]["text_7_3l"] +
+                                "Fin de contenido, regresa al menú. ",
+                                self.parent.config.activar_lector
+                            )
                             
                         elif self.x.id == "puerta":
                             self.limpiar_grupos()
