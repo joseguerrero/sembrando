@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 def _pixelPerfectCollisionDetection(sp1, sp2):
     """
     Método interno utilizado para la detección de colisiones perfect pixel.

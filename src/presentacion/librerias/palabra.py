@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import pygame
 
 class palabra(pygame.sprite.Sprite):

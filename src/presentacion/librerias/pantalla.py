@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import pygame
 from librerias.cursor import cursor
 from librerias.boton import RenderBoton

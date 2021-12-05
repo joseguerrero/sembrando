@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 class Singleton(type):
     """
     Implementación del patrón singleton para python. 

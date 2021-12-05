@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 p1 = {
 "texto1": u"    Bienvenidas y bienvenidos a Sembrando para el futuro. Sigue las instrucciones: para navegar en el recurso " 
