@@ -8,7 +8,7 @@ class personaje(pygame.sprite.Sprite):
     Esta clase implementa un personaje que puede ser controlado mediante el teclado, incluye interacción con
     elementos externos y permite cambiar la imagen que lo representa.
     """
-    pygame.mixer.init()
+    # pygame.mixer.init()
     izq = False
     """Indica si la orientación del personaje es hacia la izquierda. """
     ocupado = False
@@ -29,9 +29,9 @@ class personaje(pygame.sprite.Sprite):
     """Fotograma actual del personaje. """
     varios = "../imagenes/png/varios/"
     """Ruta de las imágenes del personaje. """
-    sonido_choque = pygame.mixer.Sound("../audio/choque.ogg")
+    # sonido_choque = pygame.mixer.Sound("../audio/choque.ogg")
     """Sonido que indica que el personaje esta chocando. """
-    sonido_caminar = pygame.mixer.Sound("../audio/pasos.ogg")
+    # sonido_caminar = pygame.mixer.Sound("../audio/pasos.ogg")
     """Sonido que indica que el personaje va por el camino correcto. """
     
     def __init__(self, x, y, imagen, frames):
@@ -182,25 +182,25 @@ class personaje(pygame.sprite.Sprite):
         if not self.ocupado:
             if direction == 'arriba':
                 self.posy -= self.vel_anim
-                self.sonido_caminar.play()
+                # self.sonido_caminar.play()
                 self.actualizar_rects()
                 self.actualizar()
                 
             if direction == 'abajo':
                 self.posy += self.vel_anim
-                self.sonido_caminar.play()
+                # self.sonido_caminar.play()
                 self.actualizar_rects()
                 self.actualizar()
                 
             if direction == 'izq':
                 self.posx -= self.vel_anim
-                self.sonido_caminar.play()
+                # self.sonido_caminar.play()
                 self.actualizar_rects()
                 self.actualizar()
                 
             if direction == 'der':
                 self.posx += self.vel_anim
-                self.sonido_caminar.play()
+                # self.sonido_caminar.play()
                 self.actualizar_rects()
                 self.actualizar()
         
@@ -213,8 +213,8 @@ class personaje(pygame.sprite.Sprite):
         @type direction: str
         """
         if pygame.sprite.spritecollideany(self, self.limites):
-            self.sonido_caminar.set_volume(0)
-            self.sonido_choque.play()
+            # self.sonido_caminar.set_volume(0)
+            # self.sonido_choque.play()
             self.chocando = True
             if direction == 'arriba':
                 dire = 'abajo'
@@ -228,7 +228,7 @@ class personaje(pygame.sprite.Sprite):
                 dire = 'none'
             self.mover(dire)
         else:
-            self.sonido_caminar.set_volume(100)
+            # self.sonido_caminar.set_volume(100)
             self.chocando = False
     
     def update(self):
