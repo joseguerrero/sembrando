@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-import json
 import pygame
+
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.popups import PopUp
 from librerias.imagen import imagen
+
 from paginas import menucfg
 from paginas import pantalla3
 from paginas import pantalla5

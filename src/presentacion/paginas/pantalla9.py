@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 
 import pygame
+
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.popups import PopUp
 from librerias.imagen import imagen
-
 from librerias.imgfondo import fondo
 from librerias.pixelperfect import *
 from librerias.textopopups import p9
 from librerias.objmask import object_mask
+
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla8

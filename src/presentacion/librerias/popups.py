@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 import pygame
+
 from .texto import texto
 from .textoci import texto2
 from .imgfondo import fondo
+
 TEXT_COLOR2 = (0,0,0)
 COLOR_RED = (213, 0, 0)
 BAR_COLOR = (151, 0, 172)

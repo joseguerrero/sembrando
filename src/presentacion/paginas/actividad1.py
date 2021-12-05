@@ -2,6 +2,7 @@
 
 import random
 import pygame
+
 from librerias import pantalla
 from librerias.prp import prp
 from librerias.popups import PopUp

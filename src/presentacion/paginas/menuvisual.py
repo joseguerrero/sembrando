@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from librerias import pantalla
 from librerias.textopopups import p1_vis
 from librerias.boton import boton

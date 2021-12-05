@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 import pygame
+
 from librerias import pantalla
 from librerias.boton import boton
 from librerias.texto import texto
 from librerias.imagen import imagen
 from librerias.animaciones import animacion
+
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla4

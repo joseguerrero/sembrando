@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from .palabra import palabra
 
 class cajatexto(pygame.sprite.Sprite):

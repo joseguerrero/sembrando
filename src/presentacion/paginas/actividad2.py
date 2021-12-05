@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from librerias import pantalla
 from librerias.textoci import texto2
 from librerias.cajatexto import cajatexto

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from librerias.cursor import cursor
 from librerias.boton import RenderBoton
 from librerias.animaciones import RenderAnim

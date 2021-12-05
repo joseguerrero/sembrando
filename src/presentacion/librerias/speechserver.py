@@ -2,6 +2,7 @@
 
 # import speechd
 import subprocess
+
 from manejador import Manejador as parent
 
 class Speechserver():

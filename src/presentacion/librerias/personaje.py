@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from .eventos import ManejadorEventos
 
 class personaje(pygame.sprite.Sprite):

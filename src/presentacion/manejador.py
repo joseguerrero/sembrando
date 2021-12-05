@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 import os
-import gc 
+import gc
 import sys
 import json
 import pygame
 import subprocess
+
 from librerias.singleton import Singleton
 from librerias.magnificador import Rendermag
 from librerias.configuracion import configuracion

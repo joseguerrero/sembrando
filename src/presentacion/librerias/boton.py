@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame
+
 from manejador import Manejador as parent
 
 class spritesheet(object):
