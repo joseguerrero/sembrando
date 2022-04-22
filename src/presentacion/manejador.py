@@ -19,6 +19,7 @@ class Manejador(object):
     """
     __metaclass__ = Singleton
     habilitar = False
+    DRAW_DEBUG_RECTANGLES = False
     VOLVER_PANTALLA_PREVIA = False
     config = configuracion()
     grupo_magnificador = Rendermag()

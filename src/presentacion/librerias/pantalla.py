@@ -73,6 +73,16 @@ class Pantalla(object):
     """Grupo utilizado para dibujar el fondo de los textos en las pantallas de contenido. """
     grupo_palabras = pygame.sprite.OrderedUpdates()
     """Grupo utilizado para dibujar textos. """
+
+    debug_groups = [
+        grupo_imagen,
+        grupo_botones,
+        grupo_banner,
+        grupo_tooltip,
+        grupo_popup,
+        grupo_palabras
+    ]
+
     enable = False
     """Si es True permite cambiar la posición del magnificador de pantalla. 
     Si es falso no se mueve el magnificador. """
@@ -154,6 +164,13 @@ class Pantalla(object):
         pygame.draw.rect(self.parent.screen, (0,255,0), self.rect, 3)    
         """Dibuja un rectangulo de color verde en la posición y con las dimensiones asignadas en
         'definir_rect()'. """
+
+    def draw_debug_rectangles(self):
+        if self.parent.DRAW_DEBUG_RECTANGLES:
+            debug_rectangles = [object.rect for group in self.debug_groups for object in group]
+            for rectangle in debug_rectangles:
+                pygame.draw.rect(self.parent.screen, (255, 0, 0), rectangle, 3)
+
     def chequeo_palabra(self, lista):
         """
         Verifica si en el texto que se muestra en la pantalla actual, hay palabras interpretables, de ser así
