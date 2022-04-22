@@ -1,16 +1,31 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import pygame
+from pygame import Rect
 
-class objeto(pygame.sprite.Sprite):
+from pygame.image import load
+from pygame.sprite import Sprite
+
+class GameObject(Sprite):
     """
     Esta clase define objetos con los que el personaje puede interactuar en la actividad 1.
     
     @todo: Crear una superclase 'objeto' que defina los métodos usados por las clases: imagen, objeto, entre otras.    
     """
-    aumentos = {"la carretilla. ":1, "las semillas. ":1, "la regadera. ":2, "la pala. ":4, "el abono. ":8, u"el controlador biológico. ":16}
-    """ Es un diccionario que asigna a cada tipo de objeto un valor de aumento para calcular los cambios
-    de imágen en la clase personaje. """
+
+    aumentos = {
+        "la carretilla. ":1, 
+        "las semillas. ":1, 
+        "la regadera. ":2, 
+        "la pala. ":4, 
+        "el abono. ":8, 
+        u"el controlador biológico. ":16
+    }
+    
+    """
+    Es un diccionario que asigna a cada tipo de objeto un valor de aumento para calcular los cambios
+    de imágen en la clase personaje. 
+    """
+
     def __init__(self, posx, posy, imagen, nombre):
         """
         Método inicializador de la clase.
@@ -24,15 +39,16 @@ class objeto(pygame.sprite.Sprite):
         @param nombre: Identificador que representa al objeto.
         @type nombre: str
         """
-        pygame.sprite.Sprite.__init__(self)
+
+        Sprite.__init__(self)
         self.nombre = nombre
         self.x = posx
         self.y = posy
-        self.image = pygame.image.load(imagen).convert_alpha()
-        self.rect = pygame.Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
+        self.image = load(imagen).convert_alpha()
+        self.rect = Rect(self.x, self.y, self.image.get_width(), self.image.get_height())
         self.aumento = self.aumentos[nombre]
         
-    def reubicar(self, x, y):
+    def relocate(self, x, y):
         """
         Reubica un objeto previamente creado, en las coordenadas especificadas.
         
@@ -41,5 +57,10 @@ class objeto(pygame.sprite.Sprite):
         @param y: Coordenada Y donde se desea reubicar el objeto.
         @type y: int
         """
-        (_,_,w,h) = self.image.get_rect()
-        self.rect = pygame.Rect(x, y, w, h)
+
+        if x:
+            self.rect.x = x
+        
+        if y:
+            self.rect.y = y
+
