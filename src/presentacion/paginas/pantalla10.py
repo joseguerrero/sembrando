@@ -3,9 +3,9 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.texto import texto
-from librerias.imagen import imagen
+from librerias.image import Image
 
 from paginas import pantalla2
 
@@ -19,15 +19,15 @@ class estado(pantalla.Pantalla):
         """
         self.parent = parent
         self.background = pygame.image.load(self.fondos + "fondo-acc.png").convert()
-        self.caja_concepto = imagen(self.varios + "caja-concepto.png", 590, 190)
-        self.banner_glo = imagen(self.banners + "banner-glo.png", 0, 0)
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
+        self.caja_concepto = Image(590, 190, self.varios + "caja-concepto.png")
+        self.banner_glo = Image(0, 0, self.banners + "banner-glo.png")
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
         self.cargar_textos()
         self.cargar_botones()
         inicial = self.parent.config.definicion[0].upper()
         self.abc.indexar(inicial)
         self.grupo_palabras.add(self.abc.img_palabras, self.indices(inicial, self.parent.config.definicion), self.mostrar_concepto(self.parent.config.definicion))
-        self.caja_concepto.ajustar_alto(self.concepto.ancho_final)
+        self.caja_concepto.resize(height = self.concepto.ancho_final)
         self.grupo_palabras.add(self.abc.img_palabras)
         self.grupo_banner.add(self.banner_glo, self.caja_concepto, self.banner_inf)
         self.grupo_botones.add(self.volver, self.home)
@@ -56,8 +56,8 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.volver = boton("volver", "Regresar", self.botones + "boton-regresar.png", 3, 320, 445, None, False, 1)
-        self.home = boton("home", "Menú", self.botones + "boton-menu.png", 3, 889, 440, None, False, 1)
+        self.volver = Button(320, 445, "volver", "Regresar", self.botones + "boton-regresar.png", 3, None, False, 1)
+        self.home = Button(889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1)
     
     def start(self):
         pass
@@ -105,7 +105,7 @@ class estado(pantalla.Pantalla):
                         self.grupo_banner.add(self.caja_concepto)
                         self.grupo_palabras.remove(self.concepto.img_palabras)
                         self.grupo_palabras.add(self.mostrar_concepto(sprite[0].codigo))
-                        self.caja_concepto.ajustar_alto(self.concepto.ancho_final)
+                        self.caja_concepto.resize(height = self.concepto.ancho_final)
                     
             if pygame.sprite.spritecollideany(self.raton, self.grupo_botones):
                 sprite = pygame.sprite.spritecollide(self.raton, self.grupo_botones, False)
@@ -140,6 +140,7 @@ class estado(pantalla.Pantalla):
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         self.dibujar_rect()
+        self.draw_debug_rectangles()
         
     def mostrar_concepto(self, palabra):
         """

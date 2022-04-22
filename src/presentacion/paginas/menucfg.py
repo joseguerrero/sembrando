@@ -3,9 +3,9 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.popups import PopUp
-from librerias.imagen import imagen
+from librerias.image import Image
 from paginas import pantalla2, menuauditivo, menuvisual
 
 class estado(pantalla.Pantalla):
@@ -24,8 +24,8 @@ class estado(pantalla.Pantalla):
         self.parent = parent
         self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
         self.fondo_simple = pygame.image.load(self.fondos + "fondo-simple.png").convert()
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
-        self.banner_config = imagen(self.banners + "banner-acc.png", 0, 0)
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png", )
+        self.banner_config = Image(0, 0, self.banners + "banner-acc.png", )
         self.cargar_botones()
         self.cargar_img_intrucciones()
         self.rect = pygame.Rect(0, 0, 0, 0)
@@ -48,10 +48,10 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.puerta = boton("puerta", "Regresar", self.botones + "boton-puerta.png", 3, 650, 425, None, False, 1)
-        self.boton_sordo = boton("sordo", "Discapacidad auditiva", self.botones + "boton-sordo.png", 3 ,300, 440, None, False, 1)
-        self.boton_visual = boton("config-vis", "Discapacidad visual", self.botones + "boton-visual.png", 3 ,483, 430, None, False, 1)
-        self.inicio = boton("inicio", "Inicio", self.botones + "boton-inicio.png", 3,  650, 440 , None, False, 1)
+        self.puerta = Button(650, 425, "puerta", "Regresar", self.botones + "boton-puerta.png", 3, None, False, 1)
+        self.boton_sordo = Button(300, 440, "sordo", "Discapacidad auditiva", self.botones + "boton-sordo.png", 3, None, False, 1)
+        self.boton_visual = Button(483, 430, "config-vis", "Discapacidad visual", self.botones + "boton-visual.png", 3, None, False, 1)
+        self.inicio = Button(650, 440, "inicio", "Inicio", self.botones + "boton-inicio.png", 3, None, False, 1)
         
     def start(self):
         pass
@@ -221,3 +221,4 @@ class estado(pantalla.Pantalla):
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)   
         self.dibujar_rect()
+        self.draw_debug_rectangles()

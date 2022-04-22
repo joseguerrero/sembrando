@@ -3,7 +3,7 @@
 import pygame
 
 from librerias.cursor import cursor
-from librerias.boton import RenderBoton
+from librerias.button import RenderButton
 from librerias.animaciones import RenderAnim
 from librerias.speechserver import Speechserver
 from librerias.magnificador import magnificador, Rendermag
@@ -57,7 +57,7 @@ class Pantalla(object):
     """Grupo utilizado para reiniciar varias animaciones simultáneamente. """
     grupo_imagen = RenderAnim()
     """Grupo utilizado para dibujar imágenes de fondo. """
-    grupo_botones = RenderBoton()
+    grupo_botones = RenderButton()
     """Grupo utilizado para dibujar los botones. """
     grupo_magnificador = Rendermag()
     """Grupo utilizado para dibujar el magnificador de pantalla. """

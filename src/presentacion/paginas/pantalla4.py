@@ -3,9 +3,9 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.texto import texto
-from librerias.imagen import imagen
+from librerias.image import Image
 from librerias.animaciones import animacion
 
 from paginas import menucfg
@@ -34,9 +34,9 @@ class estado(pantalla.Pantalla):
         self.anim4_4 = animacion("anim4_4", self.anim + "animacion4-4.png", 6, 1, 430, 100, -1, False, 10)
         self.cargar_botones()
         self.cargar_textos()
-        self.caja_texto = imagen(self.fondos + "caja-texto.png", 0, 332)
-        self.banner_partes = imagen(self.banners + "banner-partes.png", 0, 0)
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
+        self.caja_texto = Image(0, 332, self.fondos + "caja-texto.png")
+        self.banner_partes = Image(0, 0, self.banners + "banner-partes.png")
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
         self.grupo_update.add(self.anim4, self.anim4_1, self.anim4_2, self.anim4_3, self.anim4_4)
         self.rect = pygame.Rect(0,0,0,0)
         self.reloj_anim = pygame.time.Clock()
@@ -88,10 +88,10 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.home = boton("home", "Menú", self.botones + "boton-menu.png", 3, 889, 440, None, False, 1)
-        self.volver = boton("volver", "Regresar", self.botones + "boton-regresar.png", 3, 320, 445, None, False, 1)
-        self.config = boton("config", "Accesibilidad", self.botones + "boton-acc.png", 3 ,60, 445, None, False, 1)
-        self.sig = boton("sig", "Avanzar", self.botones + "boton-avanzar.png", 3, 560, 440, None, False, 1)        
+        self.home = Button(889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1)
+        self.volver = Button(320, 445, "volver", "Regresar", self.botones + "boton-regresar.png", 3, None, False, 1)
+        self.config = Button(60, 445, "config", "Accesibilidad", self.botones + "boton-acc.png", 3 ,None, False, 1)
+        self.sig = Button(560, 440, "sig", "Avanzar", self.botones + "boton-avanzar.png", 3, None, False, 1)        
      
     def start(self):
         pass
@@ -400,6 +400,7 @@ class estado(pantalla.Pantalla):
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         if self.deteccion_movimiento:
             self.dibujar_rect()
+        self.draw_debug_rectangles()
             
     def ir_glosario(self):
             self.parent.pushState(pantalla10.estado(self.parent))

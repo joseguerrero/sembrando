@@ -3,9 +3,9 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.texto import texto
-from librerias.imagen import imagen
+from librerias.image import Image
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent):
@@ -19,12 +19,12 @@ class estado(pantalla.Pantalla):
         self.name = "screen_11"
         self.parent = parent
         self.background = pygame.image.load(self.fondos + "fondo-acc.png").convert()
-        self.caja_or = imagen(self.fondos + "caja.png", 290, 125)
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
-        self.banner_or = imagen(self.banners + "banner-or.png", 0, 0)
-        self.banner_or_es = imagen(self.banners + "banner-or-es.png", 0, 0)
-        self.banner_or_pa = imagen(self.banners + "banner-or-pa.png", 0, 0)
-        self.banner_or_doc = imagen(self.banners + "banner-or-doc.png", 0, 0)
+        self.caja_or = Image(290, 125, self.fondos + "caja.png")
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+        self.banner_or = Image(0, 0, self.banners + "banner-or.png")
+        self.banner_or_es = Image(0, 0, self.banners + "banner-or-es.png")
+        self.banner_or_pa = Image(0, 0, self.banners + "banner-or-pa.png")
+        self.banner_or_doc = Image(0, 0, self.banners + "banner-or-doc.png")
         self.cargar_botones()
         self.cargar_textos()
         self.grupo_palabras.add(self.texto11.img_palabras)
@@ -125,10 +125,10 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.boton_or_ninos = boton("or-ninos", "Orientaciones a la niña, niño y adolescente", self.botones + "boton-or-es.png", 3 ,300, 440, None, False, 1)
-        self.boton_or_docentes =  boton("or-docentes", "Sugerencias pedagógicas", self.botones + "boton-or-doc.png", 3 ,500, 440, None, False, 1)
-        self.boton_or_padres = boton("or-padres", "Orientaciones a la adulta y al adulto responsable", self.botones + "boton-or-pa.png", 3 ,700, 440, None, False, 1)
-        self.puerta = boton("puerta", "Regresar", self.botones + "boton-puerta.png", 3, 60, 425, None, False, 1)
+        self.boton_or_ninos = Button(300, 440, "or-ninos", "Orientaciones a la niña, niño y adolescente", self.botones + "boton-or-es.png", 3, None, False, 1)
+        self.boton_or_docentes =  Button(500, 440, "or-docentes", "Sugerencias pedagógicas", self.botones + "boton-or-doc.png", 3, None, False, 1)
+        self.boton_or_padres = Button(700, 440, "or-padres", "Orientaciones a la adulta y al adulto responsable", self.botones + "boton-or-pa.png", 3, None, False, 1)
+        self.puerta = Button(60, 425, "puerta", "Regresar", self.botones + "boton-puerta.png", 3, None, False, 1)
         
     def start(self):
         pass
@@ -175,7 +175,7 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.empty()
                             self.grupo_banner.empty()
                             self.grupo_palabras.add(self.texto11_5_1.img_palabras, self.texto11_5_2.img_palabras, self.texto11_5_3.img_palabras)
-                            self.caja_or.ajustar_alto(self.texto11_5_1.ancho_final + self.texto11_5_2.ancho_final + self.texto11_5_3.ancho_final + 20)
+                            self.caja_or.resize(height = self.texto11_5_1.ancho_final + self.texto11_5_2.ancho_final + self.texto11_5_3.ancho_final + 30)
                             self.grupo_banner.add(self.banner_or_es, self.caja_or, self.banner_inf)
                             self.spserver.processtext(
                                 self.parent.text_content["content"][self.name]["text_5_1l"] +
@@ -189,7 +189,7 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.empty()
                             self.grupo_banner.empty()
                             self.grupo_palabras.add(self.texto11_6_1.img_palabras, self.texto11_6_2.img_palabras, self.texto11_6_3.img_palabras)
-                            self.caja_or.ajustar_alto(self.texto11_6_1.ancho_final + self.texto11_6_2.ancho_final + self.texto11_6_3.ancho_final + 20)
+                            self.caja_or.resize(height = self.texto11_6_1.ancho_final + self.texto11_6_2.ancho_final + self.texto11_6_3.ancho_final + 30)
                             self.grupo_banner.add(self.banner_or_doc, self.caja_or, self.banner_inf)
                             
                             self.spserver.processtext(
@@ -204,7 +204,7 @@ class estado(pantalla.Pantalla):
                             self.grupo_palabras.empty()
                             self.grupo_banner.empty()
                             self.grupo_palabras.add(self.texto11_7_1.img_palabras, self.texto11_7_2.img_palabras, self.texto11_7_3.img_palabras)
-                            self.caja_or.ajustar_alto(self.texto11_7_1.ancho_final + self.texto11_7_2.ancho_final + self.texto11_7_3.ancho_final + 20)
+                            self.caja_or.resize(height = self.texto11_7_1.ancho_final + self.texto11_7_2.ancho_final + self.texto11_7_3.ancho_final + 30)
                             self.grupo_banner.add(self.banner_or_pa, self.caja_or, self.banner_inf)
                             
                             self.spserver.processtext(
@@ -230,21 +230,21 @@ class estado(pantalla.Pantalla):
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(self.texto11_5_1.img_palabras, self.texto11_5_2.img_palabras, self.texto11_5_3.img_palabras)
-                        self.caja_or.ajustar_alto(self.texto11_5_1.ancho_final + self.texto11_5_2.ancho_final + self.texto11_5_3.ancho_final + 20)
+                        self.caja_or.resize(height = self.texto11_5_1.ancho_final + self.texto11_5_2.ancho_final + self.texto11_5_3.ancho_final + 30)
                         self.grupo_banner.add(self.banner_or_es, self.caja_or, self.banner_inf)
                     
                     elif sprite[0].id == "or-docentes":
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(self.texto11_6_1.img_palabras, self.texto11_6_2.img_palabras, self.texto11_6_3.img_palabras)
-                        self.caja_or.ajustar_alto(self.texto11_6_1.ancho_final + self.texto11_6_2.ancho_final + self.texto11_6_3.ancho_final + 20)
+                        self.caja_or.resize(height = self.texto11_6_1.ancho_final + self.texto11_6_2.ancho_final + self.texto11_6_3.ancho_final + 30)
                         self.grupo_banner.add(self.banner_or_doc, self.caja_or, self.banner_inf)
                     
                     elif sprite[0].id == "or-padres":
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(self.texto11_7_1.img_palabras, self.texto11_7_2.img_palabras, self.texto11_7_3.img_palabras)
-                        self.caja_or.ajustar_alto(self.texto11_7_1.ancho_final + self.texto11_7_2.ancho_final + self.texto11_7_3.ancho_final + 20)
+                        self.caja_or.resize(height = self.texto11_7_1.ancho_final + self.texto11_7_2.ancho_final + self.texto11_7_3.ancho_final + 30)
                         self.grupo_banner.add(self.banner_or_pa, self.caja_or, self.banner_inf)
         self.minimag(events)     
                      
@@ -270,3 +270,4 @@ class estado(pantalla.Pantalla):
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         self.dibujar_rect()
+        self.draw_debug_rectangles()

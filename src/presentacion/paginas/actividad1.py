@@ -7,11 +7,11 @@ from librerias import pantalla
 from librerias.prp import prp
 from librerias.popups import PopUp
 from librerias.cursor import cursor
-from librerias.imagen import imagen
-from librerias.objeto import objeto
+from librerias.image import Image
+from librerias.object import GameObject
 from librerias.limite import limite
 from librerias.marcador import marcador
-from librerias.boton import boton, RenderBoton
+from librerias.button import Button, RenderButton
 from librerias.personaje import personaje, RenderChar
 from librerias.animaciones import animacion, RenderAnim
 
@@ -19,7 +19,7 @@ class estado(pantalla.Pantalla):
     tiempo = 0
     reloj = pygame.time.Clock()
     anim_fondo = RenderAnim()
-    grupo_botones = RenderBoton()
+    grupo_botones = RenderButton()
     grupo_personaje = RenderChar()
     sprite = pygame.sprite.Sprite()
     marcador = pygame.sprite.Sprite()
@@ -88,17 +88,17 @@ class estado(pantalla.Pantalla):
         pygame.display.set_caption('Siembra la semilla')
         self.flecha_verde = pygame.image.load(self.varios + "flecha-verde.png").convert_alpha()
         self.preguntas = prp()
-        self.casa = imagen(self.varios + "casa.png", 0, 70)
-        self.poste = imagen(self.varios + "poste.png", 880, 0)
-        self.tractor = imagen(self.varios +"tractor.png", 840, 80)
-        self.pala = objeto(590, 380, self.varios + "pala.png", "la pala. ")
-        self.abono = objeto(900, 305, self.varios + "abono.png", "el abono. ")
-        self.carre = objeto(200, 80, self.varios + "carre.png", "la carretilla. ")
-        self.insec = objeto(760, 140, self.varios + "insec.png", u"el controlador biológico. ")
-        self.regadera = objeto(792, 270, self.varios + "regadera.png", "la regadera. ")
-        self.semillas = objeto(450, 200, self.varios + "semillas.png", "las semillas. ")
+        self.casa = Image(0, 70, self.varios + "casa.png")
+        self.poste = Image(880, 0, self.varios + "poste.png")
+        self.tractor = Image(840, 80, self.varios +"tractor.png")
+        self.pala = GameObject(590, 380, self.varios + "pala.png", "la pala. ")
+        self.abono = GameObject(900, 305, self.varios + "abono.png", "el abono. ")
+        self.carre = GameObject(200, 80, self.varios + "carre.png", "la carretilla. ")
+        self.insec = GameObject(760, 140, self.varios + "insec.png", u"el controlador biológico. ")
+        self.regadera = GameObject(792, 270, self.varios + "regadera.png", "la regadera. ")
+        self.semillas = GameObject(450, 200, self.varios + "semillas.png", "las semillas. ")
         self.nubes = animacion("nubes", self.varios + "nubes.png", 1, 1, 30, -15, -1, False, 18)
-        self.salir = boton("salir", "Salir", self.botones + "boton-salir.png", 1, 830, 60, -1, False, 1)
+        self.salir = Button(830, 60, "salir", "Salir", self.botones + "boton-salir.png", 1, -1, False, 1)
         self.flecha = animacion("flecha", self.varios + "flecha-verde.png", 3, 1, 800, 350, -1, True, 6)
         self.flores = animacion("flores", self.varios + "campo-flores.png", 4, 1, 758, 290, -1, False, 18)
         self.siembra = animacion("siembra", self.varios + "cinta-campesino.png", 3, 1, 680, 250, -1, True, 9)
@@ -132,10 +132,10 @@ class estado(pantalla.Pantalla):
         self.fondo = pygame.image.load(self.varios + "fondo1.png").convert()
         self.limpiar_grupos()
         self.anim_fondo.empty()
-        self.poste.reubicar(880, 0)
-        self.tractor.reubicar(840, 80)
-        self.semillas.reubicar(450, 200)
-        self.regadera.reubicar(880, 270)
+        self.poste.relocate(880, 0)
+        self.tractor.relocate(840, 80)
+        self.semillas.relocate(450, 200)
+        self.regadera.relocate(880, 270)
         self.meta = pygame.Rect(800, 470, 50, 100)
         self.grupo_marcadores.empty()
         self.m_semilla = marcador((357, 314, 20, 20), "semilla")
@@ -173,10 +173,10 @@ class estado(pantalla.Pantalla):
         self.ayuda = False
         self.fondo = pygame.image.load(self.varios + "fondo2.png").convert()
         self.limpiar_grupos()
-        self.poste.reubicar(880, -70)
-        self.tractor.reubicar(840, 20)
-        self.semillas.reubicar(290, 300)
-        self.regadera.reubicar(495, 125)
+        self.poste.relocate(880, -70)
+        self.tractor.relocate(840, 20)
+        self.semillas.relocate(290, 300)
+        self.regadera.relocate(495, 125)
         self.meta = pygame.Rect(800, 400, 50, 80)
         self.grupo_marcadores.empty()
         self.m_sem_car = marcador((206, 246, 20, 20), "sem_car")
@@ -389,9 +389,9 @@ class estado(pantalla.Pantalla):
                     self.ayuda = True
                     self.spserver.processtext(u"Has recolectado todos los elementos de este nivel, avanza hasta el sembradío para completar la siembra. " , self.parent.config.activar_lector)
                     if self.nivel_actual == 1:
-                        self.granjero.reubicar(460, 300)
+                        self.granjero.relocate(460, 300)
                     elif self.nivel_actual == 2:
-                        self.granjero.reubicar(460, 260)
+                        self.granjero.relocate(460, 260)
                     self.foobar = False
                     
         if self.marker and self.parent.config.activar_lector:

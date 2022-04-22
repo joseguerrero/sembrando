@@ -3,10 +3,10 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.texto import texto
 from librerias.popups import PopUp
-from librerias.imagen import imagen
+from librerias.image import Image
 from librerias.imgfondo import fondo
 from librerias.pixelperfect import *
 from librerias.textopopups import p9
@@ -32,8 +32,8 @@ class estado(pantalla.Pantalla):
         self.deteccion_movimiento = False
         self.fondo_texto = False
         self.background = pygame.image.load(self.fondos + "fondo-mapa2.png")
-        self.banner_siembra = imagen(self.banners + "banner-siembra.png", 0, 0)
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
+        self.banner_siembra = Image(0, 0, self.banners + "banner-siembra.png")
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
         self.mouse = object_mask("Cursor", 850, 512, self.varios + "puntero.png")
         # Para mantener las piezas del mapa bien ubicadas no se deben modificar los valores x e y de las regiones, solo de zulia.         
         self.zulia = object_mask(u"región zuliana", 13, 140, self.varios + "zulia-des.png", self.varios + "zulia-act.png")
@@ -305,9 +305,9 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.home = boton("home", "Menú", self.botones + "boton-menu.png", 3, 889, 440, None, False, 1)
-        self.volver = boton("volver", "Regresar", self.botones + "boton-regresar.png", 3, 320, 445, None, False, 1)
-        self.config = boton("config", "Accesibilidad", self.botones + "boton-acc.png", 3 ,60, 445, None, False, 1)
+        self.home = Button(889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1)
+        self.volver = Button(320, 445, "volver", "Regresar", self.botones + "boton-regresar.png", 3, None, False, 1)
+        self.config = Button(60, 445, "config", "Accesibilidad", self.botones + "boton-acc.png", 3, None, False, 1)
         
     def start(self):
         pass
@@ -741,6 +741,7 @@ class estado(pantalla.Pantalla):
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         if self.deteccion_movimiento:
             self.dibujar_rect()
-    
+        self.draw_debug_rectangles()
+
     def ir_glosario(self):
         self.parent.pushState(pantalla10.estado(self.parent))

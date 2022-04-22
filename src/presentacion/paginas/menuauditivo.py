@@ -2,10 +2,10 @@
 
 import pygame
 
-from librerias import  pantalla
-from librerias.boton import boton
+from librerias import pantalla
+from librerias.button import Button
 from librerias.texto import texto
-from librerias.imagen import imagen
+from librerias.image import Image
 from librerias.animaciones import animacion
 from paginas import pantalla2
 
@@ -25,27 +25,27 @@ class estado(pantalla.Pantalla):
         self.previa = previa
         self.fondo_acc = pygame.image.load(self.fondos + "fondo-acc.png").convert()
         self.background = self.fondo_acc
-        self.velocidad = boton("velocidad", "none", self.fondos + "velocidad.png", 1,  440, 360, None, False, 1)
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
-        self.banner_acc_sordo = imagen(self.banners + "banner-acc-sordo.png", 0, 0)
+        self.velocidad = Button(440, 360, "velocidad", "none", self.fondos + "velocidad.png", 1, None, False, 1)
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+        self.banner_acc_sordo = Image(0, 0, self.banners + "banner-acc-sordo.png")
         self.color_mujer = animacion("mujer", self.anim + "color-mujer.png", 9, 3, 730, 160, (21, 76, 75), True, 4)
         self.color_hombre = animacion("hombre", self.anim + "color-hombre.png", 9, 3, 730, 160, (21, 76, 75), True, 4)
-        self.si = boton("si", "none", self.botones + "cuadro.png", 1, 430, 120, None, False, 1)
-        self.no = boton("no", "none", self.botones + "cuadro.png", 1, 545, 120, None, False, 1)
-        self.check_si = boton("check_si", "none", self.botones + "cuadro-1.png" , 1, 430, 120, None, False, 1)
-        self.check_no = boton("check_no", "none", self.botones + "cuadro-1.png", 1, 540, 120, None, False, 1)
-        self.boton_nina = boton("nina", "none", self.botones + "cuadro.png", 1, 430, 200, None, False, 1)
-        self.boton_nino = boton("nino", "none", self.botones + "cuadro.png", 1, 540, 200, None, False, 1)
-        self.boton_nina_sel = boton("nina_sel", "none", self.botones + "cuadro-1.png", 1, 430, 200, None, False, 1)
-        self.boton_nino_sel = boton("nino_sel", "none", self.botones + "cuadro-1.png", 1, 540, 200, None, False, 1)
-        self.puerta = boton("puerta", "Regresar", self.botones + "boton-puerta.png", 3, 60, 425, None, False, 1)
-        self.guardar = boton("guardar", "Guardar", self.botones + "boton-guardar.png", 3, 860, 445, None, False, 1)
-        self.hoja = boton("hoja", "Velocidad", self.botones + "hoja.png", 1, 499, 370 , None, False, 1)
-        self.amarillo = boton("amarillo", "Amarillo", self.botones + "amarilla.png", 1, 425 , 295, None, False, 1)
-        self.rosado = boton("rosado", "Rosado", self.botones + "rosada.png", 1, 485 , 295, None, False, 1)
-        self.rojo = boton("rojo", "Rojo", self.botones + "roja.png", 1, 485 , 295, None, False, 1)
-        self.v_hombre = boton("v-hombre", "Verde", self.botones + "verdeh.png", 1, 545 , 295, None, False, 1)
-        self.v_mujer = boton("v-mujer", "Verde", self.botones + "verdem.png", 1, 545 , 295, None, False, 1)
+        self.si = Button(430, 120, "si", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.no = Button(545, 120, "no", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.check_si = Button(430, 120, "check_si", "none", self.botones + "cuadro-1.png" , 1, None, False, 1)
+        self.check_no = Button(540, 120, "check_no", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.boton_nina = Button( 430, 200, "nina", "none", self.botones + "cuadro.png", 1,None, False, 1)
+        self.boton_nino = Button(540, 200, "nino", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.boton_nina_sel = Button(430, 200, "nina_sel", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.boton_nino_sel = Button(540, 200, "nino_sel", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.puerta = Button(60, 425, "puerta", "Regresar", self.botones + "boton-puerta.png", 3, None, False, 1)
+        self.guardar = Button(860, 445, "guardar", "Guardar", self.botones + "boton-guardar.png", 3, None, False, 1)
+        self.hoja = Button(499, 370, "hoja", "Velocidad", self.botones + "hoja.png", 1, None, False, 1)
+        self.amarillo = Button(425 , 295, "amarillo", "Amarillo", self.botones + "amarilla.png", 1, None, False, 1)
+        self.rosado = Button(485, 295, "rosado", "Rosado", self.botones + "rosada.png", 1, None, False, 1)
+        self.rojo = Button(485, 295, "rojo", "Rojo", self.botones + "roja.png", 1, None, False, 1)
+        self.v_hombre = Button(545, 295, "v-hombre", "Verde", self.botones + "verdeh.png", 1, None, False, 1)
+        self.v_mujer = Button(545, 295, "v-mujer", "Verde", self.botones + "verdem.png", 1, None, False, 1)
         self.camisas_mujer = [self.amarillo, self.rosado, self.v_mujer]
         self.camisas_hombre = [self.amarillo, self.rojo, self.v_hombre]
         self.acc2_1 = texto(310, 70, u"1.- ¿Te gustaría hacer el recorrido con un intérprete virtual? ", 20,"normal", 700)
@@ -94,14 +94,14 @@ class estado(pantalla.Pantalla):
                     self.grupo_palabras.add(self.acc2_3.img_palabras, self.acc2_4.img_palabras, self.acc2_5m.img_palabras, self.acc2_6m.img_palabras, self.acc2_7.img_palabras)
                 self.color_hombre.cambiar_vel(self.parent.config.vel_anim)
                 self.color_mujer.cambiar_vel(self.parent.config.vel_anim)
-                self.hoja.mover(self.parent.config.ubx)
+                self.hoja.relocate(x = self.parent.config.ubx)
             elif self.parent.config.disc_audi == False:
                 self.grupo_palabras.add(self.acc2_7.img_palabras)
                 self.grupo_botones.add(self.si, self.check_no, self.puerta, self.guardar)
         else:
             self.parent.config.cargar_default()
             self.grupo_botones.add(self.si, self.check_no, self.puerta)
-            self.hoja.mover(499)
+            self.hoja.relocate(x = 499)
             self.color_hombre.cambiar_vel(self.parent.config.vel_anim)
             self.color_mujer.cambiar_vel(self.parent.config.vel_anim)
             self.color_hombre.cambiar_rect(self.parent.config.color)
@@ -129,7 +129,7 @@ class estado(pantalla.Pantalla):
                             factor = ((x - posx) / float(ancho - radio))
                             factor_anim = (posx + ancho - x)/8
                             ux = x - radio/2
-                            self.hoja.mover(ux)
+                            self.hoja.relocate(x = ux)
                             if factor_anim < 2:
                                 factor_anim = 2
                             if factor > 1:
@@ -282,3 +282,4 @@ class estado(pantalla.Pantalla):
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         self.dibujar_rect()
+        self.draw_debug_rectangles()

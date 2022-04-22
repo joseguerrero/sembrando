@@ -3,9 +3,9 @@
 import pygame
 
 from librerias import pantalla
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.popups import PopUp
-from librerias.imagen import imagen
+from librerias.image import Image
 
 from paginas import menucfg
 from paginas import pantalla3
@@ -27,10 +27,10 @@ class estado(pantalla.Pantalla):
         self.name = "screen_2"
         self.parent = parent
         self.previa = True
-        self.ayuda = False
+        self.display_help = False
 
-        self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()      
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
+        self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
         self.img1 = pygame.image.load(self.pops + "f1.png").convert_alpha()
         self.dic_img = {"F1": self.img1}
         self.cargar_botones()
@@ -44,7 +44,7 @@ class estado(pantalla.Pantalla):
         self.deteccion_movimiento = False
         self.resume()
         
-    def mostrar_ins(self):
+    def show_instructions(self):
         """
         Muestra las instrucciones de uso de la pantalla actual.
         """
@@ -79,13 +79,13 @@ class estado(pantalla.Pantalla):
         """
         Carga los botones utilizados en esta pantalla.
         """
-        self.nino = boton("act1", "Siembra la semilla", self.botones + "boton-nino.png" , 8, 400, 150, None, True, 12)
-        self.nina = boton("act2", "Plantas y números", self.botones + "boton-nina.png" , 8, 570, 150, None, True, 12)
-        self.plantas = boton("plantas", "Las plantas", self.botones + "boton-plantas.png" , 8, 0 , 80, None, False, 8)
-        self.repro = boton("repro", "Reproducción de las plantas", self.botones + "boton-repro.png" , 8, 700, 180, None, False, 8)
-        self.agri = boton("agri", "La agricultura en Venezuela", self.botones + "boton-agri.png", 4, 270, 185, None, False, 8)
-        self.config = boton("config", "Accesibilidad", self.botones + "boton-acc.png", 3 ,60, 445, None, False, 1)
-        self.orientacion = boton("orientacion", "Orientaciones y sugerencias", self.botones + "boton-or.png", 3, 884, 440, None, False, 1)
+        self.nino = Button(400, 150, "act1", "Siembra la semilla", self.botones + "boton-nino.png", 8, None, True, 12)
+        self.nina = Button(570, 150, "act2", "Plantas y números", self.botones + "boton-nina.png", 8, None, True, 12)
+        self.plantas = Button(0, 80, "plantas", "Las plantas", self.botones + "boton-plantas.png", 8, None, False, 8)
+        self.repro = Button(700, 180, "repro", "Reproducción de las plantas", self.botones + "boton-repro.png", 8, None, False, 8)
+        self.agri = Button(270, 185, "agri", "La agricultura en Venezuela", self.botones + "boton-agri.png", 4, None, False, 8)
+        self.config = Button(60, 445, "config", "Accesibilidad", self.botones + "boton-acc.png", 3, None, False, 1)
+        self.orientacion = Button(884, 440, "orientacion", "Orientaciones y sugerencias", self.botones + "boton-or.png", 3, None, False, 1)
     
     def start(self):
         pass
@@ -109,7 +109,7 @@ class estado(pantalla.Pantalla):
             
         if self.parent.config.visit["p2"] == False:
             self.parent.config.visit["p2"] = True
-            self.mostrar_ins()
+            self.show_instructions()
         else:
             self.spserver.processtext(u"Menú del Recurso", self.parent.config.activar_lector)	
         
@@ -130,7 +130,7 @@ class estado(pantalla.Pantalla):
                 self.parent.quit()
                 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_F1:
-                self.mostrar_ins()
+                self.show_instructions()
             
             if event.type == pygame.KEYDOWN and not self.popup_ins.activo:
                 self.chequeo_botones(self.grupo_botones)
@@ -226,3 +226,4 @@ class estado(pantalla.Pantalla):
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         self.dibujar_rect()
+        self.draw_debug_rectangles()

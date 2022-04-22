@@ -4,10 +4,10 @@ import pygame
 
 from librerias import pantalla
 from librerias.textopopups import p1_vis
-from librerias.boton import boton
+from librerias.button import Button
 from librerias.texto import texto
 from librerias.popups import PopUp
-from librerias.imagen import imagen
+from librerias.image import Image
 from paginas import pantalla2
 
 class estado(pantalla.Pantalla):
@@ -25,43 +25,43 @@ class estado(pantalla.Pantalla):
         self.previa = previa
         self.fondo_acc = pygame.image.load(self.fondos + "fondo-acc-visual.png").convert()
         self.background = self.fondo_acc
-        self.banner_inf = imagen(self.banners + "banner-inf.png", 0, 432)
-        self.banner_acc_visual = imagen(self.banners + "banner-acc-visual.png", 0, 0)
-        self.puerta = boton("puerta", "Regresar", self.botones + "boton-puerta.png", 3, 60, 425, None, False, 1)
-        self.guardar = boton("guardar", "Guardar", self.botones + "boton-guardar.png", 3, 860, 445, None, False, 1)
+        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+        self.banner_acc_visual = Image(0, 0, self.banners + "banner-acc-visual.png")
+        self.puerta = Button(60, 425, "puerta", "Regresar", self.botones + "boton-puerta.png", 3, None, False, 1)
+        self.guardar = Button(860, 445, "guardar", "Guardar", self.botones + "boton-guardar.png", 3, None, False, 1)
         
         # Botones magnificador
         self.img1 = pygame.image.load(self.pops + "f5.png").convert_alpha()
         self.img2 = pygame.image.load(self.pops + "mas.png").convert_alpha()
         self.img3 = pygame.image.load(self.pops + "menos.png").convert_alpha()
         cont_img = {"F5": self.img1, "MAS": self.img2, "MENOS": self.img3}
-        self.onmag = boton("onmag", "none", self.botones + "cuadro.png", 1, 130, 120, None, False, 1)
-        self.onmag_si = boton("onmag-si", "none", self.botones + "cuadro-1.png", 1, 130, 120, None, False, 1)
-        self.offmag = boton("offmag", "none", self.botones + "cuadro.png", 1, 245, 120, None, False, 1)
-        self.offmag_si = boton("offmag-si", "none", self.botones + "cuadro-1.png", 1, 245, 120, None, False, 1)
+        self.onmag = Button(130, 120, "onmag", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.onmag_si = Button(130, 120, "onmag-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.offmag = Button(245, 120, "offmag", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.offmag_si = Button(245, 120, "offmag-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
         self.popup_mag = PopUp(parent, p1_vis["texto_mag"], "", cont_img , self.grupo_popup, 2, 730, 230, -50)
         
         # Botones tamaño de letra
-        self.tam18 = boton("18", "none", self.botones + "cuadro.png", 1, 130, 200, None, False, 1)
-        self.tam18_sel = boton("18-si", "none", self.botones + "cuadro-1.png", 1, 130, 200, None, False, 1)
-        self.tam20 = boton("20", "none", self.botones + "cuadro.png", 1, 210, 200, None, False, 1)
-        self.tam20_sel = boton("20-si", "none", self.botones + "cuadro-1.png", 1, 210, 200, None, False, 1)
-        self.tam22 = boton("22", "none", self.botones + "cuadro.png", 1, 290, 200, None, False, 1)
-        self.tam22_sel = boton("22-si", "none", self.botones + "cuadro-1.png", 1, 290, 200, None, False, 1)
+        self.tam18 = Button(130, 200, "18", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.tam18_sel = Button(130, 200, "18-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.tam20 = Button(210, 200, "20", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.tam20_sel = Button(210, 200, "20-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.tam22 = Button(290, 200, "22", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.tam22_sel = Button(290, 200, "22-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
         
         # Botones Sintetizador de voz
-        self.lector = boton("lector", "none", self.botones + "cuadro.png", 1, 130, 295, None, False, 1)
-        self.lector_si =boton("lector-si", "none", self.botones + "cuadro-1.png", 1, 130, 295, None, False, 1)
-        self.oflector = boton("oflector", "none", self.botones + "cuadro.png", 1, 245, 295, None, False, 1)
-        self.oflector_si = boton("oflector-si", "none", self.botones + "cuadro-1.png", 1, 245, 295, None, False, 1)
+        self.lector = Button(130, 295, "lector", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.lector_si =Button(130, 295, "lector-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.oflector = Button(245, 295, "oflector", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.oflector_si = Button(245, 295, "oflector-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
         
         # Botones audio
-        self.vbaja = boton("vbaja", "none", self.botones + "cuadro.png", 1, 93, 390, None, False, 1)
-        self.vbaja_sel = boton("vbaja-si", "none", self.botones + "cuadro-1.png", 1, 93, 390, None, False, 1)
-        self.vmedia = boton("vmedia", "none", self.botones + "cuadro.png", 1, 208, 390, None, False, 1)
-        self.vmedia_sel = boton("vmedia-si", "none", self.botones + "cuadro-1.png", 1, 208, 390, None, False, 1)
-        self.vrapida = boton("vrapida", "none", self.botones + "cuadro.png", 1, 332, 390, None, False, 1)
-        self.vrapida_sel = boton("vrapida-si", "none", self.botones + "cuadro-1.png", 1, 332, 390, None, False, 1)
+        self.vbaja = Button(93, 390, "vbaja", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.vbaja_sel = Button(93, 390, "vbaja-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.vmedia = Button(208, 390, "vmedia", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.vmedia_sel = Button(208, 390, "vmedia-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
+        self.vrapida = Button(332, 390, "vrapida", "none", self.botones + "cuadro.png", 1, None, False, 1)
+        self.vrapida_sel = Button(332, 390, "vrapida-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1)
         
         # Configuracion accesibilidad visual textos
         self.acc3_1 = texto(10, 70, u"1.- ¿Te gustaría hacer el recorrido con un Magnificador de Pantalla? ", 20, "normal", 400)
@@ -321,3 +321,4 @@ class estado(pantalla.Pantalla):
         self.grupo_popup.draw(self.parent.screen)
         self.grupo_tooltip.draw(self.parent.screen)
         self.dibujar_rect()
+        self.draw_debug_rectangles()
