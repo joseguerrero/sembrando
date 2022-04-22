@@ -8,7 +8,7 @@ from librerias.prp import prp
 from librerias.popups import PopUp
 from librerias.cursor import cursor
 from librerias.image import Image
-from librerias.object import GameObject
+from librerias.object import PropObject
 from librerias.limite import limite
 from librerias.marcador import marcador
 from librerias.button import Button, RenderButton
@@ -91,12 +91,12 @@ class estado(pantalla.Pantalla):
         self.casa = Image(0, 70, self.varios + "casa.png")
         self.poste = Image(880, 0, self.varios + "poste.png")
         self.tractor = Image(840, 80, self.varios +"tractor.png")
-        self.pala = GameObject(590, 380, self.varios + "pala.png", "la pala. ")
-        self.abono = GameObject(900, 305, self.varios + "abono.png", "el abono. ")
-        self.carre = GameObject(200, 80, self.varios + "carre.png", "la carretilla. ")
-        self.insec = GameObject(760, 140, self.varios + "insec.png", u"el controlador biológico. ")
-        self.regadera = GameObject(792, 270, self.varios + "regadera.png", "la regadera. ")
-        self.semillas = GameObject(450, 200, self.varios + "semillas.png", "las semillas. ")
+        self.pala = PropObject(590, 380, self.varios + "pala.png", "la pala. ")
+        self.abono = PropObject(900, 305, self.varios + "abono.png", "el abono. ")
+        self.carre = PropObject(200, 80, self.varios + "carre.png", "la carretilla. ")
+        self.insec = PropObject(760, 140, self.varios + "insec.png", u"el controlador biológico. ")
+        self.regadera = PropObject(792, 270, self.varios + "regadera.png", "la regadera. ")
+        self.semillas = PropObject(450, 200, self.varios + "semillas.png", "las semillas. ")
         self.nubes = animacion("nubes", self.varios + "nubes.png", 1, 1, 30, -15, -1, False, 18)
         self.salir = Button(830, 60, "salir", "Salir", self.botones + "boton-salir.png", 1, -1, False, 1)
         self.flecha = animacion("flecha", self.varios + "flecha-verde.png", 3, 1, 800, 350, -1, True, 6)

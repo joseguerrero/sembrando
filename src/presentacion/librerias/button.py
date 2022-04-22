@@ -7,11 +7,17 @@ from pygame import (
 )
 
 from pygame.image import load
-from pygame.font import SysFont
+from pygame.font import match_font, Font, SysFont
 from pygame.mouse import get_pos
 from pygame.sprite import Group, OrderedUpdates, Sprite
 
 from manejador import Manejador as parent
+
+from .texto import texto
+from .object import GameObject
+
+RED = (213, 0, 0)
+TEXT_COLOR = (255, 255, 255)
 
 class SpriteSheet(object):
     """
@@ -65,7 +71,7 @@ class SpriteSheet(object):
                 for x in range(frames)]
         return self.load_images_at(tuples, colorkey)
 
-class Button(Sprite):
+class Button(GameObject):
     """
     Esta clase permite crear y manipular botones animados a partir de una tira de imágenes.
     """
@@ -143,23 +149,6 @@ class Button(Sprite):
         else:
             grupo.remove(self.texto)
         
-    def relocate(self, x = None, y = None):
-        """
-        Permite cambiar la posición en X e Y del botón.
-        
-        @param x: Nueva posición en X donde se desea ubicar el botón.
-        @type x: int
-        @param y: Nueva posición en Y donde se desea ubicar el botón.
-        @type y: int
-        @note: Esta función puede sustituir a la función mover() mencionada anteriormente.
-        """
-
-        if x:
-            self.rect.x = x
-        
-        if y:
-            self.rect.y = y
-
     def play_animation(self):
         """
         Anima el botón.
@@ -240,7 +229,67 @@ class Button(Sprite):
             self.current_image = self.images[0]
             self.stop = True
             return False
-    
+
+class TextButton(GameObject):
+    def __init__(self, identificador, parent, text, fondo = 0, ancho = 500):
+        """
+        Método inicializador de la clase. 
+        
+        @param identificador: Variable usada para identificar al botón.
+        @type identificador: str
+        @param parent: Instancia del gestor de pantallas.
+        @type parent: Manejador
+        @param text: Variable que indica el texto que tendrá el botón.
+        @type text: str
+        @param fondo: Indica si el fondo del botón sera con imagen o sin imagen (en desarrollo).
+        @type fondo: bool
+        @param ancho: Indica el ancho del botón. Es usado para cuadrar el texto centrado.
+        @type ancho: int
+        """
+
+        Sprite.__init__(self)
+        self.ancho = ancho
+        self.parent = parent
+        tipografia = match_font("FreeSans", False, False)        
+        font = Font(tipografia, parent.config.t_fuente)
+        self.identificador = identificador
+        varios = "../imagenes/png/varios/"
+        
+        if fondo == 0:
+            texto1 = font.render(text, 1, TEXT_COLOR)
+            textorect = texto1.get_rect()
+            texto2 = font.render(text, 1, RED)
+            self.img_fondo = load(varios + "img-boton.png")
+            self.img_fondo2 = load(varios + "img-boton.png")
+            imgrect = self.img_fondo.get_rect()
+            textorect.center = imgrect.center[0],imgrect.center[1]+imgrect.center[1]/3
+            self.img_fondo.blit (texto1, textorect)                            
+            self.img_fondo2.blit (texto2,textorect)
+            self.rect = self.img_fondo.get_rect()            
+            self.image= self.img_fondo 
+            
+        if fondo == 1:                            
+            txt = texto(0,0,text,parent.config.t_fuente,"texto_act",self.ancho)                                    
+            self.rect = Rect(0,0,self.ancho,txt.ancho_final)
+            image_texto = Surface((self.ancho,txt.ancho_final))
+            image_texto.fill((255,255,255))
+            image_texto.set_colorkey((255,255,255))
+            for i in txt.img_palabras:
+                image_texto.blit(i.image, i.rect)                
+            self.image = image_texto
+            self.img_fondo = image_texto
+            self.img_fondo2 = image_texto 
+        
+    def cambiar_status(self, status):
+        """
+        Dibuja un efecto en los botones cambiando la imagen de fondo (descontinuado)
+        """
+
+        if status:
+            self.image = self.img_fondo2
+        else: 
+            self.image = self.img_fondo
+
 class RenderButton(OrderedUpdates):
     """
     Esta clase es una ligera modificación de la clase pygame.sprite.OrderedUpdates. 

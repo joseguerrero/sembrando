@@ -5,7 +5,7 @@ import pygame
 from librerias import pantalla
 from librerias.textoci import texto2
 from librerias.cajatexto import cajatexto
-from librerias.popups import PopUp, Button
+from librerias.popups import PopUp, TextButton
 from librerias.animaciones import animacion
 from paginas import pantalla2
 
@@ -24,7 +24,7 @@ class actividad(pantalla.Pantalla):
         self.menu3 = self.menu2.subsurface((666, 0, 358, 572))
         self.fondo = pygame.image.load(self.varios + "fondoact3.png").convert()    
         self.teclado = 0
-        self.boton = Button("boton", self.parent, "Comprobar")
+        self.boton = TextButton("boton", self.parent, "Comprobar")
         self.grupo_boton = pygame.sprite.Group()
         self.grupo_boton.add(self.boton)
         self.img1 = pygame.image.load(self.pops + "enter.png")
@@ -87,7 +87,7 @@ class actividad(pantalla.Pantalla):
         self.grupo_texto.add(texto.img_palabras)
         self.rectangulo_texto.rect.move_ip(725,self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente-5)
         self.intr_texto= cajatexto(730,self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente, "15" , self.screen,"medium")
-        self.boton.mover_boton(666+(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)
+        self.boton.set_center(666+(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)
         self.texto_bien = u"    ¡Muy bien! Sabías que... un trozo de tallo verde que sea introducido en la tierra para multiplicar una planta tiene por nombre esqueje. "
         self.texto_mal = u"    Recuerda: si se reparte de forma equitativa las flores, podrás saber cuantas cajas lograrás armar. "
         self.texto_vacio = u"    Para continuar deberás contestar correctamente la pregunta. Si la casilla queda vacía no podrás avanzar al siguiente problema. "
@@ -114,7 +114,7 @@ class actividad(pantalla.Pantalla):
         self.pregunta_lector = u"    En una cesta hay 60 sobres de semillas, de ellos un quinto son de pimentón, un medio son de girasol y el resto de perejil. ¿Cuántos sobres son de semilla de perejil? "
         self.rectangulo_texto.rect.y =self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente-5
         self.intr_texto= cajatexto(730,self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente, "18" , self.screen,"medium")
-        self.boton.mover_boton(666+(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)        
+        self.boton.set_center(666+(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)        
         self.texto_bien = u"    ¡Excelente! Para evitar la deforestación y contribuir con el cuidado del ambiente, cuando vayas de visita a los parques recoge los desechos que te hayan quedado durante tu visita. "
         self.texto_mal = u"    Recuerda: un sobre esta representado en fracciones como 1/60. "
         self.texto_mal_lector = u"    Recuerda: un sobre está representado en fracciones como 1 entre 60. "
@@ -143,7 +143,7 @@ class actividad(pantalla.Pantalla):
         self.grupo_texto.add(texto.img_palabras)
         self.rectangulo_texto.rect.y =self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente-5
         self.intr_texto= cajatexto(730,self.popup_instruccion_fija.tam + texto.ancho_final + self.parent.config.t_fuente, "13" , self.screen,"medium")
-        self.boton.mover_boton(666 +(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)        
+        self.boton.set_center(666 +(self.menu3.get_rect().w/2), self.popup_instruccion_fija.tam + texto.ancho_final +80)
         self.texto_bien = u"   ¡Muy bien! ¿Has hecho alguna vez un germinador con semillas de caraota? Con la ayuda de tu maestra o maestro investiga los pasos a seguir para que una semilla se reproduzca y se logre obtener una nueva planta. "
         self.texto_mal = u"    Recuerda: debes separar en partes iguales para obtener el valor de cada flor. "
         self.texto_vacio = u"    Para continuar deberás contestar correctamente la pregunta. Si la casilla queda vacía no podrás avanzar al siguiente problema. "
