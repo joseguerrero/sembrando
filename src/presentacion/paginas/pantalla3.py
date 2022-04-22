@@ -245,6 +245,7 @@ class estado(pantalla.Pantalla):
         self.grupo_fondotexto.draw(self.parent.screen)
         self.grupo_palabras.draw(self.parent.screen)
         self.grupo_tooltip.draw(self.parent.screen)
+        self.grupo_popup.draw(self.parent.screen)
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)
         if self.deteccion_movimiento:

@@ -267,19 +267,3 @@ class estado(pantalla.Pantalla):
         self.raton.update()
         self.obj_magno.magnificar(self.parent.screen)
         self.grupo_botones.update(self.grupo_tooltip)
-        
-    def draw(self):
-        """
-        Dibuja el fondo de pantalla y los elementos pertenecientes a los grupos de sprites sobre la superficie 
-        del manejador de pantallas.
-        """
-        self.parent.screen.blit(self.background, (0, 0))
-        self.grupo_anim.draw(self.parent.screen)
-        self.grupo_banner.draw(self.parent.screen)
-        self.grupo_botones.draw(self.parent.screen)
-        self.grupo_palabras.draw(self.parent.screen)
-        self.grupo_tooltip.draw(self.parent.screen)
-        if self.parent.habilitar:
-            self.grupo_magnificador.draw(self.parent.screen, self.enable)
-        self.dibujar_rect()
-        self.draw_debug_rectangles()

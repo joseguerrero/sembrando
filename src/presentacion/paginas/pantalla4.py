@@ -383,24 +383,6 @@ class estado(pantalla.Pantalla):
                 self.parent.text_content["content"][self.name]["anim_4"],
                 self.parent.config.activar_lector
             )
-    
-    def draw(self):
-        """
-        Dibuja el fondo de pantalla y los elementos pertenecientes a los grupos de sprites sobre la superficie 
-        del manejador de pantallas.
-        """
-        self.parent.screen.blit(self.background, (0, 0))
-        self.grupo_anim.draw(self.parent.screen)
-        self.grupo_banner.draw(self.parent.screen)
-        self.grupo_botones.draw(self.parent.screen)
-        self.grupo_fondotexto.draw(self.parent.screen)
-        self.grupo_palabras.draw(self.parent.screen)
-        self.grupo_tooltip.draw(self.parent.screen)
-        if self.parent.habilitar:
-            self.grupo_magnificador.draw(self.parent.screen, self.enable)
-        if self.deteccion_movimiento:
-            self.dibujar_rect()
-        self.draw_debug_rectangles()
-            
+        
     def ir_glosario(self):
             self.parent.pushState(pantalla10.estado(self.parent))

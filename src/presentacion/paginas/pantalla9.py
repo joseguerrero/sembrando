@@ -722,6 +722,7 @@ class estado(pantalla.Pantalla):
         Dibuja el fondo de pantalla y los elementos pertenecientes a los grupos de sprites sobre la superficie 
         del manejador de pantallas.
         """
+
         self.parent.screen.blit(self.background, (0, 0))
         self.grupo_banner.draw(self.parent.screen)
         self.parent.screen.blit(self.zona_r, (320, 233))
@@ -735,7 +736,6 @@ class estado(pantalla.Pantalla):
         self.grupo_fondotexto.draw(self.parent.screen)
         self.grupo_palabras.draw(self.parent.screen)
         self.grupo_tooltip.draw(self.parent.screen)
-        
         self.parent.screen.blit(self.n_estados, (40, 95))
         if self.parent.habilitar:
             self.grupo_magnificador.draw(self.parent.screen, self.enable)

@@ -165,6 +165,27 @@ class Pantalla(object):
         """Dibuja un rectangulo de color verde en la posición y con las dimensiones asignadas en
         'definir_rect()'. """
 
+    def draw(self):
+        """
+        Dibuja el fondo de pantalla y los elementos pertenecientes a los grupos de sprites sobre la superficie 
+        del manejador de pantallas.
+        """
+
+        self.parent.screen.blit(self.background, (0, 0))
+        self.grupo_imagen.draw(self.parent.screen)
+        self.grupo_anim.draw(self.parent.screen)
+        self.grupo_banner.draw(self.parent.screen)
+        self.grupo_botones.draw(self.parent.screen)
+        self.grupo_fondotexto.draw(self.parent.screen)
+        self.grupo_palabras.draw(self.parent.screen)
+        self.grupo_tooltip.draw(self.parent.screen)
+        self.grupo_popup.draw(self.parent.screen)
+        if self.parent.habilitar:
+            self.grupo_magnificador.draw(self.parent.screen, self.enable)
+        if self.deteccion_movimiento:
+            self.dibujar_rect()
+        self.draw_debug_rectangles()
+
     def draw_debug_rectangles(self):
         if self.parent.DRAW_DEBUG_RECTANGLES:
             debug_rectangles = [object.rect for group in self.debug_groups for object in group]
