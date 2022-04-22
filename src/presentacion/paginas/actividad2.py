@@ -25,8 +25,7 @@ class actividad(pantalla.Pantalla):
         self.fondo = pygame.image.load(self.varios + "fondoact3.png").convert()    
         self.teclado = 0
         self.boton = TextButton("boton", self.parent, "Comprobar")
-        self.grupo_boton = pygame.sprite.Group()
-        self.grupo_boton.add(self.boton)
+        self.text_button_group.add(self.boton)
         self.img1 = pygame.image.load(self.pops + "enter.png")
         img2 = pygame.image.load(self.pops + "tab.png")
         img3 = pygame.image.load(self.pops + "f1.png")
@@ -238,20 +237,21 @@ class actividad(pantalla.Pantalla):
     def update(self):
         """"
         Actualiza los grupos de sprites y la pantalla.
-        """ 
-        grupo_cuadro_texto = pygame.sprite.Group()
-        self.intr_texto.titilar()
-        self.intr_texto.get_imagen(grupo_cuadro_texto)
-        self.screen.blit(self.fondo,(0,0))
-        self.grupo_anim.draw(self.screen)          
-        self.parent.screen.blit (self.menu3 ,(666,0))            
-        self.grupo_sprite.draw(self.screen)          
-        self.grupo_texto.draw(self.screen)
-        self.grupo_boton.draw(self.screen)
-        grupo_cuadro_texto.draw(self.screen)
-        self.grupo_popup.draw(self.screen)    
+        """
 
-    def handleEvents(self, eventos):         
+        self.intr_texto.titilar()
+        self.intr_texto.get_imagen(self.grupo_cuadro_texto)
+        self.screen.blit(self.fondo,(0,0))
+        self.grupo_anim.draw(self.screen)
+        self.parent.screen.blit (self.menu3 ,(666,0))
+        self.grupo_sprite.draw(self.screen)
+        self.grupo_texto.draw(self.screen)
+        self.text_button_group.draw(self.screen)
+        self.grupo_cuadro_texto.draw(self.screen)
+        self.grupo_popup.draw(self.screen)
+        self.draw_debug_rectangles()
+
+    def handleEvents(self, eventos):
         """
         Evalúa los eventos que se generan en esta pantalla.        
         @param eventos: Lista de los eventos.

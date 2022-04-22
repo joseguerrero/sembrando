@@ -65,6 +65,11 @@ class Pantalla(object):
     """Grupo utilizado para dibujar los banner. """
     grupo_tooltip = pygame.sprite.Group()
     """Grupo utilizado para dibujar los tooltip. """
+
+    grupo_cuadro_texto = pygame.sprite.Group()
+
+    text_button_group = pygame.sprite.Group()
+
     grupo_mapa = pygame.sprite.OrderedUpdates()
     """Grupo utilizado para dibujar los mapas colisionables. """
     grupo_popup = pygame.sprite.OrderedUpdates()
@@ -73,14 +78,16 @@ class Pantalla(object):
     """Grupo utilizado para dibujar el fondo de los textos en las pantallas de contenido. """
     grupo_palabras = pygame.sprite.OrderedUpdates()
     """Grupo utilizado para dibujar textos. """
-
+    
     debug_groups = [
         grupo_imagen,
         grupo_botones,
+        text_button_group,
         grupo_banner,
         grupo_tooltip,
         grupo_popup,
-        grupo_palabras
+        grupo_palabras,
+        grupo_cuadro_texto,
     ]
 
     enable = False
@@ -91,11 +98,12 @@ class Pantalla(object):
     si es True ya fue visitada. """
     deteccion_movimiento = False
     """Indica cuando se utiliza la navegación por teclado para desplazarse por los elementos de la pantalla. """
-                
+
     def limpiar_grupos(self):
         """Limpia los elementos de una pantalla. """
         self.grupo_banner.empty()
         self.grupo_botones.empty()
+        self.text_button_group.empty()
         self.grupo_imagen.empty()
         self.grupo_palabras.empty()
         self.grupo_fondotexto.empty()
@@ -103,6 +111,7 @@ class Pantalla(object):
         self.grupo_mapa.empty()
         self.grupo_tooltip.empty()
         self.grupo_popup.empty()
+        self.grupo_cuadro_texto.empty()
         
     def sonido_on(self):
         """Activa un canal de audio para reproducir efectos de sonido. """
