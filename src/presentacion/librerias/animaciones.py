@@ -15,8 +15,8 @@ class spritesheet(object):
         """
         try:
             self.sheet = pygame.image.load(filename).convert_alpha()
-        except(pygame.error, message):
-            raise(SystemExit, message)
+        except(pygame.error):
+            raise(SystemExit)
 
     def image_at(self, rectangle, colorkey = None):
         """
@@ -33,7 +33,7 @@ class spritesheet(object):
         rect = pygame.Rect(rectangle)
         image = self.sheet.subsurface(rect)
         if colorkey is not None:
-            if colorkey is -1:
+            if colorkey == -1:
                 colorkey = image.get_at((0,0))
             image.set_colorkey(colorkey, pygame.RLEACCEL)
         return image
