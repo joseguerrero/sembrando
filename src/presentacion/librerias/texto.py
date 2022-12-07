@@ -4,16 +4,20 @@ import pygame
 
 from .palabra import palabra
 
-class texto():
+
+class texto:
     """
     Esta clase hace uso de la clase palabras para formar textos y dibujarlos correctamente en la pantalla.
     Los textos generados son justificados automáticamente y sus margenes pueden personalizarse.
     """
-    def __init__(self, posx, posy, texto, size, tipo_texto, limite_der, personalizado = True):
+
+    def __init__(
+        self, posx, posy, texto, size, tipo_texto, limite_der, personalizado=True
+    ):
         """
         Inicializa el el objeto, define los valores por defecto, calcula la justificación y los margenes
         correspondientes.
-        
+
         @param posx: Coordenada X donde se desea dibujar el texto.
         @type posx: int
         @param posy: Coordenada Y donde se desea dibujar el texto.
@@ -26,7 +30,7 @@ class texto():
         @type tipo_texto: str
         @param limite_der: Indica el margen derecho desde donde se comienza a dibujar el texto.
         @type limite_der: int
-        @param personalizado: Si es True, los margenes son ajustados manualmente. Si es False, 
+        @param personalizado: Si es True, los margenes son ajustados manualmente. Si es False,
         los margenes son ajustados automáticamente según el tipo de texto y la posición.
         @type personalizado: bool
         """
@@ -40,19 +44,25 @@ class texto():
         self.buffer = ""
         self.espacio = 6
         self.nro_linea = 0
-        self.ancho_final = 0        
-        
+        self.ancho_final = 0
+
         for i in self.texto:
             self.buffer += i
             if i == " ":
-                if (self.buffer == u"Reproducción " and self.tipo_texto != "texto_act")  or (self.buffer == u"reproducción " and self.tipo_texto != "texto_act"):
+                if (
+                    self.buffer == "Reproducción " and self.tipo_texto != "texto_act"
+                ) or (
+                    self.buffer == "reproducción " and self.tipo_texto != "texto_act"
+                ):
                     pass
                 else:
-                    self.img_palabras.append(palabra(self.buffer.strip(" "), size, self.tipo_texto))
+                    self.img_palabras.append(
+                        palabra(self.buffer.strip(" "), size, self.tipo_texto)
+                    )
                     self.buffer = ""
 
         n_lineas = self.calcular_margenes()
-        
+
         if personalizado == True:
             self.limite_izq = posx
             self.limite_der = limite_der
@@ -68,36 +78,36 @@ class texto():
                 i.rect.left = self.posx
                 i.rect.top = posy
                 self.posx += i.rect.width + self.espacio
-                
+
             width = 0
             for i in self.img_palabras:
                 width += i.image.get_width()
             self.rect = pygame.Rect(self.x, self.y, width, self.ancho_final)
-                
+
         elif personalizado == False:
-            
+
             if self.tipo_texto == "instruccion":
                 self.limite_izq, self.limite_der = (self.x, limite_der)
                 self.posx = self.x + 32
-            
+
             elif n_lineas == 1:
                 self.limite_izq, self.limite_der = (256, 768)
                 self.posx = 256
-            
-            elif n_lineas ==  2:
+
+            elif n_lineas == 2:
                 self.limite_izq, self.limite_der = (192, 832)
                 self.posx = 224
-            
+
             elif n_lineas >= 3:
                 self.limite_izq, self.limite_der = (32, 992)
                 self.posx = 64
-              
+
             else:
                 self.limite_izq, self.limite_der = (0, 1024)
                 self.posx = 0
-            medidas, ancho, lineas = self.calcular(self.posx, posy) 
+            medidas, ancho, lineas = self.calcular(self.posx, posy)
             ancho_total = ancho * lineas
-            posy = 382 - (ancho_total/2)
+            posy = 382 - (ancho_total / 2)
             if self.tipo_texto == "instruccion":
                 posy = self.y
             self.espacio = 6 + medidas[self.nro_linea]
@@ -114,12 +124,12 @@ class texto():
             for i in self.img_palabras:
                 width += i.image.get_width()
             self.rect = pygame.Rect(self.x, self.y, width, ancho_total)
-            
+
     def calcular_margenes(self):
         """
         Realiza un pre-cálculo usando una ubicación y margenes arbitrarios para determinar la cantidad de lineas
         que ocupa el texto.
-        
+
         @return: El numero de lineas que ocupa el texto.
         @rtype: int
         """
@@ -132,10 +142,10 @@ class texto():
         ppl = 0
         for i in self.img_palabras:
             if px + i.rect.width > lim_der:
-                if ppl == 1 :
-                    medida_lineas.append((lim_der - px)/ ppl)
+                if ppl == 1:
+                    medida_lineas.append((lim_der - px) / ppl)
                 else:
-                    medida_lineas.append((lim_der - px)/ (ppl-1.0))
+                    medida_lineas.append((lim_der - px) / (ppl - 1.0))
                 ppl = 0
                 px = lim_izq
                 py += i.rect.height
@@ -143,12 +153,12 @@ class texto():
             px += i.rect.width + self.espacio
             ppl += 1
         medida_lineas.append(0)
-        return nro_lineas 
-    
+        return nro_lineas
+
     def calcular(self, posx, posy):
         """
         Realiza el cálculo de los margenes y número de lineas reales a partir de las coordenadas X e Y.
-        
+
         @param posx: Coordenada X donde se desea dibujar el texto.
         @type posx: int
         @param posy: Coordenada Y donde se desea dibujar el texto.
@@ -164,10 +174,10 @@ class texto():
         ancho = 0
         for i in self.img_palabras:
             if px + i.rect.width > self.limite_der:
-                if ppl == 1 :
-                    medida_lineas.append((self.limite_der - px)/ ppl)
+                if ppl == 1:
+                    medida_lineas.append((self.limite_der - px) / ppl)
                 else:
-                    medida_lineas.append((self.limite_der - px)/ (ppl-1.0))
+                    medida_lineas.append((self.limite_der - px) / (ppl - 1.0))
                 ppl = 0
                 px = self.limite_izq
                 py += i.rect.height
@@ -175,13 +185,13 @@ class texto():
             px += i.rect.width + self.espacio
             ancho = i.rect.height
             ppl += 1
-        medida_lineas.append(0) 
-        return medida_lineas, ancho, nro_lineas +1
-    
+        medida_lineas.append(0)
+        return medida_lineas, ancho, nro_lineas + 1
+
     def indexar(self, letra):
         """
         Permite destacar o restaurar un texto de tipo indice, suministrando la letra que debe destacarse.
-        
+
         @param letra: Letra que se debe resaltar en el indice.
         @type letra: str
         """

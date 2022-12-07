@@ -5,10 +5,12 @@ import subprocess
 
 from manejador import Manejador as parent
 
-class Speechserver():
+
+class Speechserver:
     """
     Esta clase implementa una sencilla interfaz para acceder al sintetizador de voz "Espeak".
     """
+
     def __init__(self):
         """
         Método inicializador de la clase.
@@ -22,31 +24,31 @@ class Speechserver():
         # self.hablando = False
         # self.ultima_lectura = ""
         pass
-            
+
     def actualizar_servidor(self):
         """
         Consulta el valor de la velocidad del sintetizador.
         """
         # self.speaker.set_rate(self.dic_vel[self.parent.config.synvel])
         pass
-                     
+
     def processtext2(self, texto, lector_activo):
         """
         Enviá información al sintetizador de voz para que este la procese y permite encolar las peticiones.
-        
+
         @param texto: El texto que se desea enviar al sintetizador.
         @type texto: str
         @param lector_activo: Indica si el sintetizador de voz esta activado.
         @type lector_activo: bool
-        """        
+        """
         # if lector_activo:
-        #     self.data = texto          
+        #     self.data = texto
         #     self.speaker.speak(self.data)
-    
-    def processtext(self, texto, lector_activo, continuar = True):
+
+    def processtext(self, texto, lector_activo, continuar=True):
         """
         Enviá información al sintetizador de voz para que este la procese. No permite encolar peticiones.
-        
+
         @param texto: El texto que se desea enviar al sintetizador.
         @type texto: str
         @param lector_activo: Indica si el sintetizador de voz esta activado.
@@ -60,11 +62,11 @@ class Speechserver():
         # if lector_activo:
         #     if self.hablando and continuar:
         #         self.stopserver()
-        #     self.data = texto          
+        #     self.data = texto
         #     self.speaker.speak(self.data)
         #     self.hablando = True
         pass
-            
+
     def stopserver(self):
         """
         Detiene el sintetizador de voz.
@@ -72,12 +74,12 @@ class Speechserver():
         # self.speaker.stop()
         # self.hablando = False
         pass
-    
+
     def repetir(self):
         # self.stopserver()
         # self.speaker.speak(self.data)
         pass
-        
+
     def quitserver(self):
         """
         Cierra la conexión con el sintetizador de voz.

@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-class configuracion():
+
+class configuracion:
     """
     Esta clase cumple la función de una base de datos o fichero de configuración, donde se almacenan de
     manera temporal las preferencias de uso del ReDA.
     """
+
     color = 0
     """Indica el color de la camisa del interprete, sus posibles valores son 0, 1 y 2. value: 0"""
     ubx = 499
@@ -36,32 +38,29 @@ class configuracion():
     """Indica la velocidad del lector de pantalla, sus posibles valores son 'baja', 'media' y 'alta'."""
     definicion = ""
     """Guarda el valor de la palabra seleccionada para mostrar en el glosario."""
-    
-    visit = {
-    "p0": False,
-    "p2": False
-    }
-    """Diccionario que registra las visitas a las pantallas del recurso.""" 
-    
+
+    visit = {"p0": False, "p2": False}
+    """Diccionario que registra las visitas a las pantallas del recurso."""
+
     preferencias = {
-     "color": 0,
-     "ubx": 499,
-     "vel_anim": 4,
-     "t_fuente": 18,
-     "velocidad": 0.5, 
-     "audio": False,
-     "cache": False,
-     "disc_audi": False,
-     "disc_vis": False,
-     "texto_cambio": False,
-     "magnificador": False,
-     "activar_lector" : False,
-     "genero": "",
-     "synvel": "baja",
-     "definicion": "",
+        "color": 0,
+        "ubx": 499,
+        "vel_anim": 4,
+        "t_fuente": 18,
+        "velocidad": 0.5,
+        "audio": False,
+        "cache": False,
+        "disc_audi": False,
+        "disc_vis": False,
+        "texto_cambio": False,
+        "magnificador": False,
+        "activar_lector": False,
+        "genero": "",
+        "synvel": "baja",
+        "definicion": "",
     }
-    """Diccionario que almacena las preferencias mientras el ReDA este cargado en memoria.""" 
-    
+    """Diccionario que almacena las preferencias mientras el ReDA este cargado en memoria."""
+
     def consultar(self):
         """
         Carga la ultima configuración utilizada o la configuración por defecto.
@@ -81,13 +80,13 @@ class configuracion():
         self.synvel = self.preferencias["synvel"]
         self.magnificador = self.preferencias["magnificador"]
         self.activar_lector = self.preferencias["activar_lector"]
-        
+
     def guardar_preferencias(self):
         """
         Guarda las preferencias actuales.
         """
-        self.preferencias["ubx"] =  self.ubx
-        self.preferencias["t_fuente"] = self.t_fuente 
+        self.preferencias["ubx"] = self.ubx
+        self.preferencias["t_fuente"] = self.t_fuente
         self.preferencias["vel_anim"] = self.vel_anim
         self.preferencias["velocidad"] = self.velocidad
         self.preferencias["color"] = self.color
@@ -99,12 +98,12 @@ class configuracion():
         self.preferencias["genero"] = self.genero
         self.preferencias["definicion"] = self.definicion
         self.preferencias["synvel"] = self.synvel
-        self.preferencias["magnificador"] = self.magnificador 
-        self.preferencias["activar_lector"] = self.activar_lector  
-    
+        self.preferencias["magnificador"] = self.magnificador
+        self.preferencias["activar_lector"] = self.activar_lector
+
     def cargar_default(self):
         """
         Carga valores por defecto para la animación del intérprete en el menú de configuración auditiva.
-        """     
+        """
         self.vel_anim = 4
         self.velocidad = 0.5

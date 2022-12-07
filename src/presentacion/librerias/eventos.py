@@ -3,7 +3,8 @@
 import sys
 import pygame
 
-class ManejadorEventos():
+
+class ManejadorEventos:
     def __init__(self):
         """
         Método inicializador de la clase.
@@ -40,7 +41,7 @@ class ManejadorEventos():
     def pressed(self, key):
         """
         Verifica si una tecla especifica esta fue pulsada.
-        
+
         @return: True si la tecla fue pulsada, de lo contrario False.
         @rtype: bool
         """
@@ -48,28 +49,28 @@ class ManejadorEventos():
             return True
         else:
             return False
-    
+
     def held(self, key):
         """
         Verifica si una tecla especifica se mantiene pulsada.
-        
+
         @return: True si la tecla se mantiene pulsada, de lo contrario False.
         @rtype: bool
         """
-        
+
         if self.keyspressed[key]:
             return True
         else:
             return False
-    
+
     def modded(self, key):
         """
         Verifica si una tecla especifica fue pulsada conjuntamente con una tecla modificadora.
-        
+
         @return: True si la tecla fue pulsada conjuntamente con un modificador, de lo contrario False.
         @rtype: bool
         """
-        if self.mods&key:
+        if self.mods & key:
             return True
         else:
             return False
