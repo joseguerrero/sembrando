@@ -2,11 +2,13 @@
 
 import pygame
 
+from librerias.animations import Animation, RenderAnim
+from librerias.image import Image
 from librerias.cursor import cursor
-from librerias.button import RenderButton
-from librerias.animaciones import RenderAnim
+from librerias.button import Button, RenderButton
 from librerias.speechserver import Speechserver
 from librerias.magnificador import magnificador, Rendermag
+from librerias.assets_data import *
 
 
 class Pantalla(object):
@@ -19,16 +21,15 @@ class Pantalla(object):
     """Indica el objeto actual cuando se utiliza la navegación por teclado. """
     pops = "../imagenes/png/popups/"
     """Ruta de las imágenes de los pop-ups. """
-    fondos = "../imagenes/png/fondos/"
-    """Ruta de las imágenes de los fondos de pantalla. """
+
+    animations_path = "../imagenes/png/animations/"
+    backgrounds_path = "../imagenes/png/backgrounds/"
+    banners_path = "../imagenes/png/banners/"
+    buttons_path = "../imagenes/png/buttons/"
+
     varios = "../imagenes/png/varios/"
     """Ruta de imágenes variadas. """
-    banners = "../imagenes/png/banners/"
-    """Ruta de las imágenes de los banner. """
-    botones = "../imagenes/png/botones/"
-    """Ruta de las imágenes de los botones. """
-    anim = "../imagenes/png/animaciones/"
-    """Ruta de las imágenes de las animaciones. """
+
     anim_actual = 0
     """Indica la animación que se esta reproduciendo en un determinado momento. """
     elemento_actual = -1
@@ -46,7 +47,7 @@ class Pantalla(object):
     rect = pygame.Rect(0, 0, 0, 0)
     """Rectángulo que aparece sobre el elemento actual al usar la navegabilidad por teclado. """
     reloj = pygame.time.Clock()
-    """Contador utilizado para sincronizar las animaciones. """
+    """Contador utilizado para sincronizar las animationes. """
     spserver = Speechserver()
     """Instancia de la clase speechserver, utilizada para enviar información al lector de pantalla. """
     raton = cursor()
@@ -54,9 +55,9 @@ class Pantalla(object):
     obj_magno = magnificador()
     """Instancia del magnificador de pantalla. """
     grupo_anim = RenderAnim()
-    """Grupo en el cual se dibujar las animaciones. """
+    """Grupo en el cual se dibujar las animationes. """
     grupo_update = RenderAnim()
-    """Grupo utilizado para reiniciar varias animaciones simultáneamente. """
+    """Grupo utilizado para reiniciar varias animationes simultáneamente. """
     grupo_imagen = RenderAnim()
     """Grupo utilizado para dibujar imágenes de fondo. """
     grupo_botones = RenderButton()
@@ -100,6 +101,88 @@ class Pantalla(object):
     si es True ya fue visitada. """
     deteccion_movimiento = False
     """Indica cuando se utiliza la navegación por teclado para desplazarse por los elementos de la pantalla. """
+
+    def __init__(self, parent, screen_id):
+        self.parent = parent
+        self.load_background(screen_id)
+        self.previa = True
+        self.reloj_anim = pygame.time.Clock()
+        self.reloj_anim.tick(30)
+        self.rect = pygame.Rect(0, 0, 0, 0)
+
+    def load_animations(self, animation_ids):
+        for id in animation_ids:
+            x, y = animations.get(id).get("coordinates")
+            columns = animations.get(id).get("columns")
+            rows = animations.get(id).get("rows")
+            colorkey = animations.get(id).get("colorkey")
+            loop = animations.get(id).get("loop")
+            frames = animations.get(id).get("frames")
+            filename = animations.get(id).get("filename")
+            attribute_name = id.replace("-", "_")
+            setattr(
+                self,
+                attribute_name,
+                Animation(
+                    id,
+                    self.animations_path + filename,
+                    columns,
+                    rows,
+                    x,
+                    y,
+                    colorkey,
+                    loop,
+                    frames,
+                ),
+            )
+
+    def load_background(self, screen_id):
+        self.background = pygame.image.load(
+            self.backgrounds_path + backgrounds.get(screen_id)
+        ).convert()
+
+    def load_buttons(self, button_ids):
+        for id in button_ids:
+            x, y = buttons.get(id).get("coordinates")
+            tooltip = buttons.get(id).get("tooltip")
+            colorkey = buttons.get(id).get("colorkey")
+            loop = buttons.get(id).get("loop")
+            frames = buttons.get(id).get("frames")
+            frame_speed = buttons.get(id).get("frame_speed")
+            filename = buttons.get(id).get("filename")
+            attribute_name = id.replace("-", "_")
+            setattr(
+                self,
+                attribute_name,
+                Button(
+                    x,
+                    y,
+                    id,
+                    tooltip,
+                    self.buttons_path + filename,
+                    frames,
+                    colorkey,
+                    loop,
+                    frame_speed,
+                ),
+            )
+
+    def load_banners(self, banner_ids):
+        for id in banner_ids:
+            x, y = banners.get(id).get("coordinates")
+            filename = banners.get(id).get("filename")
+            attribute_name = id.replace("-", "_")
+            setattr(self, attribute_name, Image(x, y, self.banners_path + filename))
+
+    def load_images(self, image_ids):
+        for id in image_ids:
+            filename = images.get(id)
+            attribute_name = id.replace("-", "_")
+            setattr(
+                self,
+                attribute_name,
+                pygame.image.load(self.pops + filename).convert_alpha(),
+            )
 
     def limpiar_grupos(self):
         """Limpia los elementos de una pantalla."""
@@ -286,3 +369,15 @@ class Pantalla(object):
             elif self.x.tipo_objeto == "boton":
                 self.definir_rect(self.x.rect)
                 self.spserver.processtext(self.x.tt, self.parent.config.activar_lector)
+
+    def start(self):
+        pass
+
+    def cleanUp(self):
+        pass
+
+    def pause(self):
+        pass
+
+    def resume(self):
+        pass

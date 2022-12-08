@@ -3,15 +3,28 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.image import Image
-from librerias.animaciones import animacion
 
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla4
 from paginas import pantalla10
+
+animations = [
+    "animation-3",
+]
+
+banners = [
+    "banner-inf",
+    "banner-plantas",
+]
+
+buttons = [
+    "home",
+    "config",
+    "sig",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -24,27 +37,24 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_3"
-        self.deteccion_movimiento = False
-        self.parent = parent
-        self.previa = True
-        self.background = pygame.image.load(self.fondos + "fondo-plantas.png").convert()
-        self.anim1 = animacion(
-            "anim1", self.anim + "animacion3.png", 8, 1, 100, 200, -1, True, 5
-        )
-        self.caja_texto = Image(0, 332, self.fondos + "caja-texto.png")
-        self.banner_plantas = Image(0, 0, self.banners + "banner-plantas.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+        super().__init__(parent, self.name)
+
+        # Add to the banners
+
+        self.caja_texto = Image(0, 332, self.backgrounds_path + "caja-texto.png")
+
+        self.load_animations(animations)
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
-        self.cargar_botones()
-        self.reloj_anim = pygame.time.Clock()
-        self.reloj_anim.tick(30)
+
         self.resume()
 
     def cargar_textos(self):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto3_2 = texto(
+        self.texto3_2 = Text(
             32,
             340,
             self.parent.text_content["content"][self.name]["text_2"],
@@ -54,60 +64,21 @@ class estado(pantalla.Pantalla):
             False,
         )
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.home = Button(
-            889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1
-        )
-        self.sig = Button(
-            560,
-            440,
-            "sig",
-            "Avanzar",
-            self.botones + "boton-avanzar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.config = Button(
-            60,
-            445,
-            "config",
-            "Accesibilidad",
-            self.botones + "boton-acc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si se realizaron cambios en la configuración. Carga los valores iniciales de esta pantalla.
         """
         if self.parent.config.texto_cambio == True:
             self.cargar_textos()
-            self.cargar_botones()
+            self.load_buttons(buttons)
             self.parent.config.texto_cambio = False
-        self.grupo_anim.add(self.anim1)
+        self.grupo_anim.add(self.animation_3)
         self.grupo_banner.add(self.banner_plantas, self.banner_inf)
         self.grupo_botones.add(self.config, self.sig, self.home)
         self.tiempo = 0
         self.creado = True
         self.final = False
-        self.anim1.detener()
+        self.animation_3.detener()
         self.spserver.stopserver()
         self.entrada_primera_vez = True
         self.spserver.processtext(
@@ -210,7 +181,7 @@ class estado(pantalla.Pantalla):
         """
         if animacion == 0:
             self.elemento_actual = -1
-            self.anim1.continuar()
+            self.animation_3.continuar()
             self.grupo_fondotexto.add(self.caja_texto)
             self.grupo_palabras.add(self.texto3_2.img_palabras)
             self.txt_actual = self.texto3_2.img_palabras
@@ -228,7 +199,7 @@ class estado(pantalla.Pantalla):
                         self.parent.text_content["content"][self.name]["text_2"],
                         self.parent.config.activar_lector,
                     )
-                self.anim1.continuar()
+                self.animation_3.continuar()
                 self.grupo_fondotexto.add(self.caja_texto)
                 self.grupo_palabras.add(self.texto3_2.img_palabras)
                 self.txt_actual = self.texto3_2.img_palabras
@@ -256,7 +227,7 @@ class estado(pantalla.Pantalla):
         self.grupo_botones.update(self.grupo_tooltip)
         if not self.parent.config.activar_lector:
             if not self.tiempo < 1000:
-                self.anim1.continuar()
+                self.animation_3.continuar()
                 self.grupo_fondotexto.add(self.caja_texto)
                 self.grupo_palabras.add(self.texto3_2.img_palabras)
                 self.txt_actual = self.texto3_2.img_palabras

@@ -3,10 +3,8 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.popups import PopUp
-from librerias.image import Image
 from librerias.imgfondo import fondo
 from librerias.pixelperfect import *
 from librerias.textopopups import p9
@@ -16,6 +14,17 @@ from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla8
 from paginas import pantalla10
+
+banners = [
+    "banner-inf",
+    "banner-siembra",
+]
+
+buttons = [
+    "home",
+    "volver",
+    "config",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -28,13 +37,10 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_9"
-        self.parent = parent
-        self.previa = True
-        self.deteccion_movimiento = False
+        super().__init__(parent, self.name)
+
         self.fondo_texto = False
-        self.background = pygame.image.load(self.fondos + "fondo-mapa2.png")
-        self.banner_siembra = Image(0, 0, self.banners + "banner-siembra.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+
         self.mouse = object_mask("Cursor", 850, 512, self.varios + "puntero.png")
         # Para mantener las piezas del mapa bien ubicadas no se deben modificar los valores x e y de las regiones, solo de zulia.
         self.zulia = object_mask(
@@ -100,6 +106,7 @@ class estado(pantalla.Pantalla):
             self.varios + "insular-des.png",
             self.varios + "insular-act.png",
         )
+
         self.limites1 = pygame.image.load(self.varios + "limitemar.png").convert_alpha()
         self.limites2 = pygame.image.load(
             self.varios + "limitemar2.png"
@@ -108,7 +115,9 @@ class estado(pantalla.Pantalla):
         self.n_estados = pygame.image.load(
             self.varios + "nombre-estados.png"
         ).convert_alpha()
-        self.cargar_botones()
+
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
         self.resume()
         self.bg = fondo(573, 377)
@@ -117,7 +126,7 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto9_2_1 = texto(
+        self.texto9_2_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_2_1"],
@@ -125,7 +134,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_2_2 = texto(
+        self.texto9_2_2 = Text(
             490,
             self.texto9_2_1.y + self.texto9_2_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_2_2"],
@@ -133,7 +142,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_2_3 = texto(
+        self.texto9_2_3 = Text(
             490,
             self.texto9_2_2.y + self.texto9_2_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_2_3"],
@@ -141,7 +150,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_2_4 = texto(
+        self.texto9_2_4 = Text(
             490,
             self.texto9_2_3.y + self.texto9_2_3.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_2_4"],
@@ -150,7 +159,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_3_1 = texto(
+        self.texto9_3_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_3_1"],
@@ -158,7 +167,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_3_2 = texto(
+        self.texto9_3_2 = Text(
             490,
             self.texto9_3_1.y + self.texto9_3_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_3_2"],
@@ -166,7 +175,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_3_3 = texto(
+        self.texto9_3_3 = Text(
             490,
             self.texto9_3_2.y + self.texto9_3_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_3_3"],
@@ -175,7 +184,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_4_1 = texto(
+        self.texto9_4_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_4_1"],
@@ -183,7 +192,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_4_2 = texto(
+        self.texto9_4_2 = Text(
             490,
             self.texto9_4_1.y + self.texto9_4_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_4_2"],
@@ -191,7 +200,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_4_3 = texto(
+        self.texto9_4_3 = Text(
             490,
             self.texto9_4_2.y + self.texto9_4_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_4_3"],
@@ -200,7 +209,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_5_1 = texto(
+        self.texto9_5_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_5_1"],
@@ -208,7 +217,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_5_2 = texto(
+        self.texto9_5_2 = Text(
             490,
             self.texto9_5_1.y + self.texto9_5_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_5_2"],
@@ -216,7 +225,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_5_3 = texto(
+        self.texto9_5_3 = Text(
             490,
             self.texto9_5_2.y + self.texto9_5_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_5_3"],
@@ -224,7 +233,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_6_1 = texto(
+        self.texto9_6_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_6_1"],
@@ -232,7 +241,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_6_2 = texto(
+        self.texto9_6_2 = Text(
             490,
             self.texto9_6_1.y + self.texto9_6_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_6_2"],
@@ -240,7 +249,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_6_3 = texto(
+        self.texto9_6_3 = Text(
             490,
             self.texto9_6_2.y + self.texto9_6_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_6_3"],
@@ -249,7 +258,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_7_1 = texto(
+        self.texto9_7_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_7_1"],
@@ -257,7 +266,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_7_2 = texto(
+        self.texto9_7_2 = Text(
             490,
             self.texto9_7_1.y + self.texto9_7_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_7_2"],
@@ -265,7 +274,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_7_3 = texto(
+        self.texto9_7_3 = Text(
             490,
             self.texto9_7_2.y + self.texto9_7_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_7_3"],
@@ -274,7 +283,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_8_1 = texto(
+        self.texto9_8_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_8_1"],
@@ -282,7 +291,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_8_2 = texto(
+        self.texto9_8_2 = Text(
             490,
             self.texto9_8_1.y + self.texto9_8_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_8_2"],
@@ -290,7 +299,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_8_3 = texto(
+        self.texto9_8_3 = Text(
             490,
             self.texto9_8_2.y + self.texto9_8_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_8_3"],
@@ -299,7 +308,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_9_1 = texto(
+        self.texto9_9_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_9_1"],
@@ -307,7 +316,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_9_2 = texto(
+        self.texto9_9_2 = Text(
             490,
             self.texto9_9_1.y + self.texto9_9_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_9_2"],
@@ -315,7 +324,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_9_3 = texto(
+        self.texto9_9_3 = Text(
             490,
             self.texto9_9_2.y + self.texto9_9_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_9_3"],
@@ -324,7 +333,7 @@ class estado(pantalla.Pantalla):
             1000,
         )
 
-        self.texto9_10_1 = texto(
+        self.texto9_10_1 = Text(
             490,
             60,
             self.parent.text_content["content"][self.name]["text_10_1"],
@@ -332,7 +341,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_10_2 = texto(
+        self.texto9_10_2 = Text(
             490,
             self.texto9_10_1.y + self.texto9_10_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_10_2"],
@@ -340,7 +349,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_10_3 = texto(
+        self.texto9_10_3 = Text(
             490,
             self.texto9_10_2.y + self.texto9_10_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_10_3"],
@@ -348,7 +357,7 @@ class estado(pantalla.Pantalla):
             "normal",
             1000,
         )
-        self.texto9_10_4 = texto(
+        self.texto9_10_4 = Text(
             490,
             self.texto9_10_3.y + self.texto9_10_3.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_10_4"],
@@ -362,51 +371,12 @@ class estado(pantalla.Pantalla):
         )
         self.popup_ins1.agregar_grupo()
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.home = Button(
-            889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1
-        )
-        self.volver = Button(
-            320,
-            445,
-            "volver",
-            "Regresar",
-            self.botones + "boton-regresar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.config = Button(
-            60,
-            445,
-            "config",
-            "Accesibilidad",
-            self.botones + "boton-acc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si se realizaron cambios en la configuración. Carga los valores iniciales de esta pantalla.
         """
         if self.parent.config.texto_cambio == True:
-            self.cargar_botones()
+            self.load_buttons(buttons)
             self.cargar_textos()
             self.parent.config.texto_cambio = False
         self.popup_ins1.agregar_grupo()

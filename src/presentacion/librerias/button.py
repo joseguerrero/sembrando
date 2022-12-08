@@ -11,7 +11,7 @@ from pygame.sprite import Group, OrderedUpdates, Sprite
 
 from manejador import Manejador as parent
 
-from .texto import texto
+from .texto import Text
 from .object import GameObject
 
 RED = (213, 0, 0)
@@ -287,7 +287,7 @@ class TextButton(GameObject):
             self.image = self.img_fondo
 
         if fondo == 1:
-            txt = texto(0, 0, text, parent.config.t_fuente, "texto_act", self.ancho)
+            txt = Text(0, 0, text, parent.config.t_fuente, "texto_act", self.ancho)
             self.rect = Rect(0, 0, self.ancho, txt.ancho_final)
             image_texto = Surface((self.ancho, txt.ancho_final))
             image_texto.fill((255, 255, 255))

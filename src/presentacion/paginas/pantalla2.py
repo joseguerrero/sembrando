@@ -3,9 +3,7 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
 from librerias.popups import PopUp
-from librerias.image import Image
 
 from paginas import menucfg
 from paginas import pantalla3
@@ -14,6 +12,20 @@ from paginas import pantalla8
 from paginas import pantalla11
 from paginas import actividad1
 from paginas import actividad2
+
+banners = ["banner-inf"]
+
+buttons = [
+    "nino",
+    "nina",
+    "plantas",
+    "repro",
+    "agri",
+    "config",
+    "orientacion",
+]
+
+images = ["f1"]
 
 
 class estado(pantalla.Pantalla):
@@ -26,23 +38,17 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_2"
-        self.parent = parent
-        self.previa = True
-        self.display_help = False
+        super().__init__(parent, self.name)
 
-        self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.img1 = pygame.image.load(self.pops + "f1.png").convert_alpha()
-        self.dic_img = {"F1": self.img1}
-        self.cargar_botones()
+        self.load_images(images)
+
+        self.dic_img = {"F1": self.f1}
+
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
-        self.reloj_anim = pygame.time.Clock()
-        self.reloj_anim.tick(30)
-        self.tiempo = 0
-        self.creado = True
-        self.final = False
-        self.elemento_actual = -1
-        self.deteccion_movimiento = False
+
+        # Initialize scene
         self.resume()
 
     def show_instructions(self):
@@ -76,97 +82,6 @@ class estado(pantalla.Pantalla):
             100,
         )
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.nino = Button(
-            400,
-            150,
-            "act1",
-            "Siembra la semilla",
-            self.botones + "boton-nino.png",
-            8,
-            None,
-            True,
-            12,
-        )
-        self.nina = Button(
-            570,
-            150,
-            "act2",
-            "Plantas y números",
-            self.botones + "boton-nina.png",
-            8,
-            None,
-            True,
-            12,
-        )
-        self.plantas = Button(
-            0,
-            80,
-            "plantas",
-            "Las plantas",
-            self.botones + "boton-plantas.png",
-            8,
-            None,
-            False,
-            8,
-        )
-        self.repro = Button(
-            700,
-            180,
-            "repro",
-            "Reproducción de las plantas",
-            self.botones + "boton-repro.png",
-            8,
-            None,
-            False,
-            8,
-        )
-        self.agri = Button(
-            270,
-            185,
-            "agri",
-            "La agricultura en Venezuela",
-            self.botones + "boton-agri.png",
-            4,
-            None,
-            False,
-            8,
-        )
-        self.config = Button(
-            60,
-            445,
-            "config",
-            "Accesibilidad",
-            self.botones + "boton-acc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.orientacion = Button(
-            884,
-            440,
-            "orientacion",
-            "Orientaciones y sugerencias",
-            self.botones + "boton-or.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si es la primera vez que se muestra esta pantalla. Carga los objetos correspondientes
@@ -174,7 +89,7 @@ class estado(pantalla.Pantalla):
         """
         self.parent.primera_vez = False
         if self.parent.config.texto_cambio == True:
-            self.cargar_botones()
+            self.load_buttons(buttons)
             self.cargar_textos()
             self.parent.config.texto_cambio = False
 

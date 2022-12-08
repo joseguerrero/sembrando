@@ -3,15 +3,33 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.image import Image
-from librerias.animaciones import animacion
 
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla6
 from paginas import pantalla10
+
+animations = [
+    "animation-5",
+    "animation-5-0",
+    "animation-5-1",
+    "animation-5-2",
+    "animation-5-3",
+]
+
+banners = [
+    "banner-inf",
+    "banner-repro",
+]
+
+buttons = [
+    "home",
+    "sig",
+    "config",
+    "volver",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -26,42 +44,31 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_5"
-        self.deteccion_movimiento = False
-        self.parent = parent
-        self.previa = True
+        super().__init__(parent, self.name)
+
+        # Animations
+
         self.anim_actual = anim_actual
-        self.background = pygame.image.load(self.fondos + "fondo-repro.png").convert()
-        self.anim5 = animacion(
-            "anim5", self.anim + "animacion5.png", 8, 1, 50, 50, -1, True, 10
-        )
-        self.anim5_0 = animacion(
-            "anim5_0", self.anim + "animacion5-0.png", 7, 1, 560, 235, -1, False, 10
-        )
-        self.anim5_1 = animacion(
-            "anim5_1", self.anim + "animacion5-1.png", 7, 1, 620, 235, -1, False, 10
-        )
-        self.anim5_2 = animacion(
-            "anim5_2", self.anim + "animacion5-2.png", 7, 1, 520, 235, -1, False, 10
-        )
-        self.flores = animacion(
-            "flores", self.anim + "anim-flores.png", 8, 1, 530, 250, None, False, 12
-        )
-        self.cargar_botones()
+
+        self.load_animations(animations)
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
-        self.caja_texto = Image(0, 332, self.fondos + "caja-texto.png")
-        self.banner_repro = Image(0, 0, self.banners + "banner-repro.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.grupo_update.add(self.anim5, self.anim5_0, self.anim5_1, self.anim5_2)
-        self.rect = pygame.Rect(0, 0, 0, 0)
-        self.reloj_anim = pygame.time.Clock()
-        self.reloj_anim.tick(30)
+
+        # Banners
+        self.caja_texto = Image(0, 332, self.backgrounds_path + "caja-texto.png")
+
+        self.grupo_update.add(
+            self.animation_5, self.animation_5_0, self.animation_5_1, self.animation_5_2
+        )
+
         self.resume()
 
     def cargar_textos(self):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto5_2 = texto(
+        self.texto5_2 = Text(
             64,
             340,
             self.parent.text_content["content"][self.name]["text_2"],
@@ -70,7 +77,7 @@ class estado(pantalla.Pantalla):
             960,
             False,
         )
-        self.texto5_3 = texto(
+        self.texto5_3 = Text(
             64,
             340,
             self.parent.text_content["content"][self.name]["text_3"],
@@ -79,7 +86,7 @@ class estado(pantalla.Pantalla):
             960,
             False,
         )
-        self.texto5_4 = texto(
+        self.texto5_4 = Text(
             64,
             340,
             self.parent.text_content["content"][self.name]["text_4"],
@@ -88,7 +95,7 @@ class estado(pantalla.Pantalla):
             960,
             False,
         )
-        self.texto5_5 = texto(
+        self.texto5_5 = Text(
             64,
             340,
             self.parent.text_content["content"][self.name]["text_5"],
@@ -97,7 +104,7 @@ class estado(pantalla.Pantalla):
             960,
             False,
         )
-        self.texto5_6 = texto(
+        self.texto5_6 = Text(
             64,
             340,
             self.parent.text_content["content"][self.name]["text_6"],
@@ -107,70 +114,20 @@ class estado(pantalla.Pantalla):
             False,
         )
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.home = Button(
-            889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1
-        )
-        self.sig = Button(
-            560,
-            440,
-            "sig",
-            "Avanzar",
-            self.botones + "boton-avanzar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.config = Button(
-            60,
-            445,
-            "config",
-            "Accesibilidad",
-            self.botones + "boton-acc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.volver = Button(
-            320,
-            445,
-            "volver",
-            "Regresar",
-            self.botones + "boton-regresar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si se realizaron cambios en la configuración. Carga los valores iniciales de esta pantalla.
         """
         if self.parent.config.texto_cambio == True:
-            self.cargar_botones()
+            self.load_buttons(buttons)
             self.cargar_textos()
             self.parent.config.texto_cambio = False
-        self.grupo_anim.add(self.anim5)
-        self.grupo_imagen.add(self.flores)
+        self.grupo_anim.add(self.animation_5)
+        self.grupo_imagen.add(self.animation_5_3)
         self.grupo_banner.add(self.banner_repro, self.banner_inf)
         self.grupo_botones.add(self.config, self.sig, self.volver, self.home)
-        self.anim5.detener()
-        self.flores.detener()
+        self.animation_5.detener()
+        self.animation_5_3.detener()
         self.creado = True
         self.final = False
         self.tiempo = 0
@@ -285,7 +242,7 @@ class estado(pantalla.Pantalla):
                 self.grupo_palabras.add(self.texto5_2.img_palabras)
                 self.txt_actual = self.texto5_2.img_palabras
                 self.chequeo_palabra(self.txt_actual)
-                self.anim5.continuar()
+                self.animation_5.continuar()
         self.tiempo += self.reloj_anim.get_time()
 
     def reproducir_animacion(self, animacion):
@@ -315,9 +272,9 @@ class estado(pantalla.Pantalla):
                 self.grupo_palabras.add(self.texto5_2.img_palabras)
                 self.txt_actual = self.texto5_2.img_palabras
                 self.chequeo_palabra(self.txt_actual)
-                self.anim5.continuar()
+                self.animation_5.continuar()
 
-        # Mostrar crecimiento flores
+        # Mostrar crecimiento animation_5_3
         elif animacion == 2:
             self.entrada_primera_vez = False
             self.elemento_actual = -1
@@ -326,10 +283,10 @@ class estado(pantalla.Pantalla):
             self.grupo_botones.add(self.config, self.volver, self.sig, self.home)
             self.grupo_palabras.empty()
             self.grupo_fondotexto.empty()
-            self.anim5.detener()
-            self.flores.update()
-            self.flores.stop = False
-            self.flores.continuar()
+            self.animation_5.detener()
+            self.animation_5_3.update()
+            self.animation_5_3.stop = False
+            self.animation_5_3.continuar()
             self.spserver.processtext(
                 self.parent.text_content["content"][self.name]["anim_1"],
                 self.parent.config.activar_lector,
@@ -338,7 +295,7 @@ class estado(pantalla.Pantalla):
         # Mostrar texto 3
         elif animacion == 3:
             self.elemento_actual = -1
-            self.grupo_anim.remove(self.anim5_0)
+            self.grupo_anim.remove(self.animation_5_0)
             self.grupo_fondotexto.add(self.caja_texto)
             self.grupo_palabras.add(self.texto5_3.img_palabras)
             self.txt_actual = self.texto5_3.img_palabras
@@ -347,7 +304,7 @@ class estado(pantalla.Pantalla):
                 self.parent.text_content["content"][self.name]["text_3"],
                 self.parent.config.activar_lector,
             )
-            self.anim5.continuar()
+            self.animation_5.continuar()
 
         # Mostrar acercamiento a la animacion 5-0
         elif animacion == 4:
@@ -355,11 +312,11 @@ class estado(pantalla.Pantalla):
             self.lista_palabra = []
             self.grupo_palabras.empty()
             self.grupo_fondotexto.empty()
-            self.anim5.detener()
-            self.grupo_anim.add(self.anim5_0)
-            self.anim5_0.update()
-            self.anim5_0.stop = False
-            self.anim5_0.continuar()
+            self.animation_5.detener()
+            self.grupo_anim.add(self.animation_5_0)
+            self.animation_5_0.update()
+            self.animation_5_0.stop = False
+            self.animation_5_0.continuar()
             self.chequeo_palabra(self.txt_actual)
             self.spserver.processtext(
                 self.parent.text_content["content"][self.name]["anim_2"],
@@ -369,8 +326,8 @@ class estado(pantalla.Pantalla):
         # Texto 4
         elif animacion == 5:
             self.elemento_actual = -1
-            self.grupo_anim.remove(self.anim5_1)
-            self.grupo_anim.remove(self.anim5_0)
+            self.grupo_anim.remove(self.animation_5_1)
+            self.grupo_anim.remove(self.animation_5_0)
             self.grupo_fondotexto.add(self.caja_texto)
             self.grupo_palabras.add(self.texto5_4.img_palabras)
             self.txt_actual = self.texto5_4.img_palabras
@@ -379,7 +336,7 @@ class estado(pantalla.Pantalla):
                 self.parent.text_content["content"][self.name]["text_4"],
                 self.parent.config.activar_lector,
             )
-            self.anim5.continuar()
+            self.animation_5.continuar()
 
         # Mostrar acercamiento a la animacion 5-1
         elif animacion == 6:
@@ -387,11 +344,11 @@ class estado(pantalla.Pantalla):
             self.lista_palabra = []
             self.grupo_palabras.empty()
             self.grupo_fondotexto.empty()
-            self.anim5_1.update()
-            self.anim5_1.stop = False
-            self.anim5.detener()
-            self.grupo_anim.add(self.anim5_1)
-            self.anim5_1.continuar()
+            self.animation_5_1.update()
+            self.animation_5_1.stop = False
+            self.animation_5.detener()
+            self.grupo_anim.add(self.animation_5_1)
+            self.animation_5_1.continuar()
             self.chequeo_palabra(self.txt_actual)
             self.spserver.processtext(
                 self.parent.text_content["content"][self.name]["anim_3"],
@@ -401,8 +358,8 @@ class estado(pantalla.Pantalla):
         # Texto 5
         elif animacion == 7:
             self.elemento_actual = -1
-            self.grupo_anim.remove(self.anim5_2)
-            self.grupo_anim.remove(self.anim5_1)
+            self.grupo_anim.remove(self.animation_5_2)
+            self.grupo_anim.remove(self.animation_5_1)
             self.grupo_fondotexto.add(self.caja_texto)
             self.grupo_palabras.add(self.texto5_5.img_palabras)
             self.txt_actual = self.texto5_5.img_palabras
@@ -411,7 +368,7 @@ class estado(pantalla.Pantalla):
                 self.parent.text_content["content"][self.name]["text_5"],
                 self.parent.config.activar_lector,
             )
-            self.anim5.continuar()
+            self.animation_5.continuar()
 
         # Mostrar acercamiento a la animacion 5-2
         elif animacion == 8:
@@ -419,11 +376,11 @@ class estado(pantalla.Pantalla):
             self.lista_palabra = []
             self.grupo_palabras.empty()
             self.grupo_fondotexto.empty()
-            self.anim5.detener()
-            self.grupo_anim.add(self.anim5_2)
-            self.anim5_2.update()
-            self.anim5_2.stop = False
-            self.anim5_2.continuar()
+            self.animation_5.detener()
+            self.grupo_anim.add(self.animation_5_2)
+            self.animation_5_2.update()
+            self.animation_5_2.stop = False
+            self.animation_5_2.continuar()
             self.spserver.processtext(
                 self.parent.text_content["content"][self.name]["anim_4"],
                 self.parent.config.activar_lector,
@@ -433,7 +390,7 @@ class estado(pantalla.Pantalla):
         elif animacion == 9:
             self.elemento_actual = -1
             self.grupo_botones.add(self.volver)
-            self.grupo_anim.remove(self.anim5_2)
+            self.grupo_anim.remove(self.animation_5_2)
             self.grupo_fondotexto.add(self.caja_texto)
             self.grupo_palabras.add(self.texto5_6.img_palabras)
             self.txt_actual = self.texto5_6.img_palabras
@@ -442,7 +399,7 @@ class estado(pantalla.Pantalla):
                 self.parent.text_content["content"][self.name]["text_6"],
                 self.parent.config.activar_lector,
             )
-            self.anim5.continuar()
+            self.animation_5.continuar()
 
         elif animacion == 10:
             self.elemento_actual = -1

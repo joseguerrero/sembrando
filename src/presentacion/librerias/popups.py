@@ -9,7 +9,7 @@ from pygame.sprite import Sprite
 
 from pygame import MOUSEBUTTONDOWN, K_RETURN
 
-from .texto import texto
+from .texto import Text
 from .textoci import texto2
 from .imgfondo import fondo
 from .button import TextButton
@@ -72,7 +72,7 @@ class PopUp(Sprite):
             self.sprite.rect = self.sprite.image.get_rect()
             x = 30
             y = 30
-            self.texto = texto(
+            self.texto = Text(
                 x,
                 y,
                 texto1[0],
@@ -151,7 +151,7 @@ class PopUp(Sprite):
             self.sprite.rect.w += tam
             for i in texto1:
                 if o == 0:
-                    self.texto = texto(
+                    self.texto = Text(
                         x,
                         y,
                         i,

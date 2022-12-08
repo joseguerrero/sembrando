@@ -3,9 +3,23 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.image import Image
+
+banners = [
+    "banner-inf",
+    "banner-or",
+    "banner-or-es",
+    "banner-or-pa",
+    "banner-or-doc",
+]
+
+buttons = [
+    "boton_or_ninos",
+    "boton_or_docentes",
+    "boton_or_padres",
+    "puerta",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -18,16 +32,18 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_11"
-        self.parent = parent
-        self.background = pygame.image.load(self.fondos + "fondo-acc.png").convert()
-        self.caja_or = Image(290, 125, self.fondos + "caja.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.banner_or = Image(0, 0, self.banners + "banner-or.png")
-        self.banner_or_es = Image(0, 0, self.banners + "banner-or-es.png")
-        self.banner_or_pa = Image(0, 0, self.banners + "banner-or-pa.png")
-        self.banner_or_doc = Image(0, 0, self.banners + "banner-or-doc.png")
-        self.cargar_botones()
+        super().__init__(parent, self.name)
+
+        self.previa = False
+
+        # Banners
+
+        self.caja_or = Image(290, 125, self.backgrounds_path + "caja.png")
+
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
+
         self.grupo_palabras.add(self.texto11.img_palabras)
         self.grupo_banner.add(self.banner_or, self.banner_inf)
         self.grupo_botones.add(
@@ -46,7 +62,7 @@ class estado(pantalla.Pantalla):
             "Pulsa sobre cada botón para que puedas explorar las orientaciones y sugerencias. ",
             self.parent.config.activar_lector,
         )
-        self.texto11 = texto(
+        self.texto11 = Text(
             400,
             200,
             self.parent.text_content["content"][self.name]["text_1"],
@@ -54,7 +70,7 @@ class estado(pantalla.Pantalla):
             "instruccion",
             800,
         )
-        self.texto11_5_1 = texto(
+        self.texto11_5_1 = Text(
             300,
             130,
             self.parent.text_content["content"][self.name]["text_5_1"],
@@ -62,7 +78,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_5_2 = texto(
+        self.texto11_5_2 = Text(
             300,
             self.texto11_5_1.y + self.texto11_5_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_5_2"],
@@ -70,7 +86,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_5_3 = texto(
+        self.texto11_5_3 = Text(
             300,
             self.texto11_5_2.y + self.texto11_5_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_5_3"],
@@ -78,7 +94,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_6_1 = texto(
+        self.texto11_6_1 = Text(
             300,
             130,
             self.parent.text_content["content"][self.name]["text_6_1"],
@@ -86,7 +102,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_6_2 = texto(
+        self.texto11_6_2 = Text(
             300,
             self.texto11_6_1.y + self.texto11_6_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_6_2"],
@@ -94,7 +110,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_6_3 = texto(
+        self.texto11_6_3 = Text(
             300,
             self.texto11_6_2.y + self.texto11_6_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_6_3"],
@@ -102,7 +118,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_7_1 = texto(
+        self.texto11_7_1 = Text(
             300,
             130,
             self.parent.text_content["content"][self.name]["text_7_1"],
@@ -110,7 +126,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_7_2 = texto(
+        self.texto11_7_2 = Text(
             300,
             self.texto11_7_1.y + self.texto11_7_1.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_7_2"],
@@ -118,7 +134,7 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-        self.texto11_7_3 = texto(
+        self.texto11_7_3 = Text(
             300,
             self.texto11_7_2.y + self.texto11_7_2.ancho_final + 10,
             self.parent.text_content["content"][self.name]["text_7_3"],
@@ -126,67 +142,6 @@ class estado(pantalla.Pantalla):
             "normal",
             900,
         )
-
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.boton_or_ninos = Button(
-            300,
-            440,
-            "or-ninos",
-            "Orientaciones a la niña, niño y adolescente",
-            self.botones + "boton-or-es.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.boton_or_docentes = Button(
-            500,
-            440,
-            "or-docentes",
-            "Sugerencias pedagógicas",
-            self.botones + "boton-or-doc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.boton_or_padres = Button(
-            700,
-            440,
-            "or-padres",
-            "Orientaciones a la adulta y al adulto responsable",
-            self.botones + "boton-or-pa.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.puerta = Button(
-            60,
-            425,
-            "puerta",
-            "Regresar",
-            self.botones + "boton-puerta.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
-    def resume(self):
-        pass
 
     def handleEvents(self, events):
         """
@@ -325,7 +280,7 @@ class estado(pantalla.Pantalla):
                         self.limpiar_grupos()
                         self.parent.popState()
 
-                    elif sprite[0].id == "or-ninos":
+                    elif sprite[0].id == "boton_or_ninos":
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(
@@ -343,7 +298,7 @@ class estado(pantalla.Pantalla):
                             self.banner_or_es, self.caja_or, self.banner_inf
                         )
 
-                    elif sprite[0].id == "or-docentes":
+                    elif sprite[0].id == "boton_or_docentes":
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(
@@ -361,7 +316,7 @@ class estado(pantalla.Pantalla):
                             self.banner_or_doc, self.caja_or, self.banner_inf
                         )
 
-                    elif sprite[0].id == "or-padres":
+                    elif sprite[0].id == "boton_or_padres":
                         self.grupo_palabras.empty()
                         self.grupo_banner.empty()
                         self.grupo_palabras.add(

@@ -13,7 +13,7 @@ from librerias.limite import limite
 from librerias.marcador import marcador
 from librerias.button import Button, RenderButton
 from librerias.personaje import personaje, RenderChar
-from librerias.animaciones import animacion, RenderAnim
+from librerias.animations import Animation, RenderAnim
 
 
 class estado(pantalla.Pantalla):

@@ -6,7 +6,7 @@ from librerias import pantalla
 from librerias.textoci import texto2
 from librerias.cajatexto import cajatexto
 from librerias.popups import PopUp, TextButton
-from librerias.animaciones import animacion
+from librerias.animations import Animation
 from paginas import pantalla2
 
 

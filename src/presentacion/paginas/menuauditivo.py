@@ -3,11 +3,38 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
-from librerias.image import Image
-from librerias.animaciones import animacion
+from librerias.texto import Text
 from paginas import pantalla2
+
+animations = [
+    "colors-man",
+    "colors-woman",
+]
+
+banners = [
+    "banner-inf",
+    "banner-acc-sordo",
+]
+
+buttons = [
+    "velocidad",
+    "si",
+    "no",
+    "check_si",
+    "check_no",
+    "boton_nina",
+    "boton_nino",
+    "boton_nina_sel",
+    "boton_nino_sel",
+    "puerta",
+    "guardar",
+    "hoja",
+    "amarillo",
+    "rosado",
+    "rojo",
+    "v_hombre",
+    "v_mujer",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -24,158 +51,14 @@ class estado(pantalla.Pantalla):
         self.parent = parent
         self.spserver.processtext("Configuración de discapacidad auditiva.", False)
         self.previa = previa
-        self.fondo_acc = pygame.image.load(self.fondos + "fondo-acc.png").convert()
+        self.fondo_acc = pygame.image.load(
+            self.backgrounds_path + "fondo-acc.png"
+        ).convert()
         self.background = self.fondo_acc
-        self.velocidad = Button(
-            440,
-            360,
-            "velocidad",
-            "none",
-            self.fondos + "velocidad.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.banner_acc_sordo = Image(0, 0, self.banners + "banner-acc-sordo.png")
-        self.color_mujer = animacion(
-            "mujer",
-            self.anim + "color-mujer.png",
-            9,
-            3,
-            730,
-            160,
-            (21, 76, 75),
-            True,
-            4,
-        )
-        self.color_hombre = animacion(
-            "hombre",
-            self.anim + "color-hombre.png",
-            9,
-            3,
-            730,
-            160,
-            (21, 76, 75),
-            True,
-            4,
-        )
-        self.si = Button(
-            430, 120, "si", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.no = Button(
-            545, 120, "no", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.check_si = Button(
-            430,
-            120,
-            "check_si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.check_no = Button(
-            540,
-            120,
-            "check_no",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.boton_nina = Button(
-            430, 200, "nina", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.boton_nino = Button(
-            540, 200, "nino", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.boton_nina_sel = Button(
-            430,
-            200,
-            "nina_sel",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.boton_nino_sel = Button(
-            540,
-            200,
-            "nino_sel",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.puerta = Button(
-            60,
-            425,
-            "puerta",
-            "Regresar",
-            self.botones + "boton-puerta.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.guardar = Button(
-            860,
-            445,
-            "guardar",
-            "Guardar",
-            self.botones + "boton-guardar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.hoja = Button(
-            499, 370, "hoja", "Velocidad", self.botones + "hoja.png", 1, None, False, 1
-        )
-        self.amarillo = Button(
-            425,
-            295,
-            "amarillo",
-            "Amarillo",
-            self.botones + "amarilla.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.rosado = Button(
-            485, 295, "rosado", "Rosado", self.botones + "rosada.png", 1, None, False, 1
-        )
-        self.rojo = Button(
-            485, 295, "rojo", "Rojo", self.botones + "roja.png", 1, None, False, 1
-        )
-        self.v_hombre = Button(
-            545,
-            295,
-            "v-hombre",
-            "Verde",
-            self.botones + "verdeh.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.v_mujer = Button(
-            545, 295, "v-mujer", "Verde", self.botones + "verdem.png", 1, None, False, 1
-        )
+        self.load_buttons(buttons)
         self.camisas_mujer = [self.amarillo, self.rosado, self.v_mujer]
         self.camisas_hombre = [self.amarillo, self.rojo, self.v_hombre]
-        self.acc2_1 = texto(
+        self.acc2_1 = Text(
             310,
             70,
             "1.- ¿Te gustaría hacer el recorrido con un intérprete virtual? ",
@@ -183,8 +66,8 @@ class estado(pantalla.Pantalla):
             "normal",
             700,
         )
-        self.acc2_2 = texto(400, 120, "Sí            No ", 20, "normal", 800)
-        self.acc2_3 = texto(
+        self.acc2_2 = Text(400, 120, "Sí            No ", 20, "normal", 800)
+        self.acc2_3 = Text(
             310,
             150,
             "2.- Selecciona el género del intérprete con el que desees hacer el recorrido. ",
@@ -192,8 +75,8 @@ class estado(pantalla.Pantalla):
             "normal",
             700,
         )
-        self.acc2_4 = texto(400, 200, "F             M ", 20, "normal", 800)
-        self.acc2_5m = texto(
+        self.acc2_4 = Text(400, 200, "F             M ", 20, "normal", 800)
+        self.acc2_5m = Text(
             310,
             240,
             "3.- Elige el color de la camisa del intérprete virtual.  ",
@@ -201,7 +84,7 @@ class estado(pantalla.Pantalla):
             "normal",
             700,
         )
-        self.acc2_5f = texto(
+        self.acc2_5f = Text(
             310,
             240,
             "3.- Elige el color de la camisa de la intérprete virtual.  ",
@@ -209,7 +92,7 @@ class estado(pantalla.Pantalla):
             "normal",
             700,
         )
-        self.acc2_6m = texto(
+        self.acc2_6m = Text(
             310,
             330,
             "4.- Elige la velocidad del intérprete virtual. ",
@@ -217,7 +100,7 @@ class estado(pantalla.Pantalla):
             "normal",
             800,
         )
-        self.acc2_6f = texto(
+        self.acc2_6f = Text(
             310,
             330,
             "4.- Elige la velocidad de la intérprete virtual. ",
@@ -225,7 +108,7 @@ class estado(pantalla.Pantalla):
             "normal",
             800,
         )
-        self.acc2_7 = texto(
+        self.acc2_7 = Text(
             200,
             400,
             "Pulsa sobre el botón guardar para salvar tu configuración. ",
@@ -233,19 +116,10 @@ class estado(pantalla.Pantalla):
             "normal",
             800,
         )
+
+        self.load_animations(animations)
+        self.load_banners(banners)
         self.cargar_preferencias()
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
-    def resume(self):
-        pass
 
     def cargar_preferencias(self):
         """
@@ -266,8 +140,8 @@ class estado(pantalla.Pantalla):
                     self.hoja,
                 )
                 if self.parent.config.genero == "Mujer":
-                    self.grupo_anim.add(self.color_mujer)
-                    self.color_mujer.cambiar_rect(self.parent.config.color)
+                    self.grupo_anim.add(self.colors_woman)
+                    self.colors_woman.cambiar_rect(self.parent.config.color)
                     self.grupo_botones.add(
                         self.boton_nino,
                         self.boton_nina_sel,
@@ -283,8 +157,8 @@ class estado(pantalla.Pantalla):
                         self.acc2_7.img_palabras,
                     )
                 elif self.parent.config.genero == "Hombre":
-                    self.grupo_anim.add(self.color_hombre)
-                    self.color_hombre.cambiar_rect(self.parent.config.color)
+                    self.grupo_anim.add(self.colors_man)
+                    self.colors_man.cambiar_rect(self.parent.config.color)
                     self.grupo_botones.add(
                         self.boton_nina,
                         self.boton_nino_sel,
@@ -299,8 +173,8 @@ class estado(pantalla.Pantalla):
                         self.acc2_6m.img_palabras,
                         self.acc2_7.img_palabras,
                     )
-                self.color_hombre.cambiar_vel(self.parent.config.vel_anim)
-                self.color_mujer.cambiar_vel(self.parent.config.vel_anim)
+                self.colors_man.cambiar_vel(self.parent.config.vel_anim)
+                self.colors_woman.cambiar_vel(self.parent.config.vel_anim)
                 self.hoja.relocate(x=self.parent.config.ubx)
             elif self.parent.config.disc_audi == False:
                 self.grupo_palabras.add(self.acc2_7.img_palabras)
@@ -311,10 +185,10 @@ class estado(pantalla.Pantalla):
             self.parent.config.cargar_default()
             self.grupo_botones.add(self.si, self.check_no, self.puerta)
             self.hoja.relocate(x=499)
-            self.color_hombre.cambiar_vel(self.parent.config.vel_anim)
-            self.color_mujer.cambiar_vel(self.parent.config.vel_anim)
-            self.color_hombre.cambiar_rect(self.parent.config.color)
-            self.color_mujer.cambiar_rect(self.parent.config.color)
+            self.colors_man.cambiar_vel(self.parent.config.vel_anim)
+            self.colors_woman.cambiar_vel(self.parent.config.vel_anim)
+            self.colors_man.cambiar_rect(self.parent.config.color)
+            self.colors_woman.cambiar_rect(self.parent.config.color)
 
     def handleEvents(self, events):
         """
@@ -345,8 +219,8 @@ class estado(pantalla.Pantalla):
                                 factor_anim = 2
                             if factor > 1:
                                 factor = 1
-                            self.color_mujer.cambiar_vel(int(factor_anim))
-                            self.color_hombre.cambiar_vel(int(factor_anim))
+                            self.colors_woman.cambiar_vel(int(factor_anim))
+                            self.colors_man.cambiar_vel(int(factor_anim))
                             self.parent.config.vel_anim = factor_anim
                             self.parent.config.velocidad = factor
                             self.parent.config.ubx = ux
@@ -393,7 +267,7 @@ class estado(pantalla.Pantalla):
                         )
                         self.parent.config.disc_audi = False
 
-                    elif sprite[0].id == "nino":
+                    elif sprite[0].id == "boton_nino":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(
                             self.acc2_5f.img_palabras,
@@ -401,8 +275,8 @@ class estado(pantalla.Pantalla):
                             self.acc2_6f.img_palabras,
                             self.acc2_5f.img_palabras,
                         )
-                        self.grupo_anim.add(self.color_hombre)
-                        self.color_hombre.detener()
+                        self.grupo_anim.add(self.colors_man)
+                        self.colors_man.detener()
                         self.grupo_palabras.add(
                             self.acc2_5m.img_palabras, self.acc2_7.img_palabras
                         )
@@ -422,7 +296,7 @@ class estado(pantalla.Pantalla):
                         )
                         self.parent.config.genero = "Hombre"
 
-                    elif sprite[0].id == "nina":
+                    elif sprite[0].id == "boton_nina":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(
                             self.acc2_5m.img_palabras,
@@ -430,8 +304,8 @@ class estado(pantalla.Pantalla):
                             self.acc2_6m.img_palabras,
                             self.acc2_5m.img_palabras,
                         )
-                        self.grupo_anim.add(self.color_mujer)
-                        self.color_mujer.detener()
+                        self.grupo_anim.add(self.colors_woman)
+                        self.colors_woman.detener()
                         self.grupo_palabras.add(
                             self.acc2_5f.img_palabras, self.acc2_7.img_palabras
                         )
@@ -459,56 +333,56 @@ class estado(pantalla.Pantalla):
                         )
                         if self.parent.config.genero == "Mujer":
                             self.grupo_palabras.add(self.acc2_6f.img_palabras)
-                            self.grupo_anim.add(self.color_mujer)
-                            self.color_mujer.cambiar_rect(0)
-                            self.parent.config.color = self.color_mujer.fila_pos
-                            self.color_mujer.continuar()
+                            self.grupo_anim.add(self.colors_woman)
+                            self.colors_woman.cambiar_rect(0)
+                            self.parent.config.color = self.colors_woman.fila_pos
+                            self.colors_woman.continuar()
                         else:
                             self.grupo_palabras.add(self.acc2_6m.img_palabras)
-                            self.grupo_anim.add(self.color_hombre)
-                            self.color_hombre.cambiar_rect(0)
-                            self.parent.config.color = self.color_hombre.fila_pos
-                            self.color_hombre.continuar()
+                            self.grupo_anim.add(self.colors_man)
+                            self.colors_man.cambiar_rect(0)
+                            self.parent.config.color = self.colors_man.fila_pos
+                            self.colors_man.continuar()
 
                     elif sprite[0].id == "rojo":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(self.acc2_6f.img_palabras)
                         self.grupo_botones.add(self.velocidad, self.hoja)
-                        self.grupo_anim.add(self.color_hombre)
+                        self.grupo_anim.add(self.colors_man)
                         self.grupo_palabras.add(self.acc2_6m.img_palabras)
-                        self.color_hombre.cambiar_rect(1)
-                        self.parent.config.color = self.color_hombre.fila_pos
-                        self.color_hombre.continuar()
+                        self.colors_man.cambiar_rect(1)
+                        self.parent.config.color = self.colors_man.fila_pos
+                        self.colors_man.continuar()
 
                     elif sprite[0].id == "rosado":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(self.acc2_6m.img_palabras)
                         self.grupo_botones.add(self.velocidad, self.hoja)
-                        self.grupo_anim.add(self.color_mujer)
+                        self.grupo_anim.add(self.colors_woman)
                         self.grupo_palabras.add(self.acc2_6f.img_palabras)
-                        self.color_mujer.cambiar_rect(1)
-                        self.parent.config.color = self.color_mujer.fila_pos
-                        self.color_mujer.continuar()
+                        self.colors_woman.cambiar_rect(1)
+                        self.parent.config.color = self.colors_woman.fila_pos
+                        self.colors_woman.continuar()
 
-                    elif sprite[0].id == "v-hombre":
+                    elif sprite[0].id == "v_hombre":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(self.acc2_6f.img_palabras)
                         self.grupo_botones.add(self.velocidad, self.hoja)
-                        self.grupo_anim.add(self.color_hombre)
+                        self.grupo_anim.add(self.colors_man)
                         self.grupo_palabras.add(self.acc2_6m.img_palabras)
-                        self.color_hombre.cambiar_rect(2)
-                        self.parent.config.color = self.color_hombre.fila_pos
-                        self.color_hombre.continuar()
+                        self.colors_man.cambiar_rect(2)
+                        self.parent.config.color = self.colors_man.fila_pos
+                        self.colors_man.continuar()
 
-                    elif sprite[0].id == "v-mujer":
+                    elif sprite[0].id == "v_mujer":
                         self.grupo_anim.empty()
                         self.grupo_palabras.remove(self.acc2_6f.img_palabras)
                         self.grupo_botones.add(self.velocidad, self.hoja)
-                        self.grupo_anim.add(self.color_mujer)
+                        self.grupo_anim.add(self.colors_woman)
                         self.grupo_palabras.add(self.acc2_6f.img_palabras)
-                        self.color_mujer.cambiar_rect(2)
-                        self.parent.config.color = self.color_mujer.fila_pos
-                        self.color_mujer.continuar()
+                        self.colors_woman.cambiar_rect(2)
+                        self.parent.config.color = self.colors_woman.fila_pos
+                        self.colors_woman.continuar()
 
                     elif sprite[0].id == "guardar":
                         if (

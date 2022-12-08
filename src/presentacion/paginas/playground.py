@@ -3,32 +3,22 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.image import Image
 from paginas import pantalla2
+
+banners = ["banner-inf"]
+
+buttons = ["inicio"]
 
 
 class estado(pantalla.Pantalla):
     def __init__(self, parent, previa=False):
 
-        self.name = "playground"
-        self.previa = previa
-        self.parent = parent
-        self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
-        self.fondo_simple = pygame.image.load(
-            self.fondos + "fondo-simple.png"
-        ).convert()
+        self.name = "screen_2"
+        super().__init__(parent, self.name)
 
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-
-        # This banner shouldn't be needed here but in the next screen
-        self.banner_config = Image(0, 0, self.banners + "banner-acc.png")
-
-        self.load_buttons()
-
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_img_intrucciones()
-
-        self.rect = pygame.Rect(0, 0, 0, 0)
 
         self.resume()
 
@@ -51,21 +41,6 @@ class estado(pantalla.Pantalla):
             "DFV": self.img6,
         }
 
-    def load_buttons(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-
-        self.inicio = Button(
-            650,
-            440,
-            "inicio",
-            "Inicio",
-            self.botones + "boton-inicio.png",
-            frames=3,
-            frame_speed=1,
-        )
-
     def start(self):
         pass
 
@@ -81,7 +56,7 @@ class estado(pantalla.Pantalla):
         según el caso.
         """
 
-        self.load_buttons()
+        self.load_buttons(buttons)
         self.grupo_banner.add(self.banner_inf)
         self.grupo_botones.add(self.inicio)
 

@@ -4,11 +4,39 @@ import pygame
 
 from librerias import pantalla
 from librerias.textopopups import p1_vis
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.popups import PopUp
-from librerias.image import Image
 from paginas import pantalla2
+
+banners = [
+    "banner-inf",
+    "banner-acc-visual",
+]
+
+buttons = [
+    "puerta",
+    "guardar",
+    "onmag",
+    "onmag_si",
+    "offmag",
+    "offmag_si",
+    "tam18",
+    "tam18_sel",
+    "tam20",
+    "tam20_sel",
+    "tam22",
+    "tam22_sel",
+    "lector",
+    "lector_si",
+    "oflector",
+    "oflector_si",
+    "vbaja",
+    "vbaja_sel",
+    "vmedia",
+    "vmedia_sel",
+    "vrapida",
+    "vrapida_sel",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -25,67 +53,16 @@ class estado(pantalla.Pantalla):
         self.parent = parent
         self.previa = previa
         self.fondo_acc = pygame.image.load(
-            self.fondos + "fondo-acc-visual.png"
+            self.backgrounds_path + "fondo-acc-visual.png"
         ).convert()
         self.background = self.fondo_acc
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.banner_acc_visual = Image(0, 0, self.banners + "banner-acc-visual.png")
-        self.puerta = Button(
-            60,
-            425,
-            "puerta",
-            "Regresar",
-            self.botones + "boton-puerta.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.guardar = Button(
-            860,
-            445,
-            "guardar",
-            "Guardar",
-            self.botones + "boton-guardar.png",
-            3,
-            None,
-            False,
-            1,
-        )
 
         # Botones magnificador
         self.img1 = pygame.image.load(self.pops + "f5.png").convert_alpha()
         self.img2 = pygame.image.load(self.pops + "mas.png").convert_alpha()
         self.img3 = pygame.image.load(self.pops + "menos.png").convert_alpha()
         cont_img = {"F5": self.img1, "MAS": self.img2, "MENOS": self.img3}
-        self.onmag = Button(
-            130, 120, "onmag", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.onmag_si = Button(
-            130,
-            120,
-            "onmag-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.offmag = Button(
-            245, 120, "offmag", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.offmag_si = Button(
-            245,
-            120,
-            "offmag-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
+
         self.popup_mag = PopUp(
             parent,
             p1_vis["texto_mag"],
@@ -98,102 +75,8 @@ class estado(pantalla.Pantalla):
             -50,
         )
 
-        # Botones tamaño de letra
-        self.tam18 = Button(
-            130, 200, "18", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.tam18_sel = Button(
-            130, 200, "18-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1
-        )
-        self.tam20 = Button(
-            210, 200, "20", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.tam20_sel = Button(
-            210, 200, "20-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1
-        )
-        self.tam22 = Button(
-            290, 200, "22", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.tam22_sel = Button(
-            290, 200, "22-si", "none", self.botones + "cuadro-1.png", 1, None, False, 1
-        )
-
-        # Botones Sintetizador de voz
-        self.lector = Button(
-            130, 295, "lector", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.lector_si = Button(
-            130,
-            295,
-            "lector-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.oflector = Button(
-            245, 295, "oflector", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.oflector_si = Button(
-            245,
-            295,
-            "oflector-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-
-        # Botones audio
-        self.vbaja = Button(
-            93, 390, "vbaja", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.vbaja_sel = Button(
-            93,
-            390,
-            "vbaja-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.vmedia = Button(
-            208, 390, "vmedia", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.vmedia_sel = Button(
-            208,
-            390,
-            "vmedia-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-        self.vrapida = Button(
-            332, 390, "vrapida", "none", self.botones + "cuadro.png", 1, None, False, 1
-        )
-        self.vrapida_sel = Button(
-            332,
-            390,
-            "vrapida-si",
-            "none",
-            self.botones + "cuadro-1.png",
-            1,
-            None,
-            False,
-            1,
-        )
-
         # Configuracion accesibilidad visual textos
-        self.acc3_1 = texto(
+        self.acc3_1 = Text(
             10,
             70,
             "1.- ¿Te gustaría hacer el recorrido con un Magnificador de Pantalla? ",
@@ -201,12 +84,12 @@ class estado(pantalla.Pantalla):
             "normal",
             400,
         )
-        self.acc3_2 = texto(100, 120, "Sí             No ", 20, "normal", 500)
-        self.acc3_3 = texto(
+        self.acc3_2 = Text(100, 120, "Sí             No ", 20, "normal", 500)
+        self.acc3_3 = Text(
             10, 250, "3.- ¿Deseas activar el lector de pantalla? ", 20, "normal", 400
         )
-        self.acc3_4 = texto(100, 300, "Sí             No ", 20, "normal", 500)
-        self.acc3_5 = texto(
+        self.acc3_4 = Text(100, 300, "Sí             No ", 20, "normal", 500)
+        self.acc3_5 = Text(
             10,
             340,
             "4.- Elije la velocidad del lector de pantalla. ",
@@ -214,10 +97,10 @@ class estado(pantalla.Pantalla):
             "normal",
             400,
         )
-        self.acc3_6 = texto(
+        self.acc3_6 = Text(
             40, 390, "Lenta         Media         Rápida ", 20, "normal", 500
         )
-        self.acc3_7 = texto(
+        self.acc3_7 = Text(
             200,
             400,
             "Pulsa sobre el botón guardar para salvar tu configuración. ",
@@ -225,13 +108,16 @@ class estado(pantalla.Pantalla):
             "normal",
             500,
         )
-        self.acc3_8 = texto(
+        self.acc3_8 = Text(
             10, 160, "2.- Elige el tamaño de la letra. ", 20, "normal", 400
         )
-        self.acc3_9 = texto(100, 200, "18         20        22 ", 20, "normal", 400)
+        self.acc3_9 = Text(100, 200, "18         20        22 ", 20, "normal", 400)
         instrucciones = "Pantalla: Discapacidad visual: Instrucciones: pulsa las teclas uno, 2, o 3, para seleccionar la opcion de tu preferencia, en cada una de las siguientes preguntas, o pulsa la tecla escape para volver al menú: "
         self.pregunta1 = "¿Deseas activar el lector de pantalla? Si deseas activarlo presiona uno. Si no deseas activarlo pulsa 2. "
         self.pregunta2 = "Elige la velocidad del lector de pantalla: Si deseas velocidad lenta, pulsa uno. Velocidad media, pulsa 2. Velocidad rápida, pulsa 3."
+
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_preferencias()
         self.spserver.stopserver()
         self.opcion = 1
@@ -457,7 +343,7 @@ class estado(pantalla.Pantalla):
                         self.parent.config.consultar()
                         self.parent.popState()
 
-                    elif sprite[0].id == "18":
+                    elif sprite[0].id == "tam18":
                         self.grupo_botones.remove(
                             self.tam18, self.tam20_sel, self.tam22_sel
                         )
@@ -466,7 +352,7 @@ class estado(pantalla.Pantalla):
                         )
                         self.parent.config.t_fuente = 18
 
-                    elif sprite[0].id == "20":
+                    elif sprite[0].id == "tam20":
                         self.grupo_botones.remove(
                             self.tam18_sel, self.tam20, self.tam22_sel
                         )
@@ -475,7 +361,7 @@ class estado(pantalla.Pantalla):
                         )
                         self.parent.config.t_fuente = 20
 
-                    elif sprite[0].id == "22":
+                    elif sprite[0].id == "tam22":
                         self.grupo_botones.remove(
                             self.tam18_sel, self.tam20_sel, self.tam22
                         )

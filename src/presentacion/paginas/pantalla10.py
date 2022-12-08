@@ -3,11 +3,18 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.image import Image
 
 from paginas import pantalla2
+
+
+banners = [
+    "banner-inf",
+    "banner-glo",
+]
+
+buttons = ["home", "volver"]
 
 
 class estado(pantalla.Pantalla):
@@ -18,13 +25,18 @@ class estado(pantalla.Pantalla):
         @param parent: Instancia del gestor de pantallas.
         @type parent: Manejador
         """
-        self.parent = parent
-        self.background = pygame.image.load(self.fondos + "fondo-acc.png").convert()
+
+        self.name = "screen_10"
+        super().__init__(parent, self.name)
+
+        self.previa = False
+
         self.caja_concepto = Image(590, 190, self.varios + "caja-concepto.png")
-        self.banner_glo = Image(0, 0, self.banners + "banner-glo.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
+
+        self.load_banners(banners)
         self.cargar_textos()
-        self.cargar_botones()
+        self.load_buttons(buttons)
+
         inicial = self.parent.config.definicion[0].upper()
         self.abc.indexar(inicial)
         self.grupo_palabras.add(
@@ -41,7 +53,7 @@ class estado(pantalla.Pantalla):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.abc = texto(
+        self.abc = Text(
             290,
             140,
             "A  B  C  D  E  F  G  H  I  J  K  L  M  N  Ñ  O  P  Q  R  S  T  U  V  W  X  Y  Z ",
@@ -49,55 +61,22 @@ class estado(pantalla.Pantalla):
             "indice",
             1010,
         )
-        self.concepto = texto(
+        self.concepto = Text(
             600, 200, "", self.parent.config.t_fuente, "concepto", 1000
         )
-        self.a_absorber = texto(330, 200, "Absorber ", 22, "definicion", 900)
-        self.c_celula = texto(330, 200, "Célula ", 22, "definicion", 900)
-        self.c_componentes = texto(330, 250, "Componentes ", 22, "definicion", 900)
-        self.f_fotosintesis = texto(330, 200, "Fotosíntesis ", 22, "definicion", 900)
-        self.g_germinacion = texto(330, 200, "Germinación ", 22, "definicion", 900)
-        self.g_germinar = texto(330, 250, "Germinar ", 22, "definicion", 900)
-        self.m_minerales = texto(330, 200, "Mineral ", 22, "definicion", 900)
-        self.n_nutrientes = texto(330, 200, "Nutriente ", 22, "definicion", 900)
-        self.o_organo = texto(330, 200, "Órgano ", 22, "definicion", 900)
-        self.a_asexual = texto(330, 200, "Reproducción asexual ", 22, "definicion", 900)
-        self.s_sexual = texto(330, 250, "Reproducción sexual ", 22, "definicion", 900)
-        self.t_transformacion = texto(
-            330, 200, "Transformación ", 22, "definicion", 900
-        )
-        self.t_transporte = texto(330, 250, "Transportar ", 22, "definicion", 900)
-
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.volver = Button(
-            320,
-            445,
-            "volver",
-            "Regresar",
-            self.botones + "boton-regresar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.home = Button(
-            889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
-    def resume(self):
-        pass
+        self.a_absorber = Text(330, 200, "Absorber ", 22, "definicion", 900)
+        self.c_celula = Text(330, 200, "Célula ", 22, "definicion", 900)
+        self.c_componentes = Text(330, 250, "Componentes ", 22, "definicion", 900)
+        self.f_fotosintesis = Text(330, 200, "Fotosíntesis ", 22, "definicion", 900)
+        self.g_germinacion = Text(330, 200, "Germinación ", 22, "definicion", 900)
+        self.g_germinar = Text(330, 250, "Germinar ", 22, "definicion", 900)
+        self.m_minerales = Text(330, 200, "Mineral ", 22, "definicion", 900)
+        self.n_nutrientes = Text(330, 200, "Nutriente ", 22, "definicion", 900)
+        self.o_organo = Text(330, 200, "Órgano ", 22, "definicion", 900)
+        self.a_asexual = Text(330, 200, "Reproducción asexual ", 22, "definicion", 900)
+        self.s_sexual = Text(330, 250, "Reproducción sexual ", 22, "definicion", 900)
+        self.t_transformacion = Text(330, 200, "Transformación ", 22, "definicion", 900)
+        self.t_transporte = Text(330, 250, "Transportar ", 22, "definicion", 900)
 
     def handleEvents(self, events):
         """
@@ -168,7 +147,7 @@ class estado(pantalla.Pantalla):
         @rtype: list
         """
 
-        self.concepto = texto(
+        self.concepto = Text(
             600,
             200,
             self.parent.text_content["concepts"][palabra],

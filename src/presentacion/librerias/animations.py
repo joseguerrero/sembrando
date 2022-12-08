@@ -88,10 +88,17 @@ class spritesheet(object):
         return self.images_at(tups, colorkey)
 
 
-class animacion(pygame.sprite.Sprite):
+class Animation(pygame.sprite.Sprite):
     """
     Esta clase permite crear y manipular animaciones a partir de una tira de imágenes.
     """
+
+    def __repr__(self) -> str:
+        return repr(
+            "Animation({}, {}, {}, {}, {}, {}, {})".format(
+                self.id, self.filename, self.col, self.fil, self.ck, self.loop, self.f
+            )
+        )
 
     def __init__(
         self, id, filename, col, fil, x, y, colorkey=None, loop=False, frames=1

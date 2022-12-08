@@ -3,15 +3,30 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
-from librerias.texto import texto
+from librerias.texto import Text
 from librerias.image import Image
-from librerias.animaciones import animacion
 
 from paginas import menucfg
 from paginas import pantalla2
 from paginas import pantalla9
 from paginas import pantalla10
+
+animations = [
+    "animation-8",
+    "animation-8-0",
+]
+
+banners = [
+    "banner-inf",
+    "banner-agri",
+]
+
+buttons = [
+    "home",
+    "sig",
+    "volver",
+    "config",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -26,35 +41,32 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_8"
-        self.deteccion_movimiento = False
-        self.parent = parent
-        self.previa = True
+        super().__init__(parent, self.name)
+
         self.anim_actual = anim_actual
+
         pygame.display.set_caption("Sembrando para el futuro")
-        self.background = pygame.image.load(self.fondos + "fondo-agri.png").convert()
-        self.anim8 = animacion(
-            "anim8", self.anim + "animacion8.png", 5, 1, 130, 110, -1, True, 8
-        )
-        self.anim8_0 = animacion(
-            "anim8_0", self.anim + "animacion8-0.png", 1, 1, 700, 150, -1, False, 18
-        )
-        self.caja_texto = Image(0, 332, self.fondos + "caja-texto.png")
-        self.banner_agri = Image(0, 0, self.banners + "banner-agri.png")
-        self.banner_inf = Image(0, 432, self.banners + "banner-inf.png")
-        self.cargar_botones()
+
+        # Banners
+
+        self.caja_texto = Image(0, 332, self.backgrounds_path + "caja-texto.png")
+
+        self.load_animations(animations)
+        self.load_banners(banners)
+        self.load_buttons(buttons)
         self.cargar_textos()
-        self.reloj_anim = pygame.time.Clock()
-        self.reloj_anim.tick(30)
-        self.rect = pygame.Rect(0, 0, 0, 0)
+
+        # These two are used by the tractor animation in the background
         self.tiempo = 0
         self.tractor = -2
+
         self.resume()
 
     def cargar_textos(self):
         """
         Carga los textos utilizados en esta pantalla.
         """
-        self.texto8_2 = texto(
+        self.texto8_2 = Text(
             32,
             340,
             self.parent.text_content["content"][self.name]["text_2"],
@@ -63,7 +75,7 @@ class estado(pantalla.Pantalla):
             992,
             False,
         )
-        self.texto8_3 = texto(
+        self.texto8_3 = Text(
             32,
             340,
             self.parent.text_content["content"][self.name]["text_3"],
@@ -72,7 +84,7 @@ class estado(pantalla.Pantalla):
             992,
             False,
         )
-        self.texto8_4 = texto(
+        self.texto8_4 = Text(
             32,
             340,
             self.parent.text_content["content"][self.name]["text_4"],
@@ -82,66 +94,16 @@ class estado(pantalla.Pantalla):
             False,
         )
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.home = Button(
-            889, 440, "home", "Menú", self.botones + "boton-menu.png", 3, None, False, 1
-        )
-        self.sig = Button(
-            560,
-            440,
-            "sig",
-            "Avanzar",
-            self.botones + "boton-avanzar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.volver = Button(
-            320,
-            445,
-            "volver",
-            "Regresar",
-            self.botones + "boton-regresar.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.config = Button(
-            60,
-            445,
-            "config",
-            "Accesibilidad",
-            self.botones + "boton-acc.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si se realizaron cambios en la configuración. Carga los valores iniciales de esta pantalla.
         """
         if self.parent.config.texto_cambio == True:
-            self.cargar_botones()
+            self.load_buttons(buttons)
             self.cargar_textos()
             self.parent.config.texto_cambio = False
-        self.grupo_anim.add(self.anim8)
-        self.grupo_imagen.add(self.anim8_0)
+        self.grupo_anim.add(self.animation_8)
+        self.grupo_imagen.add(self.animation_8_0)
         self.grupo_banner.add(self.banner_agri, self.banner_inf)
         self.grupo_botones.add(self.config, self.sig, self.home)
         self.creado = True
@@ -244,20 +206,24 @@ class estado(pantalla.Pantalla):
         self.raton.update()
         self.obj_magno.magnificar(self.parent.screen)
         self.grupo_botones.update(self.grupo_tooltip)
-        self.anim8_0.rect.move_ip(self.tractor, 0)
+        self.animation_8_0.rect.move_ip(self.tractor, 0)
         # Movimiento del tractor
-        if self.anim8_0.rect.left + self.anim8_0.rect.width + 100 < 0:
+        if self.animation_8_0.rect.left + self.animation_8_0.rect.width + 100 < 0:
             self.tractor = self.tractor * -1
-            self.anim8_0.image = pygame.transform.flip(self.anim8_0.image, True, False)
-            self.anim8_0.image = pygame.transform.smoothscale(
-                self.anim8_0.image,
-                (self.anim8_0.rect.width / 2, self.anim8_0.rect.height / 2),
+            self.animation_8_0.image = pygame.transform.flip(
+                self.animation_8_0.image, True, False
+            )
+            self.animation_8_0.image = pygame.transform.smoothscale(
+                self.animation_8_0.image,
+                (self.animation_8_0.rect.width / 2, self.animation_8_0.rect.height / 2),
             )
 
-        if self.anim8_0.rect.left > 1124:
+        if self.animation_8_0.rect.left > 1124:
             self.tractor = self.tractor * -1
-            self.anim8_0.image = pygame.transform.flip(self.anim8_0.image, True, False)
-            self.anim8_0.image = self.anim8_0.img
+            self.animation_8_0.image = pygame.transform.flip(
+                self.animation_8_0.image, True, False
+            )
+            self.animation_8_0.image = self.animation_8_0.img
         # Automatizado del inicio de pantalla
         if self.anim_actual == 1 and not self.parent.config.activar_lector:
             if not self.tiempo < 1000:

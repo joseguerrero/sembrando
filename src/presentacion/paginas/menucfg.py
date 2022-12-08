@@ -3,10 +3,16 @@
 import pygame
 
 from librerias import pantalla
-from librerias.button import Button
 from librerias.popups import PopUp
 from librerias.image import Image
 from paginas import pantalla2, menuauditivo, menuvisual
+
+buttons = [
+    "puerta",
+    "boton_sordo",
+    "boton_visual",
+    "inicio",
+]
 
 
 class estado(pantalla.Pantalla):
@@ -21,23 +27,31 @@ class estado(pantalla.Pantalla):
         """
 
         self.name = "screen_1"
-        self.previa = previa
+
         self.parent = parent
-        self.background = pygame.image.load(self.fondos + "fondo-inicio.png").convert()
+
+        super().__init__(parent, self.name)
+
+        self.previa = previa
+
         self.fondo_simple = pygame.image.load(
-            self.fondos + "fondo-simple.png"
+            self.backgrounds_path + "fondo-simple.png"
         ).convert()
+
         self.banner_inf = Image(
             0,
             432,
-            self.banners + "banner-inf.png",
+            self.banners_path + "banner-inf.png",
         )
+
         self.banner_config = Image(
             0,
             0,
-            self.banners + "banner-acc.png",
+            self.banners_path + "banner-acc.png",
         )
-        self.cargar_botones()
+
+        self.load_buttons(buttons)
+
         self.cargar_img_intrucciones()
         self.rect = pygame.Rect(0, 0, 0, 0)
         self.resume()
@@ -61,64 +75,6 @@ class estado(pantalla.Pantalla):
             "DFV": self.img6,
         }
 
-    def cargar_botones(self):
-        """
-        Carga los botones utilizados en esta pantalla.
-        """
-        self.puerta = Button(
-            650,
-            425,
-            "puerta",
-            "Regresar",
-            self.botones + "boton-puerta.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.boton_sordo = Button(
-            300,
-            440,
-            "sordo",
-            "Discapacidad auditiva",
-            self.botones + "boton-sordo.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.boton_visual = Button(
-            483,
-            430,
-            "config-vis",
-            "Discapacidad visual",
-            self.botones + "boton-visual.png",
-            3,
-            None,
-            False,
-            1,
-        )
-        self.inicio = Button(
-            650,
-            440,
-            "inicio",
-            "Inicio",
-            self.botones + "boton-inicio.png",
-            3,
-            None,
-            False,
-            1,
-        )
-
-    def start(self):
-        pass
-
-    def cleanUp(self):
-        pass
-
-    def pause(self):
-        pass
-
     def resume(self):
         """
         Verifica si es la primera vez que se muestra esta pantalla. Carga los objetos correspondientes
@@ -130,7 +86,7 @@ class estado(pantalla.Pantalla):
             self.parent.popState()
         else:
             if self.parent.primera_vez:
-                self.cargar_botones()
+                self.load_buttons(buttons)
                 self.grupo_banner.add(self.banner_inf)
                 self.grupo_botones.add(self.boton_sordo, self.boton_visual, self.inicio)
                 self.popup_ins = PopUp(
@@ -155,7 +111,7 @@ class estado(pantalla.Pantalla):
             else:
                 self.background = self.fondo_simple
                 if self.parent.config.texto_cambio == True:
-                    self.cargar_botones()
+                    self.load_buttons(buttons)
                     self.parent.config.texto_cambio = False
                 self.popup_ins = PopUp(
                     self.parent,
@@ -249,13 +205,13 @@ class estado(pantalla.Pantalla):
                         self.limpiar_grupos()
                         self.parent.popState()
 
-                    elif sprite[0].id == "sordo":
+                    elif sprite[0].id == "boton_sordo":
                         self.limpiar_grupos()
                         self.parent.pushState(
                             menuauditivo.estado(self.parent, self.previa)
                         )
 
-                    elif sprite[0].id == "config-vis":
+                    elif sprite[0].id == "boton_visual":
                         self.limpiar_grupos()
                         self.parent.pushState(
                             menuvisual.estado(self.parent, self.previa)

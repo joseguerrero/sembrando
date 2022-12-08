@@ -5,7 +5,7 @@ import pygame
 from .palabra import palabra
 
 
-class texto:
+class Text:
     """
     Esta clase hace uso de la clase palabras para formar textos y dibujarlos correctamente en la pantalla.
     Los textos generados son justificados automáticamente y sus margenes pueden personalizarse.
